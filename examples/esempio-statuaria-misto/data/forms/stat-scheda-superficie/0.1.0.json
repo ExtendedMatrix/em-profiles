@@ -1,15 +1,684 @@
 {
-  "_note": "ESEMPIO INVENTATO (D-5) — non citare. / INVENTED EXAMPLE — not to be cited.",
-  "id": "stat-scheda-superficie",
-  "version": "0.1.0",
-  "fields": [
-    {
-      "id": "fase",
-      "qualia": "stat:fase_di_superficie"
+  "format": "stratigraph-templates/compiled-definition",
+  "format_version": "1",
+  "header": {
+    "id": "stat-scheda-superficie",
+    "version": "0.1.0",
+    "standard": {
+      "authority": "ESEMPIO",
+      "code": "SUP",
+      "version": "2026-esempio",
+      "kind": "field_model",
+      "title": {
+        "it": "Scheda della superficie (ESEMPIO)",
+        "en": "Surface form (EXAMPLE)"
+      },
+      "license": "CC BY 4.0",
+      "attribution": "em-profiles, pacchetto d'esempio esempio-statuaria",
+      "source": "inventata per il pacchetto d'esempio (D-5) — nessuna norma è citata",
+      "invented": true
     },
-    {
-      "id": "area",
-      "qualia": "stat:area_integrazione"
-    }
-  ]
+    "source_language": "it",
+    "languages": [
+      "it",
+      "en"
+    ],
+    "vocabularies": [
+      {
+        "id": "stat:fase-superficie",
+        "authority": "Stratigraphic reading of statuary (EXAMPLE)",
+        "status": "resolvable",
+        "origin": "originated",
+        "version": "0.1.0",
+        "uri": "https://w3id.org/extendedmatrix/profile/esempio-statuaria/vocab/fase-superficie/",
+        "license": "SPDX:CC-BY-4.0",
+        "unverified_languages": [
+          "en"
+        ]
+      },
+      {
+        "id": "stat:lavorazione",
+        "authority": "Stratigraphic reading of statuary (EXAMPLE)",
+        "status": "resolvable",
+        "origin": "originated",
+        "version": "0.1.0",
+        "uri": "https://w3id.org/extendedmatrix/profile/esempio-statuaria/vocab/lavorazione/",
+        "license": "SPDX:CC-BY-4.0",
+        "unverified_languages": [
+          "en"
+        ]
+      }
+    ],
+    "digest": "sha256:62fdad46ae518fd51f12847a2c34196306e1bb14753e02dd21a41ebff9105f35",
+    "datamodel": {
+      "nodes": "1.6.51",
+      "node_registry": "1.6.41",
+      "connections": "1.6.55",
+      "visual_rules": "1.6.48",
+      "qualia": "1.6.13",
+      "translations": "1.17",
+      "digest": "sha256:feaee8d2599ad9a0672e8963f6ce8bfd409e09359f8dcbd5c3d439e35b17d0be",
+      "files": {
+        "nodes": {
+          "digest": "sha256:21c7a2346f9b670207802c036135ed65f9d055ae7984b78a3a565d8170af2117",
+          "version": "1.6.51"
+        },
+        "node_registry": {
+          "digest": "sha256:5669c0824d7149e22a25d424645b3b78b7c698c5338f3fd639d75c60b31483da",
+          "version": "1.6.41"
+        },
+        "connections": {
+          "digest": "sha256:c1d475a3ea9543dada7ac42ca73452f5c20f185ea56de2787914cad44389ad6b",
+          "version": "1.6.55"
+        },
+        "qualia": {
+          "digest": "sha256:175c189d760b4dc511b0b93ed16e95b354272152458cc9984a8d64bb6db50bca",
+          "version": "1.6.13"
+        }
+      },
+      "em_ttl": "1.6.26",
+      "s3dgraphy": "1.6.0.dev122",
+      "taken_from": {
+        "git_commit": "8e6d5a002b219a9cb494b79b10dc144e16c1cc54",
+        "git_dirty": false
+      },
+      "snapshot": "registry/s3dgraphy-snapshot.json"
+    },
+    "compiled_by": {
+      "name": "stratigraph-templates",
+      "version": "0.1.0"
+    },
+    "packages": [
+      {
+        "name": "esempio-statuaria",
+        "iri": "https://w3id.org/extendedmatrix/profile/esempio-statuaria",
+        "prefix": "stat",
+        "version": "0.1.0"
+      }
+    ]
+  },
+  "visual": {
+    "identity": {
+      "human_key": [
+        "us"
+      ],
+      "pattern": "US {us}",
+      "unit_field": "us",
+      "uid": {
+        "policy": "minted_by_creator",
+        "opaque": true,
+        "display": "on_request",
+        "derive_from_human_key": false
+      },
+      "deduplication": "by_human_key_in_context"
+    },
+    "provenance": {
+      "per_field": true,
+      "authors": [
+        "human",
+        "ai"
+      ],
+      "states": [
+        "asserted",
+        "ai_drafted",
+        "human_validated"
+      ],
+      "clock": "s3dgraphy_crdt_field_clock"
+    },
+    "paragraphs": [
+      {
+        "id": "superficie",
+        "labels": {
+          "it": "Superficie",
+          "en": "Surface"
+        },
+        "fields": [
+          "us",
+          "descrizione",
+          "fase",
+          "lavorazione",
+          "area"
+        ]
+      },
+      {
+        "id": "volto",
+        "labels": {
+          "it": "Misure del volto",
+          "en": "Measures of the face"
+        },
+        "fields": [
+          "larghezza",
+          "altezza",
+          "indice"
+        ]
+      }
+    ],
+    "fields": [
+      {
+        "id": "us",
+        "paragraph": "superficie",
+        "type": "identifier",
+        "required": true,
+        "repeatable": false,
+        "recorded_in": "unknown",
+        "labels": {
+          "it": "US",
+          "en": "SU"
+        }
+      },
+      {
+        "id": "descrizione",
+        "paragraph": "superficie",
+        "type": "longtext",
+        "required": false,
+        "repeatable": false,
+        "recorded_in": "unknown",
+        "labels": {
+          "it": "DESCRIZIONE",
+          "en": "DESCRIPTION"
+        }
+      },
+      {
+        "id": "fase",
+        "paragraph": "superficie",
+        "type": "term",
+        "required": false,
+        "repeatable": false,
+        "recorded_in": "unknown",
+        "labels": {
+          "it": "FASE DELLA SUPERFICIE",
+          "en": "SURFACE PHASE"
+        },
+        "vocabulary": {
+          "scheme": "stat:fase-superficie"
+        }
+      },
+      {
+        "id": "lavorazione",
+        "paragraph": "superficie",
+        "type": "term",
+        "required": false,
+        "repeatable": false,
+        "recorded_in": "unknown",
+        "labels": {
+          "it": "LAVORAZIONE",
+          "en": "WORKING"
+        },
+        "vocabulary": {
+          "scheme": "stat:lavorazione"
+        }
+      },
+      {
+        "id": "area",
+        "paragraph": "superficie",
+        "type": "decimal",
+        "required": false,
+        "repeatable": false,
+        "recorded_in": "unknown",
+        "labels": {
+          "it": "AREA DELL'INTEGRAZIONE (m²)",
+          "en": "AREA OF THE INFILL (m²)"
+        }
+      },
+      {
+        "id": "larghezza",
+        "paragraph": "volto",
+        "type": "decimal",
+        "required": false,
+        "repeatable": false,
+        "recorded_in": "unknown",
+        "labels": {
+          "it": "LARGHEZZA BIORBITALE (m)",
+          "en": "BIORBITAL WIDTH (m)"
+        },
+        "help": {
+          "it": "La calcola il combinatore dai punti canonici posati nello Spazio.",
+          "en": "Computed by the combiner from the canonical points placed in the Space."
+        }
+      },
+      {
+        "id": "altezza",
+        "paragraph": "volto",
+        "type": "decimal",
+        "required": false,
+        "repeatable": false,
+        "recorded_in": "unknown",
+        "labels": {
+          "it": "ALTEZZA DEL VOLTO (m)",
+          "en": "FACE HEIGHT (m)"
+        }
+      },
+      {
+        "id": "indice",
+        "paragraph": "volto",
+        "type": "decimal",
+        "required": false,
+        "repeatable": false,
+        "recorded_in": "unknown",
+        "labels": {
+          "it": "INDICE FACCIALE",
+          "en": "FACIAL INDEX"
+        }
+      }
+    ],
+    "sheet": {
+      "page": "A4",
+      "margins_mm": {
+        "top": 12,
+        "right": 12,
+        "bottom": 12,
+        "left": 12
+      },
+      "sides": [
+        {
+          "id": "recto",
+          "labels": {
+            "it": "fronte",
+            "en": "front"
+          },
+          "rows": [
+            {
+              "h": 12.0,
+              "cells": [
+                {
+                  "field": "us",
+                  "block": null,
+                  "block_labels": {},
+                  "rows": [],
+                  "w": 100.0,
+                  "label": "auto",
+                  "rotated": false,
+                  "style": null
+                }
+              ]
+            },
+            {
+              "h": 40.0,
+              "cells": [
+                {
+                  "field": "descrizione",
+                  "block": null,
+                  "block_labels": {},
+                  "rows": [],
+                  "w": 100.0,
+                  "label": "auto",
+                  "rotated": false,
+                  "style": null
+                }
+              ]
+            },
+            {
+              "h": 14.0,
+              "cells": [
+                {
+                  "field": "fase",
+                  "block": null,
+                  "block_labels": {},
+                  "rows": [],
+                  "w": 40.0,
+                  "label": "auto",
+                  "rotated": false,
+                  "style": null
+                },
+                {
+                  "field": "lavorazione",
+                  "block": null,
+                  "block_labels": {},
+                  "rows": [],
+                  "w": 35.0,
+                  "label": "auto",
+                  "rotated": false,
+                  "style": null
+                },
+                {
+                  "field": "area",
+                  "block": null,
+                  "block_labels": {},
+                  "rows": [],
+                  "w": 25.0,
+                  "label": "auto",
+                  "rotated": false,
+                  "style": null
+                }
+              ]
+            },
+            {
+              "h": 14.0,
+              "cells": [
+                {
+                  "field": "larghezza",
+                  "block": null,
+                  "block_labels": {},
+                  "rows": [],
+                  "w": 34.0,
+                  "label": "auto",
+                  "rotated": false,
+                  "style": null
+                },
+                {
+                  "field": "altezza",
+                  "block": null,
+                  "block_labels": {},
+                  "rows": [],
+                  "w": 33.0,
+                  "label": "auto",
+                  "rotated": false,
+                  "style": null
+                },
+                {
+                  "field": "indice",
+                  "block": null,
+                  "block_labels": {},
+                  "rows": [],
+                  "w": 33.0,
+                  "label": "auto",
+                  "rotated": false,
+                  "style": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "notes": {}
+  },
+  "recipe": {
+    "operations": [
+      "add_node",
+      "update_field",
+      "remove_node",
+      "add_edge",
+      "remove_edge"
+    ],
+    "unit": {
+      "resolve": {
+        "$unit": {
+          "find": {
+            "human_key": [
+              "us"
+            ],
+            "rule": "by_human_key_in_context"
+          },
+          "create": true
+        }
+      },
+      "steps": [
+        {
+          "emit": {
+            "op": "add_node",
+            "node": {
+              "id": "$unit",
+              "node_type": "$unit.node_type",
+              "name": "$unit.name"
+            }
+          },
+          "when": "created"
+        }
+      ],
+      "name": {
+        "pattern": "US {us}",
+        "unit_field": "us"
+      },
+      "node_type": {
+        "decided_by": null,
+        "table": {},
+        "when_empty": "not decided by the definition",
+        "note": "decided when the unit is CREATED: update_field addresses name, description and data.* only, so an existing unit's node_type cannot be changed by an operation of this vocabulary"
+      }
+    },
+    "fields": {
+      "us": {
+        "verdict": "identity",
+        "steps": [],
+        "names": "$unit",
+        "designator": true
+      },
+      "descrizione": {
+        "verdict": "property",
+        "each": false,
+        "steps": [
+          {
+            "emit": {
+              "op": "update_field",
+              "node_id": "$unit",
+              "field": "description",
+              "value": "$value"
+            }
+          }
+        ]
+      },
+      "fase": {
+        "verdict": "vocabulary",
+        "each": false,
+        "resolve": {
+          "$prop": {
+            "mint": true
+          }
+        },
+        "steps": [
+          {
+            "emit": {
+              "op": "add_node",
+              "node": {
+                "id": "$prop",
+                "node_type": "property",
+                "name": "stat:fase_di_superficie",
+                "description": "$value.concept",
+                "data": {
+                  "property_type": "stat:fase_di_superficie"
+                }
+              }
+            }
+          },
+          {
+            "emit": {
+              "op": "add_edge",
+              "edge_type": "has_property",
+              "source": "$unit",
+              "target": "$prop"
+            }
+          }
+        ],
+        "property": {
+          "property_type": "stat:fase_di_superficie",
+          "registered_qualia": true
+        },
+        "scheme": "stat:fase-superficie"
+      },
+      "lavorazione": {
+        "verdict": "vocabulary",
+        "each": false,
+        "resolve": {
+          "$prop": {
+            "mint": true
+          }
+        },
+        "steps": [
+          {
+            "emit": {
+              "op": "add_node",
+              "node": {
+                "id": "$prop",
+                "node_type": "property",
+                "name": "stat:lavorazione",
+                "description": "$value.concept",
+                "data": {
+                  "property_type": "stat:lavorazione"
+                }
+              }
+            }
+          },
+          {
+            "emit": {
+              "op": "add_edge",
+              "edge_type": "has_property",
+              "source": "$unit",
+              "target": "$prop"
+            }
+          }
+        ],
+        "property": {
+          "property_type": "stat:lavorazione",
+          "registered_qualia": true
+        },
+        "scheme": "stat:lavorazione"
+      },
+      "area": {
+        "verdict": "property",
+        "each": false,
+        "resolve": {
+          "$prop": {
+            "mint": true
+          }
+        },
+        "steps": [
+          {
+            "emit": {
+              "op": "add_node",
+              "node": {
+                "id": "$prop",
+                "node_type": "property",
+                "name": "stat:area_integrazione",
+                "description": "$value",
+                "data": {
+                  "property_type": "stat:area_integrazione"
+                }
+              }
+            }
+          },
+          {
+            "emit": {
+              "op": "add_edge",
+              "edge_type": "has_property",
+              "source": "$unit",
+              "target": "$prop"
+            }
+          }
+        ],
+        "property": {
+          "property_type": "stat:area_integrazione",
+          "registered_qualia": true
+        }
+      },
+      "larghezza": {
+        "verdict": "property",
+        "each": false,
+        "resolve": {
+          "$prop": {
+            "mint": true
+          }
+        },
+        "steps": [
+          {
+            "emit": {
+              "op": "add_node",
+              "node": {
+                "id": "$prop",
+                "node_type": "property",
+                "name": "stat:larghezza_biorbitale",
+                "description": "$value",
+                "data": {
+                  "property_type": "stat:larghezza_biorbitale"
+                }
+              }
+            }
+          },
+          {
+            "emit": {
+              "op": "add_edge",
+              "edge_type": "has_property",
+              "source": "$unit",
+              "target": "$prop"
+            }
+          }
+        ],
+        "property": {
+          "property_type": "stat:larghezza_biorbitale",
+          "registered_qualia": true
+        }
+      },
+      "altezza": {
+        "verdict": "property",
+        "each": false,
+        "resolve": {
+          "$prop": {
+            "mint": true
+          }
+        },
+        "steps": [
+          {
+            "emit": {
+              "op": "add_node",
+              "node": {
+                "id": "$prop",
+                "node_type": "property",
+                "name": "stat:altezza_facciale",
+                "description": "$value",
+                "data": {
+                  "property_type": "stat:altezza_facciale"
+                }
+              }
+            }
+          },
+          {
+            "emit": {
+              "op": "add_edge",
+              "edge_type": "has_property",
+              "source": "$unit",
+              "target": "$prop"
+            }
+          }
+        ],
+        "property": {
+          "property_type": "stat:altezza_facciale",
+          "registered_qualia": true
+        }
+      },
+      "indice": {
+        "verdict": "property",
+        "each": false,
+        "resolve": {
+          "$prop": {
+            "mint": true
+          }
+        },
+        "steps": [
+          {
+            "emit": {
+              "op": "add_node",
+              "node": {
+                "id": "$prop",
+                "node_type": "property",
+                "name": "stat:indice_facciale",
+                "description": "$value",
+                "data": {
+                  "property_type": "stat:indice_facciale"
+                }
+              }
+            }
+          },
+          {
+            "emit": {
+              "op": "add_edge",
+              "edge_type": "has_property",
+              "source": "$unit",
+              "target": "$prop"
+            }
+          }
+        ],
+        "property": {
+          "property_type": "stat:indice_facciale",
+          "registered_qualia": true
+        }
+      }
+    },
+    "anchors": {},
+    "open": [
+      {
+        "field": "",
+        "what": "no field has verdict 'node_type': the definition does not say which node type the unit is, so the creator has to"
+      }
+    ]
+  }
 }

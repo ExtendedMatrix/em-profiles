@@ -293,7 +293,7 @@
       "id": "stat-scheda-superficie",
       "source": "forms/stat-scheda-superficie/template.yaml",
       "compiled": "forms/stat-scheda-superficie/0.1.0.json",
-      "digest": "sha256:250b14659ff69b02eed7c6c9445668f0ed5614b69f324559707a3f3556359521"
+      "digest": "sha256:6b8ca8173ec479238cba7c4966d029405610eab1d5607a40b9247f43e0f574e3"
     }
   ],
   "visual_rules": {},

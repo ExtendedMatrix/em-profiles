@@ -1,9 +1,127 @@
 # ESEMPIO INVENTATO (D-5) — non citare. / INVENTED EXAMPLE — not to be cited.
-id: stat-scheda-superficie
-version: 0.1.0
-label: {it: Scheda della superficie (ESEMPIO), en: Surface form (EXAMPLE)}
-fields:
-  - id: fase
-    graph: {verdict: property, qualia: stat:fase_di_superficie}
-  - id: area
-    graph: {verdict: property, qualia: stat:area_integrazione}
+#
+# La scheda del pacchetto d'esempio «statuaria» (SPEC §8): una definizione di
+# stratigraph-templates, compilata con il nucleo + la sovrapposizione del
+# pacchetto (MICRO-PL11, riga W8):
+#
+#   stratigraph-templates package-build examples/esempio-statuaria
+#   python -m s3dgraphy.extensions build examples/esempio-statuaria   # timbra forms[].digest
+#
+# Le caselle si legano ai qualia del pacchetto (stat:…) e ai suoi vocabolari
+# portati, che nella compilazione si chiamano <prefisso>:<ultimo segmento
+# dell'IRI> (stat:fase-superficie, stat:lavorazione). Nessuna parola di questa
+# scheda viene da una norma: tutto è inventato per provare il formato.
+template:
+  id: stat-scheda-superficie
+  version: "0.1.0"
+  standard:
+    authority: "ESEMPIO"
+    code: "SUP"
+    version: "2026-esempio"
+    kind: field_model
+    invented: true
+    title:
+      it: "Scheda della superficie (ESEMPIO)"
+      en: "Surface form (EXAMPLE)"
+    source: "inventata per il pacchetto d'esempio (D-5) — nessuna norma è citata"
+    license: "CC BY 4.0"
+    attribution: "em-profiles, pacchetto d'esempio esempio-statuaria"
+
+  source_language: it
+  languages: [it, en]
+
+  vocabularies:
+    - stat:fase-superficie
+    - stat:lavorazione
+
+  identity:
+    human_key:
+      fields: [us]
+      pattern: "US {us}"
+      unit_field: us
+    uid:
+      policy: minted_by_creator
+      opaque: true
+      display: on_request
+      derive_from_human_key: false
+    deduplication: by_human_key_in_context
+
+  provenance:
+    per_field: true
+
+  paragraphs:
+    - id: superficie
+      labels: {it: "Superficie", en: "Surface"}
+      fields: [us, descrizione, fase, lavorazione, area]
+    - id: volto
+      labels: {it: "Misure del volto", en: "Measures of the face"}
+      fields: [larghezza, altezza, indice]
+
+  fields:
+    - id: us
+      labels: {it: "US", en: "SU"}
+      type: identifier
+      required: true
+      graph: {verdict: identity}
+
+    - id: descrizione
+      labels: {it: "DESCRIZIONE", en: "DESCRIPTION"}
+      type: longtext
+      graph: {verdict: property, property_name: description}
+
+    - id: fase
+      labels: {it: "FASE DELLA SUPERFICIE", en: "SURFACE PHASE"}
+      type: term
+      vocabulary: {scheme: stat:fase-superficie}
+      graph: {verdict: vocabulary, qualia: stat:fase_di_superficie}
+
+    - id: lavorazione
+      labels: {it: "LAVORAZIONE", en: "WORKING"}
+      type: term
+      vocabulary: {scheme: stat:lavorazione}
+      graph: {verdict: vocabulary, qualia: stat:lavorazione}
+
+    - id: area
+      labels: {it: "AREA DELL'INTEGRAZIONE (m²)", en: "AREA OF THE INFILL (m²)"}
+      type: decimal
+      graph: {verdict: property, qualia: stat:area_integrazione}
+
+    - id: larghezza
+      labels: {it: "LARGHEZZA BIORBITALE (m)", en: "BIORBITAL WIDTH (m)"}
+      type: decimal
+      help:
+        it: "La calcola il combinatore dai punti canonici posati nello Spazio."
+        en: "Computed by the combiner from the canonical points placed in the Space."
+      graph: {verdict: property, qualia: stat:larghezza_biorbitale}
+
+    - id: altezza
+      labels: {it: "ALTEZZA DEL VOLTO (m)", en: "FACE HEIGHT (m)"}
+      type: decimal
+      graph: {verdict: property, qualia: stat:altezza_facciale}
+
+    - id: indice
+      labels: {it: "INDICE FACCIALE", en: "FACIAL INDEX"}
+      type: decimal
+      graph: {verdict: property, qualia: stat:indice_facciale}
+
+  sheet:
+    page: A4
+    margins_mm: {top: 12, right: 12, bottom: 12, left: 12}
+    sides:
+      - id: recto
+        labels: {it: "fronte", en: "front"}
+        rows:
+          - h: 12
+            cells: [{field: us, w: 100}]
+          - h: 40
+            cells: [{field: descrizione, w: 100}]
+          - h: 14
+            cells:
+              - {field: fase, w: 40}
+              - {field: lavorazione, w: 35}
+              - {field: area, w: 25}
+          - h: 14
+            cells:
+              - {field: larghezza, w: 34}
+              - {field: altezza, w: 33}
+              - {field: indice, w: 33}
