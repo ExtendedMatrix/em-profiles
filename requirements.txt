@@ -1,0 +1,6 @@
+# the validator of the EM tools (s3dgraphy.extensions, s3dgraphy.profiles):
+# the 1.6 development line until s3dgraphy 1.6 is released
+s3dgraphy @ git+https://github.com/ExtendedMatrix/s3Dgraphy.git@s3dgraphy_v1.6dev
+jsonschema>=4.18
+rdflib>=7
+pytest>=8

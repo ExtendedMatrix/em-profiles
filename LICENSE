@@ -1,0 +1,15 @@
+The TEXT of the specification and of the documents in this repository
+(`*.md`) is licensed under the
+
+    Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+    Human-readable summary: https://creativecommons.org/licenses/by/4.0/
+    Legal code:             https://creativecommons.org/licenses/by/4.0/legalcode
+
+Copyright 2026 Consiglio Nazionale delle Ricerche — Istituto di Scienze del
+Patrimonio Culturale (CNR-ISPC), and the contributors named in the history
+of this repository.
+
+JSON schemas and examples are dedicated to the public domain (CC0 1.0), the
+tools are under the EUPL-1.2, and every community package carries its own
+licence: see LICENSING.md, which says where each line falls and why.

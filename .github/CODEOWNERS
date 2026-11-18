@@ -1,0 +1,19 @@
+# Who reviews what. A pull request needs the approval of an owner of every
+# path it touches. A community package adds a line for its own folder, with
+# its curators, in the pull request that creates it (tools/validate.py checks it).
+
+# Governance, specification, schemas, tools
+/README.md          @zalmoxes-laran
+/SPEC.md            @zalmoxes-laran
+/CONTRIBUTING.md    @zalmoxes-laran
+/LICENSE            @zalmoxes-laran
+/LICENSING.md       @zalmoxes-laran
+/.github/           @zalmoxes-laran
+/schemas/           @zalmoxes-laran
+/core-types.json    @zalmoxes-laran
+/tools/             @zalmoxes-laran
+/tests/             @zalmoxes-laran
+/examples/          @zalmoxes-laran
+
+# Community packages
+# /profiles/<id>/   @<curator> @<curator>   ← one line per package

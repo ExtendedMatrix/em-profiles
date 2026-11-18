@@ -1,0 +1,65 @@
+# EM Profiles — community packages for Extended Matrix
+
+The specification of the **EM Profiles**, their schemas, their examples, and
+the **community packages** of the scientific communities that use
+[Extended Matrix](https://www.extendedmatrix.org) (EM).
+
+| | |
+|---|---|
+| Specification | [`SPEC.md`](SPEC.md) — version **0.2**, Editor's Draft (18 November 2026) |
+| Schemas | [`schemas/`](schemas/) — `profile.v0.2.schema.json`, `profile.v0.1.schema.json` |
+| Validator | `s3dgraphy.extensions` ([s3Dgraphy](https://github.com/ExtendedMatrix/s3Dgraphy)), run here by [`tools/validate.py`](tools/validate.py) |
+| Licence | Text: CC BY 4.0 · schemas: CC0 1.0 · tools: EUPL-1.2 — see [LICENSING.md](LICENSING.md) |
+| Maintained by | the Extended Matrix project, CNR-ISPC, with the curators of each package |
+
+A **community package** — technically an *EM Profile* — is what a scientific
+community brings to EM without changing it: the properties it records and
+their vocabularies, the ways it reads its sources (with their 3D component)
+and combines those readings, its documents and file types, its recording
+sheet, its colours, its labels in its languages. **Data and declarations
+only**: a package that needs code says so, and its plugin is installed with
+its own question of trust. A stratigraphic unit stays the unit of EM.
+
+## What is here
+
+```
+SPEC.md          the specification, from 0.2 on (0.1 stays, frozen, in ExtendedMatrix/vocabularies)
+schemas/         the JSON schemas of the manifest, byte for byte those s3dgraphy ships
+core-types.json  the node and edge types of the EM core (generated: tools/core_types.py)
+examples/        invented archives that illustrate the specification — not to be cited
+profiles/        the community packages, one folder each, reviewed by their curators
+tools/           validate.py (what the CI runs), core_types.py
+tests/           the checks every pull request must pass
+```
+
+## Validating a package
+
+With [s3Dgraphy](https://github.com/ExtendedMatrix/s3Dgraphy) installed
+(`pip install -r requirements.txt`):
+
+```
+python -m s3dgraphy.extensions validate path/to/my-package        # one archive, as the EM tools see it
+python -m s3dgraphy.extensions build path/to/my-package           # → my-package-<version>.zip
+python tools/validate.py                                          # everything here, as the CI does
+pytest -q
+```
+
+The same validator speaks in the Extensions window of EMStudio, on the
+command line and in this repository's CI, in English and Italian
+(`--lang it`).
+
+## Where the rest lives
+
+- **Vocabularies shared by several communities**:
+  [ExtendedMatrix/vocabularies](https://github.com/ExtendedMatrix/vocabularies).
+  A package cites them by IRI; a vocabulary only one package uses may travel
+  in it.
+- **The index of packages and plugins to download** (the repositories of
+  phase 2, in the form of Blender's Extension Listing API):
+  [ExtendedMatrix/em-extensions](https://github.com/ExtendedMatrix/em-extensions).
+  Until then, packages are installed from disk (a folder or a zip).
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md): an issue first, then a pull request
+that adds `profiles/<id>/` and its curators' line in `.github/CODEOWNERS`.
