@@ -740,6 +740,21 @@ esempio-statuaria-0.1.0.zip
    package. **Vocabularies stay** on the machine, like fonts; a box, off by
    default, removes those nobody else carries (decision D-19).
 
+7. **The signature of a repository** (row X8, informative). A repository
+   may sign with a minisign key (Ed25519): a `<archive>.zip.minisig` beside
+   every archive, whose *trusted comment* names the entry's `id`, `version`
+   and `archive_hash`, and an `index.json.minisig` beside the index (the
+   `blocklist` and `reviewed` live there). The files are minisign's own
+   (`minisign -Vm <archive>.zip -p minisign.pub` verifies them); the
+   signatures are never inside `index.json`. A repository added with its
+   public keys is read only signed (the previous copy stays otherwise) and
+   its archives are opened only signed; without keys, the `archive_hash` of
+   the index the person chose is the guarantee, as in Blender. A signature
+   says who published the bytes, not that anyone read the code: the question
+   of trust stays, and a reviewed code is point 4's. Commands:
+   `python -m s3dgraphy.extensions sign keygen|repo|archive|verify|check`,
+   `server-generate --sign-key`, `repo add --key`.
+
 ## 10. Conformance
 
 - A **manifest** conforms when it validates against the schema of its
@@ -855,7 +870,8 @@ package in `profiles/`.
   review add`, checked by the CI of em-extensions against decision D-6.
   Row X6 too: EM Tools reads the same repositories in its Preferences (the
   community packages and the plugins whose code names `blender`; with
-  Blender's own «Allow Online Access» off it stays offline).
+  Blender's own «Allow Online Access» off it stays offline). Row X8 too: the
+  signature of a repository — minisign over `archive_hash` (§9, point 7).
 
 ## 15. Changes
 
@@ -874,7 +890,8 @@ package in `profiles/`.
   (`header.digest`); the conventions of the combiners' operations written. The CI checks the packages as the index of em-extensions will list them
   (19 November 2026). The tools read a repository: added by URL, `file://` or
   a folder, the archive checked against `archive_hash`, the `blocklist`
-  respected, `[requires]` installed first (19 November 2026, row X2).
+  respected, `[requires]` installed first (19 November 2026, row X2). A
+  repository may be signed with minisign (19 November 2026, row X8, §9 point 7).
 - **0.1 — 25 October 2026 (Editor's Draft).** First draft: the manifest, the
   PROF correspondence, the five kinds of content, the fallback, the three axes
   of version, the declaration in the em.json header.
