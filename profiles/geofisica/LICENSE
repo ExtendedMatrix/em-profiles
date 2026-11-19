@@ -1,0 +1,14 @@
+geofisica — a community package of Extended Matrix
+
+Copyright 2026 Consiglio Nazionale delle Ricerche — Istituto di Scienze del
+Patrimonio Culturale (CNR-ISPC).
+
+Two licences, because there are two things:
+
+* data/ (the profile, the vocabularies, the colour schemes, the strings, the
+  help and the examples) — Creative Commons Attribution 4.0 International
+  (CC-BY-4.0), https://creativecommons.org/licenses/by/4.0/
+* code/ (the plugin and its reading core, which comes from
+  3D-survey-collection) — GNU General Public License, version 3 or (at your
+  option) any later version (GPL-3.0-or-later),
+  https://www.gnu.org/licenses/gpl-3.0.html

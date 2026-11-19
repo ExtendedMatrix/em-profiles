@@ -1,0 +1,7 @@
+{
+  "geof.package": "Geofisica",
+  "geof.import": "Importa una pila geofisica",
+  "geof.read_as": "Leggi come: pila geofisica",
+  "geof.depth": "Profondità",
+  "geof.depth_cursor": "Cursore di profondità"
+}

@@ -1,0 +1,29 @@
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix v:    <https://w3id.org/extendedmatrix/profile/geofisica/vocab/grandezze/> .
+
+v: a skos:ConceptScheme ;
+    dct:title "Grandezze geofisiche misurate"@it , "Measured geophysical quantities"@en ;
+    dct:license <https://creativecommons.org/licenses/by/4.0/> ;
+    owl:versionInfo "0.1.0" .
+
+v:ampiezza a skos:Concept ; skos:inScheme v: ; skos:topConceptOf v: ;
+    skos:prefLabel "ampiezza del segnale"@it , "signal amplitude"@en ;
+    skos:scopeNote "In unità dello strumento (V, conteggi) se non è detto altrimenti."@it ,
+                   "In the instrument's units (V, counts) unless said otherwise."@en .
+
+v:ampiezza_media a skos:Concept ; skos:inScheme v: ; skos:broader v:ampiezza ;
+    skos:prefLabel "ampiezza media"@it , "mean amplitude"@en .
+
+v:energia a skos:Concept ; skos:inScheme v: ; skos:broader v:ampiezza ;
+    skos:prefLabel "energia (media dei quadrati)"@it , "energy (mean of squares)"@en .
+
+v:resistivita a skos:Concept ; skos:inScheme v: ; skos:topConceptOf v: ;
+    skos:prefLabel "resistività elettrica"@it , "electrical resistivity"@en ;
+    skos:scopeNote "Ω·m. Un valore letto da una figura (indice di colore) porta la scala dichiarata e la sua confidenza, mai come misura."@it ,
+                   "Ω·m. A value read from a figure (a colour index) carries its declared scale and confidence, never as a measurement."@en .
+
+v:campo_magnetico a skos:Concept ; skos:inScheme v: ; skos:topConceptOf v: ;
+    skos:prefLabel "anomalia del campo magnetico"@it , "magnetic field anomaly"@en ;
+    skos:scopeNote "nT."@it , "nT."@en .

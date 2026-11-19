@@ -1,0 +1,16 @@
+{
+  "_note": "A continuous ramp: color_mapping keys are positions 0–1 on the slice's value range (after value_scale and the robust percentiles), interpolated linearly. Use: any quantity.",
+  "name": "Grey",
+  "name_it": "Grigio",
+  "kind": "ramp",
+  "interpolation": "linear",
+  "domain": "normalized",
+  "color_mapping": {
+    "0.000": "#000000",
+    "0.250": "#404040",
+    "0.500": "#808080",
+    "0.750": "#bfbfbf",
+    "1.000": "#ffffff"
+  },
+  "nodata": "transparent"
+}

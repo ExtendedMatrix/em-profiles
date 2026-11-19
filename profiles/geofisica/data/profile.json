@@ -1,0 +1,403 @@
+{
+  "$schema": "https://w3id.org/extendedmatrix/schemas/profile.v0.2.schema.json",
+  "profile_format": "0.2",
+  "iri": "https://w3id.org/extendedmatrix/profile/geofisica",
+  "name": "geofisica",
+  "prefix": "geof",
+  "version": "0.1.0",
+  "lifecycle": "proposed",
+  "title": {
+    "it": "Geofisica: fette e sezioni come documenti",
+    "en": "Geophysics: slices and sections as documents"
+  },
+  "description": {
+    "it": "Le fette orizzontali, le sezioni verticali e i volumi di una prospezione geofisica (GPR, ERT, magnetometria) portati nel grafo come documenti di un'acquisizione; le anomalie lette dalla persona diventano unità USD con il loro estrattore.",
+    "en": "The horizontal slices, vertical sections and volumes of a geophysical survey (GPR, ERT, magnetometry) brought into the graph as documents of an acquisition; the anomalies a person reads become USD units with their extractor."
+  },
+  "languages": [
+    "en",
+    "it"
+  ],
+  "curators": [
+    "@zalmoxes-laran"
+  ],
+  "license": "CC-BY-4.0",
+  "is_profile_of": [
+    {
+      "iri": "https://w3id.org/extendedmatrix/spec/em-json/",
+      "version": "1.1"
+    },
+    {
+      "iri": "https://w3id.org/extendedmatrix/core/",
+      "version": "1.6"
+    }
+  ],
+  "requires": {
+    "core": {
+      "em": ">=1.6,<1.7"
+    }
+  },
+  "qualia_vocabularies": [
+    {
+      "property_type": "geof:anomaly_type",
+      "label": {
+        "it": "Tipo di anomalia",
+        "en": "Kind of anomaly"
+      },
+      "scheme": "https://w3id.org/extendedmatrix/profile/geofisica/vocab/anomalie/",
+      "version": "0.1.0"
+    },
+    {
+      "property_type": "geof:method",
+      "label": {
+        "it": "Metodo",
+        "en": "Method"
+      },
+      "scheme": "https://w3id.org/extendedmatrix/profile/geofisica/vocab/metodi/",
+      "version": "0.1.0"
+    },
+    {
+      "property_type": "geof:quantity",
+      "label": {
+        "it": "Grandezza",
+        "en": "Quantity"
+      },
+      "scheme": "https://w3id.org/extendedmatrix/profile/geofisica/vocab/grandezze/",
+      "version": "0.1.0"
+    }
+  ],
+  "qualia": [
+    {
+      "id": "geof:anomaly_type",
+      "label": {
+        "it": "Tipo di anomalia",
+        "en": "Kind of anomaly"
+      },
+      "data_type": "controlled_vocabulary"
+    },
+    {
+      "id": "geof:method",
+      "label": {
+        "it": "Metodo geofisico",
+        "en": "Geophysical method"
+      },
+      "data_type": "controlled_vocabulary"
+    },
+    {
+      "id": "geof:quantity",
+      "label": {
+        "it": "Grandezza misurata",
+        "en": "Measured quantity"
+      },
+      "data_type": "controlled_vocabulary"
+    },
+    {
+      "id": "geof:depth_top",
+      "label": {
+        "it": "Profondità del tetto",
+        "en": "Depth of the top"
+      },
+      "description": {
+        "it": "Sotto il piano di campagna.",
+        "en": "Below ground level."
+      },
+      "data_type": "float",
+      "units": [
+        "m",
+        "cm"
+      ]
+    },
+    {
+      "id": "geof:depth_bottom",
+      "label": {
+        "it": "Profondità della base",
+        "en": "Depth of the bottom"
+      },
+      "description": {
+        "it": "Sotto il piano di campagna.",
+        "en": "Below ground level."
+      },
+      "data_type": "float",
+      "units": [
+        "m",
+        "cm"
+      ]
+    },
+    {
+      "id": "geof:value_at",
+      "label": {
+        "it": "Valore letto",
+        "en": "Value read"
+      },
+      "description": {
+        "it": "Il valore della fetta dove l'anomalia è tracciata, nell'unità della grandezza (o indice, con la scala dichiarata).",
+        "en": "The slice's value where the anomaly is traced, in the quantity's unit (or an index, with the declared scale)."
+      },
+      "data_type": "float",
+      "units": [
+        "ohm.m",
+        "V",
+        "nT"
+      ]
+    },
+    {
+      "id": "geof:confidence",
+      "label": {
+        "it": "Confidenza della lettura",
+        "en": "Confidence of the reading"
+      },
+      "description": {
+        "it": "Da 0 a 1: quanto chi traccia è sicuro che l'anomalia sia nella fetta.",
+        "en": "From 0 to 1: how sure the person tracing is that the anomaly is in the slice."
+      },
+      "data_type": "float",
+      "units": []
+    }
+  ],
+  "extractor_types": [
+    {
+      "id": "geof:anomalia_punto",
+      "specializes": "extractor",
+      "label": {
+        "it": "Anomalia puntuale su fetta",
+        "en": "Point anomaly on a slice"
+      },
+      "geometry": {
+        "primitive": "point",
+        "produces": "position",
+        "unit": "m",
+        "snap": "surface",
+        "frame": "graph"
+      },
+      "produces": [
+        "geof:anomaly_type",
+        "geof:method",
+        "geof:quantity",
+        "geof:depth_top",
+        "geof:depth_bottom",
+        "geof:value_at",
+        "geof:confidence"
+      ],
+      "source_documents": [
+        "geof:fetta",
+        "geof:sezione"
+      ]
+    },
+    {
+      "id": "geof:anomalia_linea",
+      "specializes": "extractor",
+      "label": {
+        "it": "Anomalia lineare su fetta",
+        "en": "Linear anomaly on a slice"
+      },
+      "geometry": {
+        "primitive": "polyline",
+        "produces": "length",
+        "unit": "m",
+        "vertices": {
+          "min": 2
+        },
+        "snap": "surface",
+        "frame": "graph"
+      },
+      "produces": [
+        "geof:anomaly_type",
+        "geof:method",
+        "geof:quantity",
+        "geof:depth_top",
+        "geof:depth_bottom",
+        "geof:value_at",
+        "geof:confidence"
+      ],
+      "source_documents": [
+        "geof:fetta",
+        "geof:sezione"
+      ]
+    },
+    {
+      "id": "geof:anomalia_area",
+      "specializes": "extractor",
+      "label": {
+        "it": "Anomalia areale su fetta",
+        "en": "Areal anomaly on a slice"
+      },
+      "geometry": {
+        "primitive": "surface",
+        "produces": "area",
+        "unit": "m2",
+        "vertices": {
+          "min": 3
+        },
+        "snap": "surface",
+        "frame": "graph"
+      },
+      "produces": [
+        "geof:anomaly_type",
+        "geof:method",
+        "geof:quantity",
+        "geof:depth_top",
+        "geof:depth_bottom",
+        "geof:value_at",
+        "geof:confidence"
+      ],
+      "source_documents": [
+        "geof:fetta",
+        "geof:sezione"
+      ]
+    }
+  ],
+  "document_types": [
+    {
+      "id": "geof:fetta",
+      "specializes": "document",
+      "label": {
+        "it": "Fetta geofisica",
+        "en": "Geophysical slice"
+      },
+      "description": {
+        "it": "Una banda di profondità di una pila: role analytical, content_nature 2d_object; geometry dalla fonte della posizione.",
+        "en": "One depth band of a stack: role analytical, content_nature 2d_object; geometry from the source of its position."
+      },
+      "content_nature": "2d_object",
+      "formats": [
+        {
+          "media_type": "image/tiff",
+          "extensions": [
+            ".tif",
+            ".tiff"
+          ]
+        },
+        {
+          "media_type": "text/plain",
+          "extensions": [
+            ".asc",
+            ".xyz"
+          ]
+        },
+        {
+          "media_type": "text/csv",
+          "extensions": [
+            ".csv"
+          ]
+        },
+        {
+          "media_type": "image/jpeg",
+          "extensions": [
+            ".jpg",
+            ".jpeg"
+          ]
+        },
+        {
+          "media_type": "image/png",
+          "extensions": [
+            ".png"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "geof:sezione",
+      "specializes": "document",
+      "label": {
+        "it": "Sezione geofisica verticale",
+        "en": "Vertical geophysical section"
+      },
+      "description": {
+        "it": "Un profilo verticale lungo una linea: lunghezza e profondità dichiarate.",
+        "en": "A vertical profile along a line: length and depth declared."
+      },
+      "content_nature": "2d_object",
+      "formats": [
+        {
+          "media_type": "text/plain",
+          "extensions": [
+            ".asc",
+            ".xyz"
+          ]
+        },
+        {
+          "media_type": "image/png",
+          "extensions": [
+            ".png"
+          ]
+        }
+      ]
+    }
+  ],
+  "file_types": [
+    {
+      "id": "geof:matrice_ascii",
+      "label": {
+        "it": "Matrice ASCII geofisica",
+        "en": "Geophysical ASCII matrix"
+      },
+      "media_type": "text/plain",
+      "extensions": [
+        ".asc"
+      ],
+      "document_type": "geof:fetta",
+      "content_nature": "2d_object",
+      "reader": "plugin:geofisica"
+    },
+    {
+      "id": "geof:punti_xyz",
+      "label": {
+        "it": "Punti XYZ(V) geofisici",
+        "en": "Geophysical XYZ(V) points"
+      },
+      "media_type": "text/plain",
+      "extensions": [
+        ".xyz"
+      ],
+      "document_type": "geof:sezione",
+      "content_nature": "2d_object",
+      "reader": "plugin:geofisica"
+    }
+  ],
+  "visual_rules": {},
+  "color_schemes": [
+    {
+      "id": "geof:grigio",
+      "path": "colors/grigio.emc",
+      "label": {
+        "it": "Grigio",
+        "en": "Grey"
+      }
+    },
+    {
+      "id": "geof:viridis",
+      "path": "colors/viridis.emc",
+      "label": {
+        "it": "Viridis",
+        "en": "Viridis"
+      }
+    },
+    {
+      "id": "geof:hot",
+      "path": "colors/hot.emc",
+      "label": {
+        "it": "Caldo (ampiezza)",
+        "en": "Hot (amplitude)"
+      }
+    },
+    {
+      "id": "geof:jet",
+      "path": "colors/jet.emc",
+      "label": {
+        "it": "Jet (resistività)",
+        "en": "Jet (resistivity)"
+      }
+    }
+  ],
+  "i18n": {
+    "it": "i18n/it.json",
+    "en": "i18n/en.json"
+  },
+  "help": {
+    "it": "help/it/",
+    "en": "help/en/"
+  },
+  "examples": [
+    "examples/anomalia-su-fetta.em.json"
+  ]
+}

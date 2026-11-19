@@ -1,0 +1,52 @@
+schema_version = "1.0.0"
+id = "geofisica"
+version = "0.1.0"
+name = "Geofisica"
+tagline = "Geophysical slices as documents: GPR, ERT and more"
+maintainer = "Emanuel Demetrescu (CNR-ISPC)"
+license = ["SPDX:CC-BY-4.0", "SPDX:GPL-3.0-or-later"]
+em_api_min = "1.2"
+type = "mixed"
+
+[requires]
+core = { em = ">=1.6,<1.7" }
+
+[data]
+version = "0.1.0"
+root = "data/"
+profile = "profile.json"
+  [[data.vocabularies]]
+  path = "vocab/anomalie.ttl"
+  scheme = "https://w3id.org/extendedmatrix/profile/geofisica/vocab/anomalie/"
+  version = "0.1.0"
+  license = "SPDX:CC-BY-4.0"
+  fascia = "A"
+  digest = "sha256:150c69f30981aa2be662ba40c4f4f20aeb4f80072d3963407b84f073e8de4352"
+  [[data.vocabularies]]
+  path = "vocab/metodi.ttl"
+  scheme = "https://w3id.org/extendedmatrix/profile/geofisica/vocab/metodi/"
+  version = "0.1.0"
+  license = "SPDX:CC-BY-4.0"
+  fascia = "A"
+  digest = "sha256:973912f6dd1a82aff9859acf8a93944fe686f7024d8c66eed3cefd3d16172e60"
+  [[data.vocabularies]]
+  path = "vocab/grandezze.ttl"
+  scheme = "https://w3id.org/extendedmatrix/profile/geofisica/vocab/grandezze/"
+  version = "0.1.0"
+  license = "SPDX:CC-BY-4.0"
+  fascia = "A"
+  digest = "sha256:52f5c8c6d11f13e24603b0c34ceef81eee89178edbb5fce4da464a37cd0eb8b4"
+
+[code]
+version = "0.1.0"
+root = "code/"
+license = "SPDX:GPL-3.0-or-later"
+entry = "geofisica:plugin"
+hosts = ["emstudio", "blender"]
+  [code.permissions]
+  files = "Reads the chosen geophysical stacks and writes their slice cache"
+  [code.descriptor]
+  host = "emstudio-side"
+  transport = ["direct"]
+  capabilities = ["read-graph"]
+  provenance = "derivation"

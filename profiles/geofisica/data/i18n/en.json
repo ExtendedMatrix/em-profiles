@@ -1,0 +1,7 @@
+{
+  "geof.package": "Geophysics",
+  "geof.import": "Import a geophysical stack",
+  "geof.read_as": "Read as: geophysical stack",
+  "geof.depth": "Depth",
+  "geof.depth_cursor": "Depth cursor"
+}

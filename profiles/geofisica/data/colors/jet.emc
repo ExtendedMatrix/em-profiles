@@ -1,0 +1,20 @@
+{
+  "_note": "A continuous ramp: color_mapping keys are positions 0–1 on the slice's value range (after value_scale and the robust percentiles), interpolated linearly. Use: ERT resistivity, as the reports' figures show it.",
+  "name": "Jet (resistivity)",
+  "name_it": "Jet (resistività)",
+  "kind": "ramp",
+  "interpolation": "linear",
+  "domain": "normalized",
+  "color_mapping": {
+    "0.000": "#00007f",
+    "0.125": "#0000ff",
+    "0.250": "#007fff",
+    "0.375": "#00ffff",
+    "0.500": "#7fff7f",
+    "0.625": "#ffff00",
+    "0.750": "#ff7f00",
+    "0.875": "#ff0000",
+    "1.000": "#7f0000"
+  },
+  "nodata": "transparent"
+}

@@ -22,7 +22,7 @@ def test_every_archive_of_the_repository_is_valid():
     res = validate.run([])
     paths = [a["path"] for a in res["archives"]]
     assert paths == ["examples/esempio-statuaria", "examples/esempio-statuaria-misto",
-                     "examples/example-toolmarks", "examples/facemesh_fit"]
+                     "examples/example-toolmarks", "examples/facemesh_fit", "profiles/geofisica"]
     for a in res["archives"]:
         assert a["ok"], (a["path"], [e["en"] for e in a["errors"]])
     assert res["ok"], res["repository"]

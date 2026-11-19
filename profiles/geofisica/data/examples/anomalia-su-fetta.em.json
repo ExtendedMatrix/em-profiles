@@ -1,0 +1,113 @@
+{
+  "header": {
+    "format": "em.json",
+    "version": "1.1",
+    "schema_version": 2,
+    "generator": {
+      "tool": "hand-written example of the geofisica package",
+      "version": "0.1.0"
+    },
+    "profiles": [
+      {
+        "iri": "https://w3id.org/extendedmatrix/profile/geofisica",
+        "version": "0.1.0"
+      }
+    ]
+  },
+  "graphs": {
+    "gpr": {
+      "graph_id": "gpr",
+      "name": "A GPR slice and the anomaly read on it (example)",
+      "nodes": [
+        {
+          "id": "acq1",
+          "node_type": "dtc_acquisition",
+          "name": "GPR survey, sector 1 (example)",
+          "data": {
+            "method": "https://w3id.org/extendedmatrix/profile/geofisica/vocab/metodi/gpr",
+            "quantity": "https://w3id.org/extendedmatrix/profile/geofisica/vocab/grandezze/ampiezza_media",
+            "geo_stack_id": "example-s1"
+          }
+        },
+        {
+          "id": "res1",
+          "node_type": "resource",
+          "name": "slice_0.10-0.20m.csv",
+          "data": {
+            "url": "slice_0.10-0.20m.csv"
+          }
+        },
+        {
+          "id": "doc1",
+          "node_type": "document",
+          "name": "Slice 0.10–0.20 m",
+          "data": {
+            "em_kind": "geof:fetta",
+            "role": "analytical",
+            "content_nature": "2d_object",
+            "geometry": "reality_based",
+            "geo_id": "gpr:example-s1#d0.10-0.20m"
+          }
+        },
+        {
+          "id": "usd1",
+          "node_type": "USD",
+          "name": "USD1",
+          "description": "Linear anomaly read on the 0.10–0.20 m slice (example)"
+        },
+        {
+          "id": "p1",
+          "node_type": "property",
+          "name": "geof:anomaly_type",
+          "data": {
+            "value": "https://w3id.org/extendedmatrix/profile/geofisica/vocab/anomalie/lineare"
+          }
+        },
+        {
+          "id": "x1",
+          "node_type": "extractor",
+          "name": "D.01.01",
+          "description": "alignment traced on the slice",
+          "data": {
+            "em_kind": "geof:anomalia_linea",
+            "depth_top": 0.1,
+            "depth_bottom": 0.2,
+            "confidence": 0.6
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "e1",
+          "edge_source": "acq1",
+          "edge_target": "res1",
+          "edge_type": "dtc_had_output"
+        },
+        {
+          "id": "e2",
+          "edge_source": "doc1",
+          "edge_target": "res1",
+          "edge_type": "has_linked_resource"
+        },
+        {
+          "id": "e3",
+          "edge_source": "usd1",
+          "edge_target": "p1",
+          "edge_type": "has_property"
+        },
+        {
+          "id": "e4",
+          "edge_source": "p1",
+          "edge_target": "x1",
+          "edge_type": "has_data_provenance"
+        },
+        {
+          "id": "e5",
+          "edge_source": "x1",
+          "edge_target": "doc1",
+          "edge_type": "extracted_from"
+        }
+      ]
+    }
+  }
+}

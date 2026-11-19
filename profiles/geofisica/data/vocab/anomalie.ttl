@@ -1,0 +1,37 @@
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix v:    <https://w3id.org/extendedmatrix/profile/geofisica/vocab/anomalie/> .
+
+v: a skos:ConceptScheme ;
+    dct:title "Tipi di anomalia geofisica"@it , "Kinds of geophysical anomaly"@en ;
+    dct:license <https://creativecommons.org/licenses/by/4.0/> ;
+    owl:versionInfo "0.1.0" ;
+    skos:scopeNote "Il tipo dice la forma letta sulla fetta, non l'interpretazione archeologica: questa resta dell'unità (USD) e della persona."@it ,
+                   "The kind says the shape read on the slice, not the archaeological interpretation: that stays with the unit (USD) and the person."@en .
+
+v:lineare a skos:Concept ; skos:inScheme v: ; skos:topConceptOf v: ;
+    skos:prefLabel "anomalia lineare"@it , "linear anomaly"@en ;
+    skos:definition "Allineamento continuo di valori anomali (un muro, una fondazione, un fossato)."@it ,
+                    "A continuous alignment of anomalous values (a wall, a foundation, a ditch)."@en .
+
+v:areale a skos:Concept ; skos:inScheme v: ; skos:topConceptOf v: ;
+    skos:prefLabel "anomalia areale"@it , "areal anomaly"@en ;
+    skos:definition "Zona estesa di valori anomali (un crollo, un piano, un riempimento)."@it ,
+                    "An extended zone of anomalous values (a collapse, a floor, a fill)."@en .
+
+v:puntuale a skos:Concept ; skos:inScheme v: ; skos:topConceptOf v: ;
+    skos:prefLabel "anomalia puntuale"@it , "point anomaly"@en ;
+    skos:definition "Riflettore o valore isolato (un oggetto, un pilastro, una buca)."@it ,
+                    "An isolated reflector or value (an object, a pillar, a pit)."@en .
+
+v:iperbole a skos:Concept ; skos:inScheme v: ; skos:broader v:puntuale ;
+    skos:prefLabel "iperbole di diffrazione"@it , "diffraction hyperbola"@en ;
+    skos:definition "Firma del GPR di un oggetto puntuale o tubolare, letta in una sezione."@it ,
+                    "The GPR signature of a point-like or tubular object, read in a section."@en .
+
+v:alta_resistivita a skos:Concept ; skos:inScheme v: ; skos:topConceptOf v: ;
+    skos:prefLabel "zona ad alta resistività"@it , "high-resistivity zone"@en .
+
+v:bassa_resistivita a skos:Concept ; skos:inScheme v: ; skos:topConceptOf v: ;
+    skos:prefLabel "zona a bassa resistività"@it , "low-resistivity zone"@en .

@@ -1,0 +1,27 @@
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix v:    <https://w3id.org/extendedmatrix/profile/geofisica/vocab/metodi/> .
+
+v: a skos:ConceptScheme ;
+    dct:title "Metodi geofisici"@it , "Geophysical methods"@en ;
+    dct:license <https://creativecommons.org/licenses/by/4.0/> ;
+    owl:versionInfo "0.1.0" .
+
+v:gpr a skos:Concept ; skos:inScheme v: ; skos:topConceptOf v: ;
+    skos:prefLabel "georadar (GPR)"@it , "ground-penetrating radar (GPR)"@en ;
+    skos:notation "gpr" ;
+    skos:definition "Riflessione di impulsi elettromagnetici nel sottosuolo; le fette orizzontali sono ampiezze mediate per banda di profondità."@it ,
+                    "Reflection of electromagnetic pulses in the ground; horizontal slices are amplitudes averaged over a depth band."@en .
+
+v:ert a skos:Concept ; skos:inScheme v: ; skos:topConceptOf v: ;
+    skos:prefLabel "tomografia di resistività elettrica (ERT)"@it , "electrical resistivity tomography (ERT)"@en ;
+    skos:notation "ert" ;
+    skos:definition "Resistività apparente del sottosuolo, invertita in sezioni, fette e volumi."@it ,
+                    "Apparent resistivity of the ground, inverted into sections, slices and volumes."@en .
+
+v:mag a skos:Concept ; skos:inScheme v: ; skos:topConceptOf v: ;
+    skos:prefLabel "magnetometria"@it , "magnetometry"@en ;
+    skos:notation "mag" ;
+    skos:definition "Variazioni del campo magnetico terrestre dovute a ciò che sta sotto la superficie."@it ,
+                    "Variations of the Earth's magnetic field caused by what lies below the surface."@en .

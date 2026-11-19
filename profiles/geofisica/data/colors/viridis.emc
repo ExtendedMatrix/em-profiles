@@ -1,0 +1,16 @@
+{
+  "_note": "A continuous ramp: color_mapping keys are positions 0–1 on the slice's value range (after value_scale and the robust percentiles), interpolated linearly. Use: any quantity, perceptually uniform.",
+  "name": "Viridis",
+  "name_it": "Viridis",
+  "kind": "ramp",
+  "interpolation": "linear",
+  "domain": "normalized",
+  "color_mapping": {
+    "0.000": "#440154",
+    "0.250": "#3b528b",
+    "0.500": "#21918c",
+    "0.750": "#5ec962",
+    "1.000": "#fde725"
+  },
+  "nodata": "transparent"
+}
