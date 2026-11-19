@@ -853,6 +853,9 @@ package in `profiles/`.
   platform, and a repository may list them side by side). Row X4 too: the
   list of the reviewed (§9, point 4) — `python -m s3dgraphy.extensions
   review add`, checked by the CI of em-extensions against decision D-6.
+  Row X6 too: EM Tools reads the same repositories in its Preferences (the
+  community packages and the plugins whose code names `blender`; with
+  Blender's own «Allow Online Access» off it stays offline).
 
 ## 15. Changes
 
