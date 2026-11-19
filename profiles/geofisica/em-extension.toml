@@ -121,6 +121,45 @@ hosts = ["emstudio", "blender"]
   layer = "raster_stack"
   writes = false
   slots = [{ name = "stack", kind = "string", required = false }]
+  [[code.commands]]
+  id = "geofisica.trace.point"
+  label = { en = "Point anomaly on a slice", it = "Anomalia puntuale su fetta" }
+  in = ["space.tool@1"]
+  primitive = "point"
+  icon = "◉"
+  writes = true
+  slots = [
+    { name = "g", kind = "geometry" },
+    { name = "type", kind = "string", required = false },
+    { name = "confidence", kind = "number", required = false },
+    { name = "ids", kind = "ids", required = false },
+  ]
+  [[code.commands]]
+  id = "geofisica.trace.line"
+  label = { en = "Linear anomaly on a slice", it = "Anomalia lineare su fetta" }
+  in = ["space.tool@1"]
+  primitive = "polyline"
+  icon = "〰"
+  writes = true
+  slots = [
+    { name = "g", kind = "geometry" },
+    { name = "type", kind = "string", required = false },
+    { name = "confidence", kind = "number", required = false },
+    { name = "ids", kind = "ids", required = false },
+  ]
+  [[code.commands]]
+  id = "geofisica.trace.area"
+  label = { en = "Areal anomaly on a slice", it = "Anomalia areale su fetta" }
+  in = ["space.tool@1"]
+  primitive = "surface"
+  icon = "▱"
+  writes = true
+  slots = [
+    { name = "g", kind = "geometry" },
+    { name = "type", kind = "string", required = false },
+    { name = "confidence", kind = "number", required = false },
+    { name = "ids", kind = "ids", required = false },
+  ]
   [[code.panels]]
   id = "import"
   label = { en = "Geophysical stack", it = "Pila geofisica" }

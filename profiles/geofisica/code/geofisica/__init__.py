@@ -12,8 +12,10 @@ whose value ``geofisica.describe`` says what the folder is and whose button
 runs ``geofisica.ingest``. Row G9 (:mod:`.inspector`): ``geofisica.section``,
 the Inspector's section of a slice and of a USD read on slices. Row G10
 (:mod:`.layer`): ``geofisica.layer``, the stacks described as layers of the
-Space (``space.layer@1``) — the host draws them (G11). The tracing tool (G12)
-arrives next.
+Space (``space.layer@1``) — the host draws them (G11). Row G12
+(:mod:`.trace`): ``geofisica.trace.point|line|area`` (``space.tool@1``), an
+anomaly traced on the planes of a stack → a USD, its extractor on the slice
+(or a combiner of one per slice), one act.
 """
 
 __version__ = "0.1.0"
@@ -53,6 +55,13 @@ def _layer(slots):
     return layer.layers(slots)
 
 
+def _trace(primitive):
+    def run(slots):
+        from . import trace
+        return trace.command(slots, primitive)
+    return run
+
+
 def _stacks():
     from . import ingest
     return ingest.stacks()
@@ -66,6 +75,9 @@ def setup(ctx):
     ctx.command("geofisica.describe", _describe)
     ctx.command("geofisica.section", _section)
     ctx.command("geofisica.layer", _layer)
+    ctx.command("geofisica.trace.point", _trace("point"))
+    ctx.command("geofisica.trace.line", _trace("polyline"))
+    ctx.command("geofisica.trace.area", _trace("surface"))
     ctx.expose("stacks", _stacks)
 
 

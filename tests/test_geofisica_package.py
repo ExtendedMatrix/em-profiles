@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import sys
 from pathlib import Path
 
 import pytest
@@ -91,3 +92,7 @@ def test_the_archive_installs_from_disk_and_loads(machine):
         assert PL.sync("server") == [] or all(p.id != "geofisica" for p in PL.sync("server"))
     finally:
         PL.reset()
+        # the installed copy forgotten: the tests after this one load the development folder
+        PL._imported.pop("geofisica", None)
+        for m in [m for m in sys.modules if m == "geofisica" or m.startswith("geofisica.")]:
+            del sys.modules[m]

@@ -210,22 +210,24 @@ def _slices_of_extractor(graph: Any, ext_id: str) -> List[str]:
 
 def usd_rows(graph: Any, node: Any) -> List[Dict[str, Any]]:
     slices: List[str] = []
+    # the same extractor or combiner is the provenance of several properties (row G12): counted once
+    sources = list(dict.fromkeys(pv for pid in _linked(graph, node.node_id, "has_property")
+                                 for pv in _linked(graph, pid, "has_data_provenance")))
     extractors = combiners = 0
-    for pid in _linked(graph, node.node_id, "has_property"):
-        for pv in _linked(graph, pid, "has_data_provenance"):
-            n = graph.find_node_by_id(pv)
-            if n is None:
-                continue
-            if n.node_type == "combiner":
-                found = [s for e in _linked(graph, pv, "combines") for s in _slices_of_extractor(graph, e)]
-                if found:
-                    combiners += 1
-                    slices.extend(found)
-            elif n.node_type == "extractor":
-                found = _slices_of_extractor(graph, pv)
-                if found:
-                    extractors += 1
-                    slices.extend(found)
+    for pv in sources:
+        n = graph.find_node_by_id(pv)
+        if n is None:
+            continue
+        if n.node_type == "combiner":
+            found = [s for e in _linked(graph, pv, "combines") for s in _slices_of_extractor(graph, e)]
+            if found:
+                combiners += 1
+                slices.extend(found)
+        elif n.node_type == "extractor":
+            found = _slices_of_extractor(graph, pv)
+            if found:
+                extractors += 1
+                slices.extend(found)
     slices = list(dict.fromkeys(slices))
     if not slices:
         return []
