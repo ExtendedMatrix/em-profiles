@@ -106,9 +106,15 @@ def _num(v: Any) -> Optional[float]:
 
 # ── the installation, form by form (in the child process) ───────────────────
 
+# the commit before the pilot (MICRO-PL20, a53b9ee): there the mixed package still
+# carries the stub of its code, the «before» of the update. HEAD was right only
+# while the pilot's own change was uncommitted.
+OLD_REF = "3cf61af"
+
+
 def _git_archive_folder(rel: str, dest: Path) -> Path:
-    """The folder ``rel`` as it is in HEAD (the stub of before), unpacked in ``dest``."""
-    raw = subprocess.run(["git", "-C", str(REPO), "archive", "HEAD", rel], check=True,
+    """The folder ``rel`` as it is at OLD_REF (the stub of before), unpacked in ``dest``."""
+    raw = subprocess.run(["git", "-C", str(REPO), "archive", OLD_REF, rel], check=True,
                          capture_output=True).stdout
     with tarfile.open(fileobj=io.BytesIO(raw)) as tar:
         tar.extractall(dest)
@@ -144,7 +150,7 @@ def install_separata(work: Path, heads_dir: Path) -> Dict[str, Any]:
     return out
 
 
-def install_mista(work: Path) -> Dict[str, Any]:
+def install_mista(work: Path, heads_dir: Path) -> Dict[str, Any]:
     from s3dgraphy import extensions as X
     from s3dgraphy.em import plugins as PL
     out: Dict[str, Any] = {"form": "mista"}
@@ -161,7 +167,15 @@ def install_mista(work: Path) -> Dict[str, Any]:
     plugs = PL.sync("emstudio")
     p = plugs[0] if plugs else None
     out["old_loaded"] = p.as_dict()["state"] if p else None
+    # the old stub on an open head: since the em API (MICRO-PL14) a command needs
+    # a graph open before anything else, so the stub's own answer comes only then
+    from s3dgraphy import em
+    from s3dgraphy.em.host import ScriptHost
+    h = ScriptHost(author=ORCID, language="it")
+    em.host.install(h)
+    h.open(str(heads_dir / f"testa-{HEADS[0]['id']}.em.json"))
     res = PL.invoke(p.id, "facemesh.propose", {"model": "rm1"}, author=ORCID) if p else None
+    em.host.uninstall()
     out["old_command"] = (res.data.get("messages") or {"en": res.message}) if res is not None else None
     pv = X.preview(b_new["path"])
     code = pv.get("code") or {}
@@ -441,7 +455,7 @@ def child(form: str, out_dir: Path, heads_dir: Path, *, step: str) -> Dict[str, 
     work = out_dir / f"work-{form}"
     work.mkdir(parents=True, exist_ok=True)
     if step == "install":
-        return install_separata(work, heads_dir) if form == "separata" else install_mista(work)
+        return install_separata(work, heads_dir) if form == "separata" else install_mista(work, heads_dir)
     res: Dict[str, Any] = {"form": form, "heads": []}
     hout = out_dir / form
     hout.mkdir(parents=True, exist_ok=True)
