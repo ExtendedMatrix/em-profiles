@@ -1,6 +1,6 @@
 schema_version = "1.0.0"
 id = "facemesh_fit"
-version = "0.2.0"
+version = "0.3.0"
 name = "Punti del volto, proposta automatica (ESEMPIO)"
 tagline = "Propone i punti canonici del volto su un modello"
 maintainer = "Curatori di esempio (ESEMPIO)"
@@ -16,7 +16,7 @@ entry = "facemesh_fit:plugin"
 hosts = ["emstudio"]
 platforms = ["macos-arm64", "windows-x64", "linux-x64"]
   [code.permissions]
-  files = "Legge le texture del modello per riconoscere il volto"
+  files = "Legge il file 3D del modello scelto per proporre i punti"
   [code.descriptor]
   host = "emstudio-side"
   transport = ["direct"]
@@ -28,4 +28,4 @@ platforms = ["macos-arm64", "windows-x64", "linux-x64"]
   writes = true
   slots = [{ name = "model", kind = "id" }]
   in = ["context.node@1", "menu.tools@1"]
-  when = "selection:RM"
+  when = "selection:representation_model|document"

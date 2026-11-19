@@ -1,0 +1,146 @@
+{
+ "bridge": {
+  "health": {
+   "ok": true,
+   "bridge_level": 84
+  },
+  "up_ms": 117,
+  "stopped": true
+ },
+ "install": {
+  "status": 200,
+  "ok": true,
+  "code": null
+ },
+ "plugins": {
+  "status": 200,
+  "ms": 13,
+  "plugins": [
+   {
+    "id": "esempio-statuaria",
+    "version": "0.2.0",
+    "state": "loaded",
+    "source": "disk",
+    "verified": false,
+    "commands": [
+     {
+      "id": "facemesh.propose",
+      "in": [
+       "context.node@1",
+       "menu.tools@1"
+      ],
+      "when": "selection:representation_model|document"
+     }
+    ]
+   }
+  ]
+ },
+ "relative_url": {
+  "status": 200,
+  "run": "error",
+  "messages": {
+   "en": "«esempio-statuaria/facemesh.propose» did not succeed: testa-fuori-misura.glb: percorso relativo, e l'ospite non dice dove sta il documento",
+   "it": "«esempio-statuaria/facemesh.propose» non è riuscito: testa-fuori-misura.glb: percorso relativo, e l'ospite non dice dove sta il documento"
+  },
+  "steps": 0
+ },
+ "absolute_url": {
+  "status": 200,
+  "run": "done",
+  "ms": 154,
+  "messages": null,
+  "steps": 1,
+  "volatile_steps": 1,
+  "dtc": [
+   {
+    "dtc": "4476a04a-ce2f-5d34-b89e-09959509553e",
+    "process": {},
+    "dtc_node": {
+     "name": "Proposta dei punti del volto (facemesh_fit 0.2.0)",
+     "node_type": "dtc_process",
+     "data": {
+      "dtc_kind": "transformation",
+      "technique": "Python (em)",
+      "software": [
+       {
+        "name": "esempio-statuaria/facemesh_fit",
+        "version": "0.2.0"
+       },
+       {
+        "name": "s3dgraphy.em",
+        "version": "1.1.0"
+       }
+      ],
+      "parameters": {
+       "label": "Proposta dei punti del volto (facemesh_fit 0.2.0)",
+       "host": "emstudio",
+       "touched": [
+        "facemesh:d1:0e7e91dbc5f0:0.2.0",
+        "d0ca0f74-170e-596d-97ea-916768086fc0",
+        "962d7214-f0fe-54c1-9df4-5d3017243be7",
+        "b823c9be-74cf-5887-b93c-ba8746ed8080",
+        "d103fb3c-9e91-548b-9db7-0d018c3c564f",
+        "89a29a44-916e-5e6b-83ff-1e9ceb7098af",
+        "c2564be3-61b3-51e8-86d9-9b43225147f2",
+        "f5055cfe-7841-5d5b-b202-e699d93c2e8a",
+        "3aa2316c-6037-5fab-97be-eef53d82fe6b",
+        "46516a83-97ed-5c63-8dc3-6762cbe13a75",
+        "cad5145f-05a1-5e51-8a44-34b67e9fa592",
+        "462c7232-ddea-5731-8f4a-79c1599e95b5",
+        "1db91f84-4d26-54a7-9391-c2335a842615",
+        "d1"
+       ],
+       "plugin": "esempio-statuaria",
+       "plugin_version": "0.2.0",
+       "source": "disk",
+       "verified": false,
+       "package": "esempio-statuaria",
+       "command": "facemesh.propose"
+      },
+      "lang": "und",
+      "aux_volatile": "connector:esempio-statuaria/facemesh_fit",
+      "created_by": "0000-0002-1825-0097",
+      "created_at": "2026-11-19T02:35:23Z"
+     }
+    }
+   }
+  ],
+  "proposals": 6,
+  "by": "facemesh_fit 0.2.0",
+  "err_mm": {
+   "glabella": 0.17,
+   "nasion": 0.99,
+   "exocanthion_r": 6.0,
+   "exocanthion_l": 5.96,
+   "pronasale": 0.91,
+   "gnathion": 1.14
+  }
+ },
+ "pose": {
+  "ms": 30,
+  "complete": true,
+  "computed": [
+   {
+    "type": "stat:c_larghezza_biorbitale",
+    "value": 0.101096,
+    "text": "0.101 m"
+   },
+   {
+    "type": "stat:c_altezza_facciale",
+    "value": 0.116783,
+    "text": "0.117 m"
+   },
+   {
+    "type": "stat:c_indice_facciale",
+    "value": 1.155169,
+    "text": "1.1552"
+   }
+  ],
+  "combiner_names": [
+   "Altezza del volto",
+   "Indice facciale",
+   "Larghezza biorbitale",
+   "Punti canonici del volto"
+  ]
+ }
+}

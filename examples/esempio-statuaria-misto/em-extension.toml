@@ -1,6 +1,6 @@
 schema_version = "1.0.0"
 id = "esempio-statuaria"
-version = "0.1.0"
+version = "0.1.1"
 name = "Statuaria antica (ESEMPIO)"
 tagline = "Vocabolari, punti del volto e loro proposta automatica"
 maintainer = "Curatori di esempio (ESEMPIO)"
@@ -35,14 +35,14 @@ profile = "profile.json"
   digest = "sha256:ebf888e50796e3db5e2573fde2ddc9ca265e40eba44e32b49431eced7030f50f"
 
 [code]
-version = "0.1.0"
+version = "0.2.0"
 root = "code/"
 license = "SPDX:EUPL-1.2"
 entry = "facemesh_fit:plugin"
 hosts = ["emstudio"]
 platforms = ["macos-arm64", "windows-x64", "linux-x64"]
   [code.permissions]
-  files = "Legge le texture del modello per riconoscere il volto"
+  files = "Legge il file 3D del modello scelto per proporre i punti"
   [code.descriptor]
   host = "emstudio-side"
   transport = ["direct"]
@@ -54,4 +54,4 @@ platforms = ["macos-arm64", "windows-x64", "linux-x64"]
   writes = true
   slots = [{ name = "model", kind = "id" }]
   in = ["context.node@1", "menu.tools@1"]
-  when = "selection:RM"
+  when = "selection:representation_model|document"

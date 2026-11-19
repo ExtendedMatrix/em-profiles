@@ -1,0 +1,93 @@
+{
+ "_note": "ESEMPIO SINTETICO (D-5) — la verità per costruzione della testa generata; non citare. / SYNTHETIC EXAMPLE — the truth by construction of the generated head; not to be cited.",
+ "model": "testa-canonica.glb",
+ "model_digest": "sha256:633b4577cbacfd7f702b14420ba4d2fa54fbb1f54bb8fafba464507df89e3d93",
+ "license": "CC0-1.0",
+ "variant": "canonica",
+ "frame": {
+  "units": "m",
+  "up": "+y",
+  "facing": "+z turned 0° about y",
+  "yaw_deg": 0.0,
+  "shift_m": [
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ "generator": {
+  "seed": 2026,
+  "roughness_m": 0.00015,
+  "tessellation": [
+   160,
+   120
+  ],
+  "vertices": 19481,
+  "triangles": 38400
+ },
+ "set": "stat:volto",
+ "points": {
+  "glabella": [
+   0.0,
+   0.324103,
+   0.095202
+  ],
+  "nasion": [
+   0.0,
+   0.309703,
+   0.088325
+  ],
+  "exocanthion_r": [
+   -0.049244,
+   0.303466,
+   0.065353
+  ],
+  "exocanthion_l": [
+   0.050045,
+   0.304655,
+   0.064324
+  ],
+  "pronasale": [
+   0.0,
+   0.257879,
+   0.109048
+  ],
+  "gnathion": [
+   0.0,
+   0.200987,
+   0.058627
+  ]
+ },
+ "infill_polygon": [
+  [
+   0.009029,
+   0.25815,
+   0.100077
+  ],
+  [
+   0.004737,
+   0.262817,
+   0.106219
+  ],
+  [
+   -0.004737,
+   0.262817,
+   0.106219
+  ],
+  [
+   -0.009029,
+   0.25815,
+   0.100077
+  ],
+  [
+   -0.004062,
+   0.255545,
+   0.090631
+  ],
+  [
+   0.004062,
+   0.255545,
+   0.090631
+  ]
+ ]
+}

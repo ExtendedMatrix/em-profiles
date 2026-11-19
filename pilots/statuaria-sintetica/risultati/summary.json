@@ -1,0 +1,1606 @@
+{
+ "pilot": "MICRO-PL20 · statuaria sintetica (D-5)",
+ "orcid": "0000-0002-1825-0097",
+ "tolerance_mm": 0.5,
+ "heads": {
+  "canonica": {
+   "ms": 131.0,
+   "vertices": 19481,
+   "triangles": 38400,
+   "digest": "sha256:633b4577cbacfd7f702b14420ba4d2fa54fbb1f54bb8fafba464507df89e3d93",
+   "bytes": 929508
+  },
+  "girata": {
+   "ms": 126.4,
+   "vertices": 19481,
+   "triangles": 38400,
+   "digest": "sha256:5c1ec66c799f68f17603f6d28a4f49104f983c960fe0ebb346593895b9886592",
+   "bytes": 929500
+  },
+  "fuori-misura": {
+   "ms": 127.3,
+   "vertices": 19481,
+   "triangles": 38400,
+   "digest": "sha256:0e7e91dbc5f0b70cfab3abf7544ab8b418d9fe397c3c8c5da12132a004003d15",
+   "bytes": 929516
+  }
+ },
+ "forms": {
+  "separata": {
+   "install": {
+    "form": "separata",
+    "build": {
+     "ms": 62.5,
+     "data": {
+      "file": "esempio-statuaria-0.1.0.zip",
+      "size": 12176,
+      "ok": true
+     },
+     "code": {
+      "file": "facemesh_fit-0.3.0.zip",
+      "size": 10261,
+      "ok": true
+     }
+    },
+    "preview_code": {
+     "trust_needed": true,
+     "permissions": {
+      "files": "Legge il file 3D del modello scelto per proporre i punti"
+     },
+     "capabilities": [
+      "read-graph",
+      "ingest-batch"
+     ],
+     "requires": [
+      "incompleto: mancano i dati di esempio-statuaria ^0.1"
+     ]
+    },
+    "install_code_first": {
+     "ms": 2.1,
+     "state": {
+      "data": {},
+      "code": {
+       "version": "0.3.0"
+      },
+      "version": "0.3.0",
+      "incomplete": true
+     }
+    },
+    "sync_without_data": [
+     "loaded"
+    ],
+    "command_without_data": {
+     "head": "canonica",
+     "truth": {
+      "larghezza": 0.099301,
+      "altezza": 0.112699,
+      "indice": 1.134921,
+      "area": 0.00023
+     },
+     "ms": {
+      "open": 6.6,
+      "propose": 0.1
+     },
+     "overlay_has_set": false,
+     "propose_refused": {
+      "en": "«facemesh_fit/facemesh.propose» did not succeed: manca l'insieme di punti stat:volto (i dati di esempio-statuaria)",
+      "it": "«facemesh_fit/facemesh.propose» non è riuscito: manca l'insieme di punti stat:volto (i dati di esempio-statuaria)"
+     },
+     "propose_reason": "handler-failed"
+    },
+    "install_data": {
+     "ms": 58.3,
+     "state": {
+      "data": {
+       "version": "0.1.0"
+      },
+      "code": {},
+      "version": "0.1.0"
+     }
+    },
+    "installed": [
+     {
+      "id": "esempio-statuaria",
+      "version": "0.1.0",
+      "kind": "community-package"
+     },
+     {
+      "id": "facemesh_fit",
+      "version": "0.3.0",
+      "kind": "plugin"
+     }
+    ],
+    "process_ms": 203.0
+   },
+   "heads": {
+    "form": "separata",
+    "heads": [
+     {
+      "head": "canonica",
+      "truth": {
+       "larghezza": 0.099301,
+       "altezza": 0.112699,
+       "indice": 1.134921,
+       "area": 0.00023
+      },
+      "ms": {
+       "open": 36.5,
+       "propose": 151.9,
+       "confirm_and_compute": 4.0,
+       "correct": 3.0,
+       "infill_and_terms": 3.2,
+       "save": 9.1,
+       "sheet": 12.7
+      },
+      "overlay_has_set": true,
+      "proposals": {
+       "count": 6,
+       "volatile_nodes": 13,
+       "by": "facemesh_fit 0.3.0",
+       "unit_m": 0.113336,
+       "graph_steps": 1
+      },
+      "proposal_errors": {
+       "glabella": {
+        "method": "detected",
+        "label": "glabella",
+        "err_mm": 0.17
+       },
+       "nasion": {
+        "method": "detected",
+        "label": "nasion",
+        "err_mm": 1.0
+       },
+       "exocanthion_r": {
+        "method": "predicted",
+        "label": "esocantion (destro)",
+        "err_mm": 1.8
+       },
+       "exocanthion_l": {
+        "method": "predicted",
+        "label": "esocantion (sinistro)",
+        "err_mm": 1.51
+       },
+       "pronasale": {
+        "method": "detected",
+        "label": "pronasale",
+        "err_mm": 0.4
+       },
+       "gnathion": {
+        "method": "detected",
+        "label": "gnathion",
+        "err_mm": 1.63
+       }
+      },
+      "save_with_proposals_open": {
+       "volatile_nodes_in_file": 13
+      },
+      "computed": {
+       "computed": [
+        {
+         "combiner_type": "stat:c_larghezza_biorbitale",
+         "operation": "distance",
+         "value": 0.098149,
+         "unit": "m",
+         "text": "0.098 m",
+         "created": true
+        },
+        {
+         "combiner_type": "stat:c_altezza_facciale",
+         "operation": "distance",
+         "value": 0.113336,
+         "unit": "m",
+         "text": "0.113 m",
+         "created": true
+        },
+        {
+         "combiner_type": "stat:c_indice_facciale",
+         "operation": "ratio",
+         "value": 1.154734,
+         "unit": "1",
+         "text": "1.1547",
+         "created": true
+        }
+       ],
+       "missing": {},
+       "errors": {}
+      },
+      "pose_complete": true,
+      "volatile_left": 0,
+      "values_as_proposed": {
+       "larghezza": 0.098149,
+       "altezza": 0.113336,
+       "indice": 1.154734
+      },
+      "corrected": [
+       "nasion",
+       "exocanthion_r",
+       "exocanthion_l",
+       "gnathion"
+      ],
+      "recomputed_on_move": [
+       "stat:altezza_facciale",
+       "stat:indice_facciale",
+       "stat:larghezza_biorbitale"
+      ],
+      "values_after_correction": {
+       "larghezza": 0.099301,
+       "altezza": 0.112699,
+       "indice": 1.134923
+      },
+      "infill": {
+       "area_m2": 0.00023027,
+       "truth_m2": 0.00023027,
+       "perimeter_m": 0.057224,
+       "value_text": "0.000 m2",
+       "extractor_name": "D.01.07"
+      },
+      "values_final": {
+       "larghezza": 0.099301,
+       "altezza": 0.112699,
+       "indice": 1.134923,
+       "area": 0.0002303
+      },
+      "deviation_as_proposed": {
+       "larghezza": {
+        "value": 0.098149,
+        "truth": 0.099301,
+        "abs": -0.001152,
+        "rel_pct": -1.161
+       },
+       "altezza": {
+        "value": 0.113336,
+        "truth": 0.112699,
+        "abs": 0.000637,
+        "rel_pct": 0.565
+       },
+       "indice": {
+        "value": 1.154734,
+        "truth": 1.134921,
+        "abs": 0.019813,
+        "rel_pct": 1.746
+       }
+      },
+      "deviation_final": {
+       "larghezza": {
+        "value": 0.099301,
+        "truth": 0.099301,
+        "abs": -0.0,
+        "rel_pct": -0.0
+       },
+       "altezza": {
+        "value": 0.112699,
+        "truth": 0.112699,
+        "abs": -0.0,
+        "rel_pct": -0.0
+       },
+       "indice": {
+        "value": 1.134923,
+        "truth": 1.134921,
+        "abs": 2e-06,
+        "rel_pct": 0.0
+       },
+       "area": {
+        "value": 0.00023,
+        "truth": 0.00023,
+        "abs": 0.0,
+        "rel_pct": 0.014
+       }
+      },
+      "saved": {
+       "profiles": [
+        {
+         "iri": "https://w3id.org/extendedmatrix/profile/esempio-statuaria",
+         "version": "0.1.0"
+        }
+       ],
+       "nodes": 32,
+       "edges": 44,
+       "volatile_nodes": 0,
+       "proposal_nodes": 0,
+       "landmarks": 6,
+       "landmarks_with_author": 6,
+       "landmarks_proposed_by_plugin": 6,
+       "landmarks_moved_by_person": 4
+      },
+      "reread": {
+       "pose_complete": true,
+       "values": {
+        "larghezza": 0.099301,
+        "altezza": 0.112699,
+        "indice": 1.134923,
+        "area": 0.0002303
+       },
+       "same_values": true
+      },
+      "sheet": {
+       "template": "stat-scheda-superficie 0.1.0",
+       "values": {
+        "us": "1",
+        "descrizione": "Superficie del volto della testa sintetica (ESEMPIO, D-5)",
+        "fase": {
+         "concept": "https://w3id.org/extendedmatrix/profile/esempio-statuaria/vocab/fase-superficie/integrazione",
+         "label": "integrazione di restauro"
+        },
+        "lavorazione": {
+         "concept": "https://w3id.org/extendedmatrix/profile/esempio-statuaria/vocab/lavorazione/gradina",
+         "label": "gradina"
+        },
+        "area": "0.0002303",
+        "larghezza": 0.099301,
+        "altezza": 0.112699,
+        "indice": 1.134923
+       },
+       "files": {
+        "it": {
+         "file": "testa-canonica.scheda.it.html",
+         "bytes": 5408,
+         "has_width": true
+        },
+        "en": {
+         "file": "testa-canonica.scheda.en.html",
+         "bytes": 5361,
+         "has_width": true
+        }
+       }
+      }
+     },
+     {
+      "head": "girata",
+      "truth": {
+       "larghezza": 0.099301,
+       "altezza": 0.1127,
+       "indice": 1.134927,
+       "area": 0.00023
+      },
+      "ms": {
+       "open": 0.4,
+       "propose": 144.6,
+       "confirm_and_compute": 3.3,
+       "correct": 3.0,
+       "infill_and_terms": 3.1,
+       "save": 9.0,
+       "sheet": 0.6
+      },
+      "overlay_has_set": true,
+      "proposals": {
+       "count": 6,
+       "volatile_nodes": 13,
+       "by": "facemesh_fit 0.3.0",
+       "unit_m": 0.113336,
+       "graph_steps": 1
+      },
+      "proposal_errors": {
+       "glabella": {
+        "method": "detected",
+        "label": "glabella",
+        "err_mm": 0.17
+       },
+       "nasion": {
+        "method": "detected",
+        "label": "nasion",
+        "err_mm": 1.0
+       },
+       "exocanthion_r": {
+        "method": "predicted",
+        "label": "esocantion (destro)",
+        "err_mm": 1.8
+       },
+       "exocanthion_l": {
+        "method": "predicted",
+        "label": "esocantion (sinistro)",
+        "err_mm": 1.51
+       },
+       "pronasale": {
+        "method": "detected",
+        "label": "pronasale",
+        "err_mm": 0.4
+       },
+       "gnathion": {
+        "method": "detected",
+        "label": "gnathion",
+        "err_mm": 1.63
+       }
+      },
+      "save_with_proposals_open": {
+       "volatile_nodes_in_file": 13
+      },
+      "computed": {
+       "computed": [
+        {
+         "combiner_type": "stat:c_larghezza_biorbitale",
+         "operation": "distance",
+         "value": 0.098149,
+         "unit": "m",
+         "text": "0.098 m",
+         "created": true
+        },
+        {
+         "combiner_type": "stat:c_altezza_facciale",
+         "operation": "distance",
+         "value": 0.113336,
+         "unit": "m",
+         "text": "0.113 m",
+         "created": true
+        },
+        {
+         "combiner_type": "stat:c_indice_facciale",
+         "operation": "ratio",
+         "value": 1.154734,
+         "unit": "1",
+         "text": "1.1547",
+         "created": true
+        }
+       ],
+       "missing": {},
+       "errors": {}
+      },
+      "pose_complete": true,
+      "volatile_left": 0,
+      "values_as_proposed": {
+       "larghezza": 0.098149,
+       "altezza": 0.113336,
+       "indice": 1.154734
+      },
+      "corrected": [
+       "nasion",
+       "exocanthion_r",
+       "exocanthion_l",
+       "gnathion"
+      ],
+      "recomputed_on_move": [
+       "stat:altezza_facciale",
+       "stat:indice_facciale",
+       "stat:larghezza_biorbitale"
+      ],
+      "values_after_correction": {
+       "larghezza": 0.099301,
+       "altezza": 0.1127,
+       "indice": 1.134933
+      },
+      "infill": {
+       "area_m2": 0.00023027,
+       "truth_m2": 0.00023027,
+       "perimeter_m": 0.057225,
+       "value_text": "0.000 m2",
+       "extractor_name": "D.01.07"
+      },
+      "values_final": {
+       "larghezza": 0.099301,
+       "altezza": 0.1127,
+       "indice": 1.134933,
+       "area": 0.0002303
+      },
+      "deviation_as_proposed": {
+       "larghezza": {
+        "value": 0.098149,
+        "truth": 0.099301,
+        "abs": -0.001152,
+        "rel_pct": -1.16
+       },
+       "altezza": {
+        "value": 0.113336,
+        "truth": 0.1127,
+        "abs": 0.000636,
+        "rel_pct": 0.565
+       },
+       "indice": {
+        "value": 1.154734,
+        "truth": 1.134927,
+        "abs": 0.019807,
+        "rel_pct": 1.745
+       }
+      },
+      "deviation_final": {
+       "larghezza": {
+        "value": 0.099301,
+        "truth": 0.099301,
+        "abs": -0.0,
+        "rel_pct": -0.0
+       },
+       "altezza": {
+        "value": 0.1127,
+        "truth": 0.1127,
+        "abs": 0.0,
+        "rel_pct": 0.0
+       },
+       "indice": {
+        "value": 1.134933,
+        "truth": 1.134927,
+        "abs": 6e-06,
+        "rel_pct": 0.001
+       },
+       "area": {
+        "value": 0.00023,
+        "truth": 0.00023,
+        "abs": 0.0,
+        "rel_pct": 0.012
+       }
+      },
+      "saved": {
+       "profiles": [
+        {
+         "iri": "https://w3id.org/extendedmatrix/profile/esempio-statuaria",
+         "version": "0.1.0"
+        }
+       ],
+       "nodes": 32,
+       "edges": 44,
+       "volatile_nodes": 0,
+       "proposal_nodes": 0,
+       "landmarks": 6,
+       "landmarks_with_author": 6,
+       "landmarks_proposed_by_plugin": 6,
+       "landmarks_moved_by_person": 4
+      },
+      "reread": {
+       "pose_complete": true,
+       "values": {
+        "larghezza": 0.099301,
+        "altezza": 0.1127,
+        "indice": 1.134933,
+        "area": 0.0002303
+       },
+       "same_values": true
+      },
+      "sheet": {
+       "template": "stat-scheda-superficie 0.1.0",
+       "values": {
+        "us": "1",
+        "descrizione": "Superficie del volto della testa sintetica (ESEMPIO, D-5)",
+        "fase": {
+         "concept": "https://w3id.org/extendedmatrix/profile/esempio-statuaria/vocab/fase-superficie/integrazione",
+         "label": "integrazione di restauro"
+        },
+        "lavorazione": {
+         "concept": "https://w3id.org/extendedmatrix/profile/esempio-statuaria/vocab/lavorazione/gradina",
+         "label": "gradina"
+        },
+        "area": "0.0002303",
+        "larghezza": 0.099301,
+        "altezza": 0.1127,
+        "indice": 1.134933
+       },
+       "files": {
+        "it": {
+         "file": "testa-girata.scheda.it.html",
+         "bytes": 5406,
+         "has_width": true
+        },
+        "en": {
+         "file": "testa-girata.scheda.en.html",
+         "bytes": 5359,
+         "has_width": true
+        }
+       }
+      }
+     },
+     {
+      "head": "fuori-misura",
+      "truth": {
+       "larghezza": 0.107315,
+       "altezza": 0.116693,
+       "indice": 1.087387,
+       "area": 0.000231
+      },
+      "ms": {
+       "open": 0.3,
+       "propose": 144.9,
+       "confirm_and_compute": 3.4,
+       "correct": 3.2,
+       "infill_and_terms": 3.2,
+       "save": 9.2,
+       "sheet": 0.7
+      },
+      "overlay_has_set": true,
+      "proposals": {
+       "count": 6,
+       "volatile_nodes": 13,
+       "by": "facemesh_fit 0.3.0",
+       "unit_m": 0.116783,
+       "graph_steps": 1
+      },
+      "proposal_errors": {
+       "glabella": {
+        "method": "detected",
+        "label": "glabella",
+        "err_mm": 0.17
+       },
+       "nasion": {
+        "method": "detected",
+        "label": "nasion",
+        "err_mm": 0.99
+       },
+       "exocanthion_r": {
+        "method": "predicted",
+        "label": "esocantion (destro)",
+        "err_mm": 6.0
+       },
+       "exocanthion_l": {
+        "method": "predicted",
+        "label": "esocantion (sinistro)",
+        "err_mm": 5.96
+       },
+       "pronasale": {
+        "method": "detected",
+        "label": "pronasale",
+        "err_mm": 0.91
+       },
+       "gnathion": {
+        "method": "detected",
+        "label": "gnathion",
+        "err_mm": 1.14
+       }
+      },
+      "save_with_proposals_open": {
+       "volatile_nodes_in_file": 13
+      },
+      "computed": {
+       "computed": [
+        {
+         "combiner_type": "stat:c_larghezza_biorbitale",
+         "operation": "distance",
+         "value": 0.101096,
+         "unit": "m",
+         "text": "0.101 m",
+         "created": true
+        },
+        {
+         "combiner_type": "stat:c_altezza_facciale",
+         "operation": "distance",
+         "value": 0.116783,
+         "unit": "m",
+         "text": "0.117 m",
+         "created": true
+        },
+        {
+         "combiner_type": "stat:c_indice_facciale",
+         "operation": "ratio",
+         "value": 1.155169,
+         "unit": "1",
+         "text": "1.1552",
+         "created": true
+        }
+       ],
+       "missing": {},
+       "errors": {}
+      },
+      "pose_complete": true,
+      "volatile_left": 0,
+      "values_as_proposed": {
+       "larghezza": 0.101096,
+       "altezza": 0.116783,
+       "indice": 1.155169
+      },
+      "corrected": [
+       "nasion",
+       "exocanthion_r",
+       "exocanthion_l",
+       "pronasale",
+       "gnathion"
+      ],
+      "recomputed_on_move": [
+       "stat:altezza_facciale",
+       "stat:indice_facciale",
+       "stat:larghezza_biorbitale"
+      ],
+      "values_after_correction": {
+       "larghezza": 0.107315,
+       "altezza": 0.116693,
+       "indice": 1.087388
+      },
+      "infill": {
+       "area_m2": 0.00023073,
+       "truth_m2": 0.00023073,
+       "perimeter_m": 0.057242,
+       "value_text": "0.000 m2",
+       "extractor_name": "D.01.07"
+      },
+      "values_final": {
+       "larghezza": 0.107315,
+       "altezza": 0.116693,
+       "indice": 1.087388,
+       "area": 0.0002307
+      },
+      "deviation_as_proposed": {
+       "larghezza": {
+        "value": 0.101096,
+        "truth": 0.107315,
+        "abs": -0.006219,
+        "rel_pct": -5.795
+       },
+       "altezza": {
+        "value": 0.116783,
+        "truth": 0.116693,
+        "abs": 9e-05,
+        "rel_pct": 0.077
+       },
+       "indice": {
+        "value": 1.155169,
+        "truth": 1.087387,
+        "abs": 0.067782,
+        "rel_pct": 6.233
+       }
+      },
+      "deviation_final": {
+       "larghezza": {
+        "value": 0.107315,
+        "truth": 0.107315,
+        "abs": -0.0,
+        "rel_pct": -0.0
+       },
+       "altezza": {
+        "value": 0.116693,
+        "truth": 0.116693,
+        "abs": 0.0,
+        "rel_pct": 0.0
+       },
+       "indice": {
+        "value": 1.087388,
+        "truth": 1.087387,
+        "abs": 1e-06,
+        "rel_pct": 0.0
+       },
+       "area": {
+        "value": 0.000231,
+        "truth": 0.000231,
+        "abs": -0.0,
+        "rel_pct": -0.012
+       }
+      },
+      "saved": {
+       "profiles": [
+        {
+         "iri": "https://w3id.org/extendedmatrix/profile/esempio-statuaria",
+         "version": "0.1.0"
+        }
+       ],
+       "nodes": 33,
+       "edges": 45,
+       "volatile_nodes": 0,
+       "proposal_nodes": 0,
+       "landmarks": 6,
+       "landmarks_with_author": 6,
+       "landmarks_proposed_by_plugin": 6,
+       "landmarks_moved_by_person": 5
+      },
+      "reread": {
+       "pose_complete": true,
+       "values": {
+        "larghezza": 0.107315,
+        "altezza": 0.116693,
+        "indice": 1.087388,
+        "area": 0.0002307
+       },
+       "same_values": true
+      },
+      "sheet": {
+       "template": "stat-scheda-superficie 0.1.0",
+       "values": {
+        "us": "1",
+        "descrizione": "Superficie del volto della testa sintetica (ESEMPIO, D-5)",
+        "fase": {
+         "concept": "https://w3id.org/extendedmatrix/profile/esempio-statuaria/vocab/fase-superficie/integrazione",
+         "label": "integrazione di restauro"
+        },
+        "lavorazione": {
+         "concept": "https://w3id.org/extendedmatrix/profile/esempio-statuaria/vocab/lavorazione/gradina",
+         "label": "gradina"
+        },
+        "area": "0.0002307",
+        "larghezza": 0.107315,
+        "altezza": 0.116693,
+        "indice": 1.087388
+       },
+       "files": {
+        "it": {
+         "file": "testa-fuori-misura.scheda.it.html",
+         "bytes": 5408,
+         "has_width": true
+        },
+        "en": {
+         "file": "testa-fuori-misura.scheda.en.html",
+         "bytes": 5361,
+         "has_width": true
+        }
+       }
+      }
+     }
+    ],
+    "process_ms": 645.5
+   }
+  },
+  "mista": {
+   "install": {
+    "form": "mista",
+    "build": {
+     "ms": 71.6,
+     "old": {
+      "file": "esempio-statuaria-0.1.0.zip",
+      "size": 12942
+     },
+     "new": {
+      "file": "esempio-statuaria-0.1.1.zip",
+      "size": 22012
+     }
+    },
+    "install_old": {
+     "ms": 59.4,
+     "state": {
+      "data": {
+       "version": "0.1.0"
+      },
+      "code": {
+       "version": "0.1.0"
+      },
+      "version": "0.1.0"
+     }
+    },
+    "old_loaded": "loaded",
+    "old_command": {
+     "en": "«esempio-statuaria/facemesh.propose» is declared but not wired to a service yet.",
+     "it": "«esempio-statuaria/facemesh.propose» è dichiarato ma non ancora collegato a un servizio."
+    },
+    "preview_update": {
+     "trust_needed": false,
+     "trust_changes": [],
+     "code_updated": {
+      "code": "code_updated",
+      "level": "warning",
+      "where": "",
+      "en": "code updated 0.1.0 → 0.2.0",
+      "it": "codice aggiornato 0.1.0 → 0.2.0"
+     },
+     "data": {
+      "version": "0.1.0"
+     }
+    },
+    "update": {
+     "ms": 14.0,
+     "state": {
+      "data": {
+       "version": "0.1.0"
+      },
+      "code": {
+       "version": "0.2.0"
+      },
+      "version": "0.1.1",
+      "warnings": [
+       "codice aggiornato 0.1.0 → 0.2.0"
+      ]
+     }
+    },
+    "after_update_same_process": [
+     {
+      "state": "restart",
+      "problems": [
+       "è attiva la versione 0.2.0: riavvia per caricarla (Python non scarica la 0.1.0)"
+      ]
+     }
+    ],
+    "installed": [
+     {
+      "id": "esempio-statuaria",
+      "version": "0.1.1",
+      "kind": "mixed"
+     }
+    ],
+    "process_ms": 236.6
+   },
+   "heads": {
+    "form": "mista",
+    "heads": [
+     {
+      "head": "canonica",
+      "truth": {
+       "larghezza": 0.099301,
+       "altezza": 0.112699,
+       "indice": 1.134921,
+       "area": 0.00023
+      },
+      "ms": {
+       "open": 37.7,
+       "propose": 150.9,
+       "confirm_and_compute": 4.0,
+       "correct": 3.0,
+       "infill_and_terms": 3.1,
+       "save": 9.1,
+       "sheet": 12.8
+      },
+      "overlay_has_set": true,
+      "proposals": {
+       "count": 6,
+       "volatile_nodes": 13,
+       "by": "facemesh_fit 0.2.0",
+       "unit_m": 0.113336,
+       "graph_steps": 1
+      },
+      "proposal_errors": {
+       "glabella": {
+        "method": "detected",
+        "label": "glabella",
+        "err_mm": 0.17
+       },
+       "nasion": {
+        "method": "detected",
+        "label": "nasion",
+        "err_mm": 1.0
+       },
+       "exocanthion_r": {
+        "method": "predicted",
+        "label": "esocantion (destro)",
+        "err_mm": 1.8
+       },
+       "exocanthion_l": {
+        "method": "predicted",
+        "label": "esocantion (sinistro)",
+        "err_mm": 1.51
+       },
+       "pronasale": {
+        "method": "detected",
+        "label": "pronasale",
+        "err_mm": 0.4
+       },
+       "gnathion": {
+        "method": "detected",
+        "label": "gnathion",
+        "err_mm": 1.63
+       }
+      },
+      "save_with_proposals_open": {
+       "volatile_nodes_in_file": 13
+      },
+      "computed": {
+       "computed": [
+        {
+         "combiner_type": "stat:c_larghezza_biorbitale",
+         "operation": "distance",
+         "value": 0.098149,
+         "unit": "m",
+         "text": "0.098 m",
+         "created": true
+        },
+        {
+         "combiner_type": "stat:c_altezza_facciale",
+         "operation": "distance",
+         "value": 0.113336,
+         "unit": "m",
+         "text": "0.113 m",
+         "created": true
+        },
+        {
+         "combiner_type": "stat:c_indice_facciale",
+         "operation": "ratio",
+         "value": 1.154734,
+         "unit": "1",
+         "text": "1.1547",
+         "created": true
+        }
+       ],
+       "missing": {},
+       "errors": {}
+      },
+      "pose_complete": true,
+      "volatile_left": 0,
+      "values_as_proposed": {
+       "larghezza": 0.098149,
+       "altezza": 0.113336,
+       "indice": 1.154734
+      },
+      "corrected": [
+       "nasion",
+       "exocanthion_r",
+       "exocanthion_l",
+       "gnathion"
+      ],
+      "recomputed_on_move": [
+       "stat:altezza_facciale",
+       "stat:indice_facciale",
+       "stat:larghezza_biorbitale"
+      ],
+      "values_after_correction": {
+       "larghezza": 0.099301,
+       "altezza": 0.112699,
+       "indice": 1.134923
+      },
+      "infill": {
+       "area_m2": 0.00023027,
+       "truth_m2": 0.00023027,
+       "perimeter_m": 0.057224,
+       "value_text": "0.000 m2",
+       "extractor_name": "D.01.07"
+      },
+      "values_final": {
+       "larghezza": 0.099301,
+       "altezza": 0.112699,
+       "indice": 1.134923,
+       "area": 0.0002303
+      },
+      "deviation_as_proposed": {
+       "larghezza": {
+        "value": 0.098149,
+        "truth": 0.099301,
+        "abs": -0.001152,
+        "rel_pct": -1.161
+       },
+       "altezza": {
+        "value": 0.113336,
+        "truth": 0.112699,
+        "abs": 0.000637,
+        "rel_pct": 0.565
+       },
+       "indice": {
+        "value": 1.154734,
+        "truth": 1.134921,
+        "abs": 0.019813,
+        "rel_pct": 1.746
+       }
+      },
+      "deviation_final": {
+       "larghezza": {
+        "value": 0.099301,
+        "truth": 0.099301,
+        "abs": -0.0,
+        "rel_pct": -0.0
+       },
+       "altezza": {
+        "value": 0.112699,
+        "truth": 0.112699,
+        "abs": -0.0,
+        "rel_pct": -0.0
+       },
+       "indice": {
+        "value": 1.134923,
+        "truth": 1.134921,
+        "abs": 2e-06,
+        "rel_pct": 0.0
+       },
+       "area": {
+        "value": 0.00023,
+        "truth": 0.00023,
+        "abs": 0.0,
+        "rel_pct": 0.014
+       }
+      },
+      "saved": {
+       "profiles": [
+        {
+         "iri": "https://w3id.org/extendedmatrix/profile/esempio-statuaria",
+         "version": "0.1.0"
+        }
+       ],
+       "nodes": 32,
+       "edges": 44,
+       "volatile_nodes": 0,
+       "proposal_nodes": 0,
+       "landmarks": 6,
+       "landmarks_with_author": 6,
+       "landmarks_proposed_by_plugin": 6,
+       "landmarks_moved_by_person": 4
+      },
+      "reread": {
+       "pose_complete": true,
+       "values": {
+        "larghezza": 0.099301,
+        "altezza": 0.112699,
+        "indice": 1.134923,
+        "area": 0.0002303
+       },
+       "same_values": true
+      },
+      "sheet": {
+       "template": "stat-scheda-superficie 0.1.0",
+       "values": {
+        "us": "1",
+        "descrizione": "Superficie del volto della testa sintetica (ESEMPIO, D-5)",
+        "fase": {
+         "concept": "https://w3id.org/extendedmatrix/profile/esempio-statuaria/vocab/fase-superficie/integrazione",
+         "label": "integrazione di restauro"
+        },
+        "lavorazione": {
+         "concept": "https://w3id.org/extendedmatrix/profile/esempio-statuaria/vocab/lavorazione/gradina",
+         "label": "gradina"
+        },
+        "area": "0.0002303",
+        "larghezza": 0.099301,
+        "altezza": 0.112699,
+        "indice": 1.134923
+       },
+       "files": {
+        "it": {
+         "file": "testa-canonica.scheda.it.html",
+         "bytes": 5408,
+         "has_width": true
+        },
+        "en": {
+         "file": "testa-canonica.scheda.en.html",
+         "bytes": 5361,
+         "has_width": true
+        }
+       }
+      }
+     },
+     {
+      "head": "girata",
+      "truth": {
+       "larghezza": 0.099301,
+       "altezza": 0.1127,
+       "indice": 1.134927,
+       "area": 0.00023
+      },
+      "ms": {
+       "open": 0.4,
+       "propose": 145.7,
+       "confirm_and_compute": 3.4,
+       "correct": 2.9,
+       "infill_and_terms": 3.0,
+       "save": 9.0,
+       "sheet": 0.6
+      },
+      "overlay_has_set": true,
+      "proposals": {
+       "count": 6,
+       "volatile_nodes": 13,
+       "by": "facemesh_fit 0.2.0",
+       "unit_m": 0.113336,
+       "graph_steps": 1
+      },
+      "proposal_errors": {
+       "glabella": {
+        "method": "detected",
+        "label": "glabella",
+        "err_mm": 0.17
+       },
+       "nasion": {
+        "method": "detected",
+        "label": "nasion",
+        "err_mm": 1.0
+       },
+       "exocanthion_r": {
+        "method": "predicted",
+        "label": "esocantion (destro)",
+        "err_mm": 1.8
+       },
+       "exocanthion_l": {
+        "method": "predicted",
+        "label": "esocantion (sinistro)",
+        "err_mm": 1.51
+       },
+       "pronasale": {
+        "method": "detected",
+        "label": "pronasale",
+        "err_mm": 0.4
+       },
+       "gnathion": {
+        "method": "detected",
+        "label": "gnathion",
+        "err_mm": 1.63
+       }
+      },
+      "save_with_proposals_open": {
+       "volatile_nodes_in_file": 13
+      },
+      "computed": {
+       "computed": [
+        {
+         "combiner_type": "stat:c_larghezza_biorbitale",
+         "operation": "distance",
+         "value": 0.098149,
+         "unit": "m",
+         "text": "0.098 m",
+         "created": true
+        },
+        {
+         "combiner_type": "stat:c_altezza_facciale",
+         "operation": "distance",
+         "value": 0.113336,
+         "unit": "m",
+         "text": "0.113 m",
+         "created": true
+        },
+        {
+         "combiner_type": "stat:c_indice_facciale",
+         "operation": "ratio",
+         "value": 1.154734,
+         "unit": "1",
+         "text": "1.1547",
+         "created": true
+        }
+       ],
+       "missing": {},
+       "errors": {}
+      },
+      "pose_complete": true,
+      "volatile_left": 0,
+      "values_as_proposed": {
+       "larghezza": 0.098149,
+       "altezza": 0.113336,
+       "indice": 1.154734
+      },
+      "corrected": [
+       "nasion",
+       "exocanthion_r",
+       "exocanthion_l",
+       "gnathion"
+      ],
+      "recomputed_on_move": [
+       "stat:altezza_facciale",
+       "stat:indice_facciale",
+       "stat:larghezza_biorbitale"
+      ],
+      "values_after_correction": {
+       "larghezza": 0.099301,
+       "altezza": 0.1127,
+       "indice": 1.134933
+      },
+      "infill": {
+       "area_m2": 0.00023027,
+       "truth_m2": 0.00023027,
+       "perimeter_m": 0.057225,
+       "value_text": "0.000 m2",
+       "extractor_name": "D.01.07"
+      },
+      "values_final": {
+       "larghezza": 0.099301,
+       "altezza": 0.1127,
+       "indice": 1.134933,
+       "area": 0.0002303
+      },
+      "deviation_as_proposed": {
+       "larghezza": {
+        "value": 0.098149,
+        "truth": 0.099301,
+        "abs": -0.001152,
+        "rel_pct": -1.16
+       },
+       "altezza": {
+        "value": 0.113336,
+        "truth": 0.1127,
+        "abs": 0.000636,
+        "rel_pct": 0.565
+       },
+       "indice": {
+        "value": 1.154734,
+        "truth": 1.134927,
+        "abs": 0.019807,
+        "rel_pct": 1.745
+       }
+      },
+      "deviation_final": {
+       "larghezza": {
+        "value": 0.099301,
+        "truth": 0.099301,
+        "abs": -0.0,
+        "rel_pct": -0.0
+       },
+       "altezza": {
+        "value": 0.1127,
+        "truth": 0.1127,
+        "abs": 0.0,
+        "rel_pct": 0.0
+       },
+       "indice": {
+        "value": 1.134933,
+        "truth": 1.134927,
+        "abs": 6e-06,
+        "rel_pct": 0.001
+       },
+       "area": {
+        "value": 0.00023,
+        "truth": 0.00023,
+        "abs": 0.0,
+        "rel_pct": 0.012
+       }
+      },
+      "saved": {
+       "profiles": [
+        {
+         "iri": "https://w3id.org/extendedmatrix/profile/esempio-statuaria",
+         "version": "0.1.0"
+        }
+       ],
+       "nodes": 32,
+       "edges": 44,
+       "volatile_nodes": 0,
+       "proposal_nodes": 0,
+       "landmarks": 6,
+       "landmarks_with_author": 6,
+       "landmarks_proposed_by_plugin": 6,
+       "landmarks_moved_by_person": 4
+      },
+      "reread": {
+       "pose_complete": true,
+       "values": {
+        "larghezza": 0.099301,
+        "altezza": 0.1127,
+        "indice": 1.134933,
+        "area": 0.0002303
+       },
+       "same_values": true
+      },
+      "sheet": {
+       "template": "stat-scheda-superficie 0.1.0",
+       "values": {
+        "us": "1",
+        "descrizione": "Superficie del volto della testa sintetica (ESEMPIO, D-5)",
+        "fase": {
+         "concept": "https://w3id.org/extendedmatrix/profile/esempio-statuaria/vocab/fase-superficie/integrazione",
+         "label": "integrazione di restauro"
+        },
+        "lavorazione": {
+         "concept": "https://w3id.org/extendedmatrix/profile/esempio-statuaria/vocab/lavorazione/gradina",
+         "label": "gradina"
+        },
+        "area": "0.0002303",
+        "larghezza": 0.099301,
+        "altezza": 0.1127,
+        "indice": 1.134933
+       },
+       "files": {
+        "it": {
+         "file": "testa-girata.scheda.it.html",
+         "bytes": 5406,
+         "has_width": true
+        },
+        "en": {
+         "file": "testa-girata.scheda.en.html",
+         "bytes": 5359,
+         "has_width": true
+        }
+       }
+      }
+     },
+     {
+      "head": "fuori-misura",
+      "truth": {
+       "larghezza": 0.107315,
+       "altezza": 0.116693,
+       "indice": 1.087387,
+       "area": 0.000231
+      },
+      "ms": {
+       "open": 0.3,
+       "propose": 142.1,
+       "confirm_and_compute": 3.3,
+       "correct": 3.2,
+       "infill_and_terms": 3.2,
+       "save": 9.1,
+       "sheet": 0.7
+      },
+      "overlay_has_set": true,
+      "proposals": {
+       "count": 6,
+       "volatile_nodes": 13,
+       "by": "facemesh_fit 0.2.0",
+       "unit_m": 0.116783,
+       "graph_steps": 1
+      },
+      "proposal_errors": {
+       "glabella": {
+        "method": "detected",
+        "label": "glabella",
+        "err_mm": 0.17
+       },
+       "nasion": {
+        "method": "detected",
+        "label": "nasion",
+        "err_mm": 0.99
+       },
+       "exocanthion_r": {
+        "method": "predicted",
+        "label": "esocantion (destro)",
+        "err_mm": 6.0
+       },
+       "exocanthion_l": {
+        "method": "predicted",
+        "label": "esocantion (sinistro)",
+        "err_mm": 5.96
+       },
+       "pronasale": {
+        "method": "detected",
+        "label": "pronasale",
+        "err_mm": 0.91
+       },
+       "gnathion": {
+        "method": "detected",
+        "label": "gnathion",
+        "err_mm": 1.14
+       }
+      },
+      "save_with_proposals_open": {
+       "volatile_nodes_in_file": 13
+      },
+      "computed": {
+       "computed": [
+        {
+         "combiner_type": "stat:c_larghezza_biorbitale",
+         "operation": "distance",
+         "value": 0.101096,
+         "unit": "m",
+         "text": "0.101 m",
+         "created": true
+        },
+        {
+         "combiner_type": "stat:c_altezza_facciale",
+         "operation": "distance",
+         "value": 0.116783,
+         "unit": "m",
+         "text": "0.117 m",
+         "created": true
+        },
+        {
+         "combiner_type": "stat:c_indice_facciale",
+         "operation": "ratio",
+         "value": 1.155169,
+         "unit": "1",
+         "text": "1.1552",
+         "created": true
+        }
+       ],
+       "missing": {},
+       "errors": {}
+      },
+      "pose_complete": true,
+      "volatile_left": 0,
+      "values_as_proposed": {
+       "larghezza": 0.101096,
+       "altezza": 0.116783,
+       "indice": 1.155169
+      },
+      "corrected": [
+       "nasion",
+       "exocanthion_r",
+       "exocanthion_l",
+       "pronasale",
+       "gnathion"
+      ],
+      "recomputed_on_move": [
+       "stat:altezza_facciale",
+       "stat:indice_facciale",
+       "stat:larghezza_biorbitale"
+      ],
+      "values_after_correction": {
+       "larghezza": 0.107315,
+       "altezza": 0.116693,
+       "indice": 1.087388
+      },
+      "infill": {
+       "area_m2": 0.00023073,
+       "truth_m2": 0.00023073,
+       "perimeter_m": 0.057242,
+       "value_text": "0.000 m2",
+       "extractor_name": "D.01.07"
+      },
+      "values_final": {
+       "larghezza": 0.107315,
+       "altezza": 0.116693,
+       "indice": 1.087388,
+       "area": 0.0002307
+      },
+      "deviation_as_proposed": {
+       "larghezza": {
+        "value": 0.101096,
+        "truth": 0.107315,
+        "abs": -0.006219,
+        "rel_pct": -5.795
+       },
+       "altezza": {
+        "value": 0.116783,
+        "truth": 0.116693,
+        "abs": 9e-05,
+        "rel_pct": 0.077
+       },
+       "indice": {
+        "value": 1.155169,
+        "truth": 1.087387,
+        "abs": 0.067782,
+        "rel_pct": 6.233
+       }
+      },
+      "deviation_final": {
+       "larghezza": {
+        "value": 0.107315,
+        "truth": 0.107315,
+        "abs": -0.0,
+        "rel_pct": -0.0
+       },
+       "altezza": {
+        "value": 0.116693,
+        "truth": 0.116693,
+        "abs": 0.0,
+        "rel_pct": 0.0
+       },
+       "indice": {
+        "value": 1.087388,
+        "truth": 1.087387,
+        "abs": 1e-06,
+        "rel_pct": 0.0
+       },
+       "area": {
+        "value": 0.000231,
+        "truth": 0.000231,
+        "abs": -0.0,
+        "rel_pct": -0.012
+       }
+      },
+      "saved": {
+       "profiles": [
+        {
+         "iri": "https://w3id.org/extendedmatrix/profile/esempio-statuaria",
+         "version": "0.1.0"
+        }
+       ],
+       "nodes": 33,
+       "edges": 45,
+       "volatile_nodes": 0,
+       "proposal_nodes": 0,
+       "landmarks": 6,
+       "landmarks_with_author": 6,
+       "landmarks_proposed_by_plugin": 6,
+       "landmarks_moved_by_person": 5
+      },
+      "reread": {
+       "pose_complete": true,
+       "values": {
+        "larghezza": 0.107315,
+        "altezza": 0.116693,
+        "indice": 1.087388,
+        "area": 0.0002307
+       },
+       "same_values": true
+      },
+      "sheet": {
+       "template": "stat-scheda-superficie 0.1.0",
+       "values": {
+        "us": "1",
+        "descrizione": "Superficie del volto della testa sintetica (ESEMPIO, D-5)",
+        "fase": {
+         "concept": "https://w3id.org/extendedmatrix/profile/esempio-statuaria/vocab/fase-superficie/integrazione",
+         "label": "integrazione di restauro"
+        },
+        "lavorazione": {
+         "concept": "https://w3id.org/extendedmatrix/profile/esempio-statuaria/vocab/lavorazione/gradina",
+         "label": "gradina"
+        },
+        "area": "0.0002307",
+        "larghezza": 0.107315,
+        "altezza": 0.116693,
+        "indice": 1.087388
+       },
+       "files": {
+        "it": {
+         "file": "testa-fuori-misura.scheda.it.html",
+         "bytes": 5408,
+         "has_width": true
+        },
+        "en": {
+         "file": "testa-fuori-misura.scheda.en.html",
+         "bytes": 5361,
+         "has_width": true
+        }
+       }
+      }
+     }
+    ],
+    "process_ms": 648.7
+   }
+  }
+ },
+ "forms_agree": [
+  {
+   "head": "canonica",
+   "same_proposals": true,
+   "same_values": true
+  },
+  {
+   "head": "girata",
+   "same_proposals": true,
+   "same_values": true
+  },
+  {
+   "head": "fuori-misura",
+   "same_proposals": true,
+   "same_values": true
+  }
+ ]
+}

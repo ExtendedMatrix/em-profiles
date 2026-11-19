@@ -1,0 +1,1356 @@
+{
+  "active_graph_id": "testa",
+  "graphs": {
+    "testa": {
+      "edges": [
+        {
+          "edge_type": "has_documentation",
+          "id": "e1",
+          "source": "us1",
+          "target": "d1"
+        },
+        {
+          "edge_type": "has_representation_model",
+          "id": "e2",
+          "source": "d1",
+          "target": "rm1"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "extracted_from",
+          "id": "0bc09239-1150-5e18-b6e0-19931631a332",
+          "source": "539251c8-21f1-5560-bb37-3565e95007b3",
+          "target": "f79285dd-87b7-59ad-b5c2-e122f503f237"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "is_on_resource",
+          "id": "53324320-a4d2-50a1-8eac-fa8aebebf99a",
+          "source": "f79285dd-87b7-59ad-b5c2-e122f503f237",
+          "target": "d1"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "combines",
+          "id": "9cd87520-5efd-57fb-926b-f2ec5d107dd2",
+          "source": "e66dea53-bb3e-5ca4-ba41-2c9585a30908",
+          "target": "539251c8-21f1-5560-bb37-3565e95007b3"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "is_on_resource",
+          "id": "982ce7ee-9737-5c06-a542-b2cc1b0615bb",
+          "source": "d2218783-bc7c-57b5-802c-3ed41d3bc158",
+          "target": "d1"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "combines",
+          "id": "742fc02c-4b25-5eca-a500-1cdb10035285",
+          "source": "e66dea53-bb3e-5ca4-ba41-2c9585a30908",
+          "target": "7f4fdbde-1fb6-5f9f-92ba-e334a5562ed8"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "is_on_resource",
+          "id": "224dbbe6-06bc-5ee8-ad94-40561a0abe59",
+          "source": "bbc920a2-ee0d-5c68-a0e6-f38563a6127e",
+          "target": "d1"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "combines",
+          "id": "e4ac2315-45f5-5d71-a2a1-0ef5f34b32a2",
+          "source": "e66dea53-bb3e-5ca4-ba41-2c9585a30908",
+          "target": "038c9a7a-33f1-58e2-bf1c-7bff2dd50138"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "is_on_resource",
+          "id": "15859ca3-79fd-5819-898d-b69729f5dbca",
+          "source": "c1827c85-60ef-55d8-83b1-627059f50789",
+          "target": "d1"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "combines",
+          "id": "77d735e1-fd7c-530f-a3ca-7f5d01885690",
+          "source": "e66dea53-bb3e-5ca4-ba41-2c9585a30908",
+          "target": "873faac9-bb2a-5527-a28e-5e80c2f87d77"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "extracted_from",
+          "id": "36c38bf5-8b6b-5471-8759-d17a1565fb4f",
+          "source": "df53e1f7-3f3a-5cad-b220-62c49d1df083",
+          "target": "e5b7d686-a089-5bfd-bf7e-c422c2e208d8"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "is_on_resource",
+          "id": "bab8c8a7-476e-5f0d-97f5-f6f25baaf53a",
+          "source": "e5b7d686-a089-5bfd-bf7e-c422c2e208d8",
+          "target": "d1"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "combines",
+          "id": "5b36ac51-c655-501c-9ea9-e6f941a4fd5d",
+          "source": "e66dea53-bb3e-5ca4-ba41-2c9585a30908",
+          "target": "df53e1f7-3f3a-5cad-b220-62c49d1df083"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "is_on_resource",
+          "id": "74c1d975-c59f-595a-b1e6-c4f096371479",
+          "source": "eebd4aa2-1021-5338-b11d-f6fdfb82506b",
+          "target": "d1"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "combines",
+          "id": "0280bf04-a64f-59b2-80da-ebaeb29cbf58",
+          "source": "e66dea53-bb3e-5ca4-ba41-2c9585a30908",
+          "target": "57d79df4-c368-5254-a3ed-7a1c29827fe8"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "has_data_provenance",
+          "id": "9a266aa4-80da-5594-bb5e-689484a32907",
+          "source": "52217efe-e6c8-5f92-832f-62823f2b0a77",
+          "target": "cb9e3c8e-c7e0-5d92-94c8-5a2daf967b23"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "combines",
+          "id": "ba477a87-c4fd-54e0-8952-2e0bc48bd75d",
+          "source": "cb9e3c8e-c7e0-5d92-94c8-5a2daf967b23",
+          "target": "038c9a7a-33f1-58e2-bf1c-7bff2dd50138"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "combines",
+          "id": "8a608600-6d62-548c-9c2a-5a9a5502bcc2",
+          "source": "cb9e3c8e-c7e0-5d92-94c8-5a2daf967b23",
+          "target": "873faac9-bb2a-5527-a28e-5e80c2f87d77"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "has_property",
+          "id": "e4dc260e-01c7-5487-8376-062e8a279a53",
+          "source": "us1",
+          "target": "52217efe-e6c8-5f92-832f-62823f2b0a77"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "has_data_provenance",
+          "id": "43cc90da-5ad4-5db9-8527-5625fb5412cd",
+          "source": "ff1faf92-2208-5f51-823b-3ad9afde1659",
+          "target": "112e38c7-b2eb-503d-ad67-8cc5d7f4a92f"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "combines",
+          "id": "0c3bf886-bdb9-5b87-a9f4-b38a78199ff0",
+          "source": "112e38c7-b2eb-503d-ad67-8cc5d7f4a92f",
+          "target": "7f4fdbde-1fb6-5f9f-92ba-e334a5562ed8"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "combines",
+          "id": "8a680d40-d274-55d9-a0f6-cf77d07aab5d",
+          "source": "112e38c7-b2eb-503d-ad67-8cc5d7f4a92f",
+          "target": "57d79df4-c368-5254-a3ed-7a1c29827fe8"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "has_property",
+          "id": "bd030c97-385b-594d-994f-9b74728c269c",
+          "source": "us1",
+          "target": "ff1faf92-2208-5f51-823b-3ad9afde1659"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "has_data_provenance",
+          "id": "84134f29-4be7-5878-ab0b-11d918cb1958",
+          "source": "51c6812e-750f-5f2b-ae69-47f95eb575d7",
+          "target": "0626eebc-32e0-5dda-8d9b-6f838bb7dd9b"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "combines",
+          "id": "28f84124-54e0-53cf-84df-af41e1d523a8",
+          "source": "0626eebc-32e0-5dda-8d9b-6f838bb7dd9b",
+          "target": "7f4fdbde-1fb6-5f9f-92ba-e334a5562ed8"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "combines",
+          "id": "b7b38efc-5163-5726-a689-0b5b713bc04c",
+          "source": "0626eebc-32e0-5dda-8d9b-6f838bb7dd9b",
+          "target": "57d79df4-c368-5254-a3ed-7a1c29827fe8"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "combines",
+          "id": "1ab88724-1b01-5833-a814-bb3589b2ac0e",
+          "source": "0626eebc-32e0-5dda-8d9b-6f838bb7dd9b",
+          "target": "038c9a7a-33f1-58e2-bf1c-7bff2dd50138"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "combines",
+          "id": "b613cd04-c79a-574c-9f2a-43f1e53f3f55",
+          "source": "0626eebc-32e0-5dda-8d9b-6f838bb7dd9b",
+          "target": "873faac9-bb2a-5527-a28e-5e80c2f87d77"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "has_property",
+          "id": "6ee2d28c-0fee-5c3e-a322-bec557b7996c",
+          "source": "us1",
+          "target": "51c6812e-750f-5f2b-ae69-47f95eb575d7"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "extracted_from",
+          "id": "f1a7347f-3255-5673-8969-6ba1a4f1b784",
+          "source": "7f4fdbde-1fb6-5f9f-92ba-e334a5562ed8",
+          "target": "a6e2fed0-2cbc-5fc5-9bf3-5c231fc39878"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "is_on_resource",
+          "id": "ee09d4b7-3d40-559b-9a69-e0fdb43312cd",
+          "source": "a6e2fed0-2cbc-5fc5-9bf3-5c231fc39878",
+          "target": "d1"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "extracted_from",
+          "id": "451c56e5-3991-55ae-9add-a247f17b13b9",
+          "source": "038c9a7a-33f1-58e2-bf1c-7bff2dd50138",
+          "target": "1a24a938-a1ff-5c59-88c1-0fa924dded50"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "is_on_resource",
+          "id": "2f2faae0-be38-568c-b628-d4346d4d1e6a",
+          "source": "1a24a938-a1ff-5c59-88c1-0fa924dded50",
+          "target": "d1"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "extracted_from",
+          "id": "c273c58e-e3d3-52e0-b5b7-243ab8b7d514",
+          "source": "873faac9-bb2a-5527-a28e-5e80c2f87d77",
+          "target": "8cdc05db-c4c7-5ae3-9e5b-d3f029d2d9f1"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "is_on_resource",
+          "id": "dffa43c7-82a2-5c39-9548-2f8b52f539b1",
+          "source": "8cdc05db-c4c7-5ae3-9e5b-d3f029d2d9f1",
+          "target": "d1"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "extracted_from",
+          "id": "f3e489d7-472a-5d6e-a6e5-823479afa0d6",
+          "source": "57d79df4-c368-5254-a3ed-7a1c29827fe8",
+          "target": "bf726eb5-8145-59c2-9269-7e886e6d1051"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "is_on_resource",
+          "id": "b6dc30b6-f10e-5d0e-8e64-6c99c3c5e3af",
+          "source": "bf726eb5-8145-59c2-9269-7e886e6d1051",
+          "target": "d1"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "extracted_from",
+          "id": "8aa4e556-4202-572d-b43b-c81f43e335dd",
+          "source": "c173509a-163b-5ebf-849e-4bb675fc7af4",
+          "target": "fc36e22d-a9f0-5d8b-b9a3-91cc288d91bb"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "is_on_resource",
+          "id": "9c282493-080a-5c03-a577-0a750dc52f5f",
+          "source": "fc36e22d-a9f0-5d8b-b9a3-91cc288d91bb",
+          "target": "d1"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "has_property",
+          "id": "us1__has_property__6bfde7b5-7e22-53be-a153-135f5b9100a7",
+          "source": "us1",
+          "target": "6bfde7b5-7e22-53be-a153-135f5b9100a7"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "has_data_provenance",
+          "id": "6bfde7b5-7e22-53be-a153-135f5b9100a7__has_data_provenance__c173509a-163b-5ebf-849e-4bb675fc7af4",
+          "source": "6bfde7b5-7e22-53be-a153-135f5b9100a7",
+          "target": "c173509a-163b-5ebf-849e-4bb675fc7af4"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "has_property",
+          "id": "us1__has_property__00c784bb-7cc8-5901-89db-70edc9917a4d",
+          "source": "us1",
+          "target": "00c784bb-7cc8-5901-89db-70edc9917a4d"
+        },
+        {
+          "attributes": {
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097"
+          },
+          "edge_type": "has_property",
+          "id": "us1__has_property__963934ff-defd-545c-ae3d-3c6d6538d749",
+          "source": "us1",
+          "target": "963934ff-defd-545c-ae3d-3c6d6538d749"
+        }
+      ],
+      "graph_id": "testa",
+      "name": "Testa sintetica (ESEMPIO, D-5)",
+      "nodes": [
+        {
+          "data": {
+            "rotation": 0.0,
+            "rotation_reference": "grid",
+            "shift_x": 0.0,
+            "shift_y": 0.0,
+            "shift_z": 0.0
+          },
+          "id": "geo_testa",
+          "name": "geo_position",
+          "node_type": "geo_position"
+        },
+        {
+          "data": {
+            "label": "US (or SU)"
+          },
+          "description": "Superficie del volto della testa sintetica (ESEMPIO, D-5)",
+          "id": "us1",
+          "name": "US1",
+          "node_type": "US"
+        },
+        {
+          "data": {
+            "url": "testa-canonica.glb"
+          },
+          "description": "Modello 3D della testa sintetica (generato, CC0)",
+          "id": "d1",
+          "name": "D.01",
+          "node_type": "document"
+        },
+        {
+          "data": {
+            "transform": {
+              "angle_unit": "deg",
+              "position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "quaternion": [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "rotation_order": "XYZ",
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "up_axis": "Z"
+            },
+            "url": "testa-canonica.glb"
+          },
+          "description": "Rappresentazione 3D della testa sintetica",
+          "id": "rm1",
+          "name": "testa-canonica_RM",
+          "node_type": "representation_model"
+        },
+        {
+          "data": {
+            "author": "0000-0002-1825-0097",
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097",
+            "landmark_pose": {
+              "on": "d1",
+              "set": "stat:volto",
+              "subject": "us1"
+            },
+            "lang": "und"
+          },
+          "id": "e66dea53-bb3e-5ca4-ba41-2c9585a30908",
+          "name": "Canonical points of the face",
+          "node_type": "combiner"
+        },
+        {
+          "data": {
+            "author": "0000-0002-1825-0097",
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097",
+            "em_kind": "stat:punto_canonico",
+            "landmark": {
+              "concept": "https://w3id.org/extendedmatrix/profile/esempio-statuaria/vocab/punti-volto/glabella",
+              "label": "glabella",
+              "lang": "it",
+              "point": "glabella",
+              "set": "stat:volto"
+            },
+            "lang": "und",
+            "proposed_by": {
+              "accepted": "as proposed",
+              "by": "facemesh_fit 0.3.0",
+              "method": "detected",
+              "plugin": "facemesh_fit",
+              "proposal": "c39122c4-a2e4-58f3-b9d4-166a8df9ac16"
+            }
+          },
+          "id": "539251c8-21f1-5560-bb37-3565e95007b3",
+          "name": "glabella",
+          "node_type": "extractor"
+        },
+        {
+          "data": {
+            "author": "0000-0002-1825-0097",
+            "coords": [
+              [
+                0.0,
+                0.32425,
+                0.095124
+              ]
+            ],
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097",
+            "crs": "local",
+            "geometry_kind": "point",
+            "resource_id": "d1",
+            "vertex_count": 1
+          },
+          "id": "f79285dd-87b7-59ad-b5c2-e122f503f237",
+          "name": "glabella · point",
+          "node_type": "annotation_region"
+        },
+        {
+          "data": {
+            "author": "0000-0002-1825-0097",
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097",
+            "em_kind": "stat:punto_canonico",
+            "field_clocks": {
+              "data.proposed_by": {
+                "by": "0000-0002-1825-0097",
+                "ts": "2026-11-19T02:35:21.579Z"
+              }
+            },
+            "landmark": {
+              "concept": "https://w3id.org/extendedmatrix/profile/esempio-statuaria/vocab/punti-volto/nasion",
+              "label": "nasion",
+              "lang": "it",
+              "point": "nasion",
+              "set": "stat:volto"
+            },
+            "lang": "und",
+            "modified_at": "2026-11-19T02:35:21.579Z",
+            "modified_by": "0000-0002-1825-0097",
+            "proposed_by": {
+              "accepted": "moved by the person",
+              "by": "facemesh_fit 0.3.0",
+              "method": "detected",
+              "moved_mm": 1.0,
+              "plugin": "facemesh_fit",
+              "proposal": "c39122c4-a2e4-58f3-b9d4-166a8df9ac16:nasion"
+            }
+          },
+          "id": "7f4fdbde-1fb6-5f9f-92ba-e334a5562ed8",
+          "name": "nasion",
+          "node_type": "extractor"
+        },
+        {
+          "data": {
+            "author": "0000-0002-1825-0097",
+            "coords": [
+              [
+                0.0,
+                0.30875,
+                0.088621
+              ]
+            ],
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097",
+            "crs": "local",
+            "geometry_kind": "point",
+            "resource_id": "d1",
+            "vertex_count": 1
+          },
+          "id": "d2218783-bc7c-57b5-802c-3ed41d3bc158",
+          "name": "nasion · point",
+          "node_type": "annotation_region"
+        },
+        {
+          "data": {
+            "author": "0000-0002-1825-0097",
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097",
+            "em_kind": "stat:punto_canonico",
+            "field_clocks": {
+              "data.proposed_by": {
+                "by": "0000-0002-1825-0097",
+                "ts": "2026-11-19T02:35:21.579Z"
+              }
+            },
+            "landmark": {
+              "concept": "https://w3id.org/extendedmatrix/profile/esempio-statuaria/vocab/punti-volto/exocanthion",
+              "label": "esocantion (destro)",
+              "lang": "it",
+              "point": "exocanthion_r",
+              "set": "stat:volto",
+              "side": "right"
+            },
+            "lang": "und",
+            "modified_at": "2026-11-19T02:35:21.579Z",
+            "modified_by": "0000-0002-1825-0097",
+            "proposed_by": {
+              "accepted": "moved by the person",
+              "by": "facemesh_fit 0.3.0",
+              "method": "predicted",
+              "moved_mm": 1.8,
+              "plugin": "facemesh_fit",
+              "proposal": "c39122c4-a2e4-58f3-b9d4-166a8df9ac16:exocanthion_r"
+            }
+          },
+          "id": "038c9a7a-33f1-58e2-bf1c-7bff2dd50138",
+          "name": "esocantion (destro)",
+          "node_type": "extractor"
+        },
+        {
+          "data": {
+            "author": "0000-0002-1825-0097",
+            "coords": [
+              [
+                -0.049074,
+                0.305233,
+                0.06567
+              ]
+            ],
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097",
+            "crs": "local",
+            "geometry_kind": "point",
+            "resource_id": "d1",
+            "vertex_count": 1
+          },
+          "id": "bbc920a2-ee0d-5c68-a0e6-f38563a6127e",
+          "name": "esocantion (destro) · point",
+          "node_type": "annotation_region"
+        },
+        {
+          "data": {
+            "author": "0000-0002-1825-0097",
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097",
+            "em_kind": "stat:punto_canonico",
+            "field_clocks": {
+              "data.proposed_by": {
+                "by": "0000-0002-1825-0097",
+                "ts": "2026-11-19T02:35:21.579Z"
+              }
+            },
+            "landmark": {
+              "concept": "https://w3id.org/extendedmatrix/profile/esempio-statuaria/vocab/punti-volto/exocanthion",
+              "label": "esocantion (sinistro)",
+              "lang": "it",
+              "point": "exocanthion_l",
+              "set": "stat:volto",
+              "side": "left"
+            },
+            "lang": "und",
+            "modified_at": "2026-11-19T02:35:21.579Z",
+            "modified_by": "0000-0002-1825-0097",
+            "proposed_by": {
+              "accepted": "moved by the person",
+              "by": "facemesh_fit 0.3.0",
+              "method": "predicted",
+              "moved_mm": 1.51,
+              "plugin": "facemesh_fit",
+              "proposal": "c39122c4-a2e4-58f3-b9d4-166a8df9ac16:exocanthion_l"
+            }
+          },
+          "id": "873faac9-bb2a-5527-a28e-5e80c2f87d77",
+          "name": "esocantion (sinistro)",
+          "node_type": "extractor"
+        },
+        {
+          "data": {
+            "author": "0000-0002-1825-0097",
+            "coords": [
+              [
+                0.049074,
+                0.305233,
+                0.065331
+              ]
+            ],
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097",
+            "crs": "local",
+            "geometry_kind": "point",
+            "resource_id": "d1",
+            "vertex_count": 1
+          },
+          "id": "c1827c85-60ef-55d8-83b1-627059f50789",
+          "name": "esocantion (sinistro) · point",
+          "node_type": "annotation_region"
+        },
+        {
+          "data": {
+            "author": "0000-0002-1825-0097",
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097",
+            "em_kind": "stat:punto_canonico",
+            "landmark": {
+              "concept": "https://w3id.org/extendedmatrix/profile/esempio-statuaria/vocab/punti-volto/pronasale",
+              "label": "pronasale",
+              "lang": "it",
+              "point": "pronasale",
+              "set": "stat:volto"
+            },
+            "lang": "und",
+            "proposed_by": {
+              "accepted": "as proposed",
+              "by": "facemesh_fit 0.3.0",
+              "method": "detected",
+              "plugin": "facemesh_fit",
+              "proposal": "0c0b2bc5-ca8a-5890-89d1-f3f225cc8d7f"
+            }
+          },
+          "id": "df53e1f7-3f3a-5cad-b220-62c49d1df083",
+          "name": "pronasale",
+          "node_type": "extractor"
+        },
+        {
+          "data": {
+            "author": "0000-0002-1825-0097",
+            "coords": [
+              [
+                -0.0,
+                0.25825,
+                0.108895
+              ]
+            ],
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097",
+            "crs": "local",
+            "geometry_kind": "point",
+            "resource_id": "d1",
+            "vertex_count": 1
+          },
+          "id": "e5b7d686-a089-5bfd-bf7e-c422c2e208d8",
+          "name": "pronasale · point",
+          "node_type": "annotation_region"
+        },
+        {
+          "data": {
+            "author": "0000-0002-1825-0097",
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097",
+            "em_kind": "stat:punto_canonico",
+            "field_clocks": {
+              "data.proposed_by": {
+                "by": "0000-0002-1825-0097",
+                "ts": "2026-11-19T02:35:21.579Z"
+              }
+            },
+            "landmark": {
+              "concept": "https://w3id.org/extendedmatrix/profile/esempio-statuaria/vocab/punti-volto/gnathion",
+              "label": "gnathion",
+              "lang": "it",
+              "point": "gnathion",
+              "set": "stat:volto"
+            },
+            "lang": "und",
+            "modified_at": "2026-11-19T02:35:21.579Z",
+            "modified_by": "0000-0002-1825-0097",
+            "proposed_by": {
+              "accepted": "moved by the person",
+              "by": "facemesh_fit 0.3.0",
+              "method": "detected",
+              "moved_mm": 1.63,
+              "plugin": "facemesh_fit",
+              "proposal": "c39122c4-a2e4-58f3-b9d4-166a8df9ac16:gnathion"
+            }
+          },
+          "id": "57d79df4-c368-5254-a3ed-7a1c29827fe8",
+          "name": "gnathion",
+          "node_type": "extractor"
+        },
+        {
+          "data": {
+            "author": "0000-0002-1825-0097",
+            "coords": [
+              [
+                0.0,
+                0.19975,
+                0.057572
+              ]
+            ],
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097",
+            "crs": "local",
+            "geometry_kind": "point",
+            "resource_id": "d1",
+            "vertex_count": 1
+          },
+          "id": "eebd4aa2-1021-5338-b11d-f6fdfb82506b",
+          "name": "gnathion · point",
+          "node_type": "annotation_region"
+        },
+        {
+          "data": {
+            "author": "0000-0002-1825-0097",
+            "combiner": {
+              "digest": "91c454984666531b",
+              "inputs": [
+                {
+                  "extractor": "038c9a7a-33f1-58e2-bf1c-7bff2dd50138",
+                  "landmark": "stat:volto/exocanthion_r",
+                  "mirror": "exocanthion_l",
+                  "point": "exocanthion_r",
+                  "side": "right"
+                },
+                {
+                  "extractor": "873faac9-bb2a-5527-a28e-5e80c2f87d77",
+                  "landmark": "stat:volto/exocanthion_l",
+                  "mirror": "exocanthion_r",
+                  "point": "exocanthion_l",
+                  "side": "left"
+                }
+              ],
+              "on": "d1",
+              "operation": "distance",
+              "produces": "stat:larghezza_biorbitale",
+              "subject": "us1",
+              "unit": "m",
+              "unit_asked": "m",
+              "value": 0.099301
+            },
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097",
+            "em_kind": "stat:c_larghezza_biorbitale",
+            "field_clocks": {
+              "data.combiner": {
+                "by": "0000-0002-1825-0097",
+                "ts": "2026-11-19T02:35:21.579Z"
+              }
+            },
+            "lang": "und",
+            "modified_at": "2026-11-19T02:35:21.579Z",
+            "modified_by": "0000-0002-1825-0097"
+          },
+          "id": "cb9e3c8e-c7e0-5d92-94c8-5a2daf967b23",
+          "name": "Biorbital width",
+          "node_type": "combiner"
+        },
+        {
+          "data": {
+            "author": "0000-0002-1825-0097",
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097",
+            "field_clocks": {
+              "data.measure": {
+                "by": "0000-0002-1825-0097",
+                "ts": "2026-11-19T02:35:21.579Z"
+              },
+              "data.value": {
+                "by": "0000-0002-1825-0097",
+                "ts": "2026-11-19T02:35:21.579Z"
+              },
+              "description": {
+                "by": "0000-0002-1825-0097",
+                "ts": "2026-11-19T02:35:21.579Z"
+              }
+            },
+            "lang": "und",
+            "measure": {
+              "quantity": "length",
+              "value_number": 0.099301,
+              "value_unit": "m"
+            },
+            "modified_at": "2026-11-19T02:35:21.579Z",
+            "modified_by": "0000-0002-1825-0097",
+            "property_type": "stat:larghezza_biorbitale",
+            "unit": "m",
+            "value": 0.099301
+          },
+          "description": "0.099301",
+          "id": "52217efe-e6c8-5f92-832f-62823f2b0a77",
+          "name": "stat:larghezza_biorbitale",
+          "node_type": "property"
+        },
+        {
+          "data": {
+            "author": "0000-0002-1825-0097",
+            "combiner": {
+              "digest": "f408aac28849cd69",
+              "inputs": [
+                {
+                  "extractor": "7f4fdbde-1fb6-5f9f-92ba-e334a5562ed8",
+                  "landmark": "stat:volto/nasion",
+                  "point": "nasion"
+                },
+                {
+                  "extractor": "57d79df4-c368-5254-a3ed-7a1c29827fe8",
+                  "landmark": "stat:volto/gnathion",
+                  "point": "gnathion"
+                }
+              ],
+              "on": "d1",
+              "operation": "distance",
+              "produces": "stat:altezza_facciale",
+              "subject": "us1",
+              "unit": "m",
+              "unit_asked": "m",
+              "value": 0.112699
+            },
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097",
+            "em_kind": "stat:c_altezza_facciale",
+            "field_clocks": {
+              "data.combiner": {
+                "by": "0000-0002-1825-0097",
+                "ts": "2026-11-19T02:35:21.579Z"
+              }
+            },
+            "lang": "und",
+            "modified_at": "2026-11-19T02:35:21.579Z",
+            "modified_by": "0000-0002-1825-0097"
+          },
+          "id": "112e38c7-b2eb-503d-ad67-8cc5d7f4a92f",
+          "name": "Face height",
+          "node_type": "combiner"
+        },
+        {
+          "data": {
+            "author": "0000-0002-1825-0097",
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097",
+            "field_clocks": {
+              "data.measure": {
+                "by": "0000-0002-1825-0097",
+                "ts": "2026-11-19T02:35:21.579Z"
+              },
+              "data.value": {
+                "by": "0000-0002-1825-0097",
+                "ts": "2026-11-19T02:35:21.579Z"
+              },
+              "description": {
+                "by": "0000-0002-1825-0097",
+                "ts": "2026-11-19T02:35:21.579Z"
+              }
+            },
+            "lang": "und",
+            "measure": {
+              "quantity": "length",
+              "value_number": 0.112699,
+              "value_unit": "m"
+            },
+            "modified_at": "2026-11-19T02:35:21.579Z",
+            "modified_by": "0000-0002-1825-0097",
+            "property_type": "stat:altezza_facciale",
+            "unit": "m",
+            "value": 0.112699
+          },
+          "description": "0.112699",
+          "id": "ff1faf92-2208-5f51-823b-3ad9afde1659",
+          "name": "stat:altezza_facciale",
+          "node_type": "property"
+        },
+        {
+          "data": {
+            "author": "0000-0002-1825-0097",
+            "combiner": {
+              "digest": "f1af641945449856",
+              "inputs": [
+                {
+                  "property": "ff1faf92-2208-5f51-823b-3ad9afde1659",
+                  "quale": "stat:altezza_facciale"
+                },
+                {
+                  "property": "52217efe-e6c8-5f92-832f-62823f2b0a77",
+                  "quale": "stat:larghezza_biorbitale"
+                }
+              ],
+              "on": "d1",
+              "operation": "ratio",
+              "produces": "stat:indice_facciale",
+              "subject": "us1",
+              "unit": "1",
+              "unit_asked": null,
+              "value": 1.134923
+            },
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097",
+            "em_kind": "stat:c_indice_facciale",
+            "field_clocks": {
+              "data.combiner": {
+                "by": "0000-0002-1825-0097",
+                "ts": "2026-11-19T02:35:21.579Z"
+              }
+            },
+            "lang": "und",
+            "modified_at": "2026-11-19T02:35:21.579Z",
+            "modified_by": "0000-0002-1825-0097"
+          },
+          "id": "0626eebc-32e0-5dda-8d9b-6f838bb7dd9b",
+          "name": "Facial index",
+          "node_type": "combiner"
+        },
+        {
+          "data": {
+            "author": "0000-0002-1825-0097",
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097",
+            "field_clocks": {
+              "data.measure": {
+                "by": "0000-0002-1825-0097",
+                "ts": "2026-11-19T02:35:21.579Z"
+              },
+              "data.value": {
+                "by": "0000-0002-1825-0097",
+                "ts": "2026-11-19T02:35:21.579Z"
+              },
+              "description": {
+                "by": "0000-0002-1825-0097",
+                "ts": "2026-11-19T02:35:21.579Z"
+              }
+            },
+            "lang": "und",
+            "measure": {
+              "quantity": "ratio",
+              "value_number": 1.134923,
+              "value_unit": "1"
+            },
+            "modified_at": "2026-11-19T02:35:21.579Z",
+            "modified_by": "0000-0002-1825-0097",
+            "property_type": "stat:indice_facciale",
+            "unit": "1",
+            "value": 1.134923
+          },
+          "description": "1.134923",
+          "id": "51c6812e-750f-5f2b-ae69-47f95eb575d7",
+          "name": "stat:indice_facciale",
+          "node_type": "property"
+        },
+        {
+          "data": {
+            "author": "0000-0002-1825-0097",
+            "coords": [
+              [
+                0.0,
+                0.309703,
+                0.088325
+              ]
+            ],
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097",
+            "crs": "local",
+            "geometry_kind": "point",
+            "resource_id": "d1",
+            "vertex_count": 1
+          },
+          "id": "a6e2fed0-2cbc-5fc5-9bf3-5c231fc39878",
+          "name": "nasion · point",
+          "node_type": "annotation_region"
+        },
+        {
+          "data": {
+            "author": "0000-0002-1825-0097",
+            "coords": [
+              [
+                -0.049244,
+                0.303466,
+                0.065353
+              ]
+            ],
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097",
+            "crs": "local",
+            "geometry_kind": "point",
+            "resource_id": "d1",
+            "vertex_count": 1
+          },
+          "id": "1a24a938-a1ff-5c59-88c1-0fa924dded50",
+          "name": "esocantion (destro) · point",
+          "node_type": "annotation_region"
+        },
+        {
+          "data": {
+            "author": "0000-0002-1825-0097",
+            "coords": [
+              [
+                0.050045,
+                0.304655,
+                0.064324
+              ]
+            ],
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097",
+            "crs": "local",
+            "geometry_kind": "point",
+            "resource_id": "d1",
+            "vertex_count": 1
+          },
+          "id": "8cdc05db-c4c7-5ae3-9e5b-d3f029d2d9f1",
+          "name": "esocantion (sinistro) · point",
+          "node_type": "annotation_region"
+        },
+        {
+          "data": {
+            "author": "0000-0002-1825-0097",
+            "coords": [
+              [
+                0.0,
+                0.200987,
+                0.058627
+              ]
+            ],
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097",
+            "crs": "local",
+            "geometry_kind": "point",
+            "resource_id": "d1",
+            "vertex_count": 1
+          },
+          "id": "bf726eb5-8145-59c2-9269-7e886e6d1051",
+          "name": "gnathion · point",
+          "node_type": "annotation_region"
+        },
+        {
+          "data": {
+            "author": "0000-0002-1825-0097",
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097",
+            "em_kind": "stat:superficie_integrata",
+            "lang": "und"
+          },
+          "id": "c173509a-163b-5ebf-849e-4bb675fc7af4",
+          "name": "D.01.07",
+          "node_type": "extractor"
+        },
+        {
+          "data": {
+            "area": 0.0002302673335952119,
+            "area_unit": "m2",
+            "author": "0000-0002-1825-0097",
+            "coords": [
+              [
+                0.009029,
+                0.25815,
+                0.100077
+              ],
+              [
+                0.004737,
+                0.262817,
+                0.106219
+              ],
+              [
+                -0.004737,
+                0.262817,
+                0.106219
+              ],
+              [
+                -0.009029,
+                0.25815,
+                0.100077
+              ],
+              [
+                -0.004062,
+                0.255545,
+                0.090631
+              ],
+              [
+                0.004062,
+                0.255545,
+                0.090631
+              ]
+            ],
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097",
+            "crs": "local",
+            "geometry_kind": "surface",
+            "perimeter": 0.05722443348231196,
+            "resource_id": "d1",
+            "unit": "m",
+            "vertex_count": 6
+          },
+          "id": "fc36e22d-a9f0-5d8b-b9a3-91cc288d91bb",
+          "name": "D.01.07 · surface",
+          "node_type": "annotation_region"
+        },
+        {
+          "data": {
+            "author": "0000-0002-1825-0097",
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097",
+            "lang": "und",
+            "property_type": "stat:area_integrazione",
+            "unit": "m2",
+            "value": "0.0002303"
+          },
+          "description": "0.0002303",
+          "id": "6bfde7b5-7e22-53be-a153-135f5b9100a7",
+          "name": "stat:area_integrazione",
+          "node_type": "property"
+        },
+        {
+          "data": {
+            "author": "0000-0002-1825-0097",
+            "concept": {
+              "concept": "https://w3id.org/extendedmatrix/profile/esempio-statuaria/vocab/fase-superficie/integrazione",
+              "label": "integrazione di restauro",
+              "lang": "it",
+              "version": "0.1.0",
+              "vocabulary": "esempio-statuaria.fase-superficie"
+            },
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097",
+            "lang": "und",
+            "property_type": "stat:fase_di_superficie",
+            "value": "integrazione di restauro"
+          },
+          "description": "integrazione di restauro",
+          "id": "00c784bb-7cc8-5901-89db-70edc9917a4d",
+          "name": "stat:fase_di_superficie",
+          "node_type": "property"
+        },
+        {
+          "data": {
+            "author": "0000-0002-1825-0097",
+            "concept": {
+              "concept": "https://w3id.org/extendedmatrix/profile/esempio-statuaria/vocab/lavorazione/gradina",
+              "label": "gradina",
+              "lang": "it",
+              "version": "0.1.0",
+              "vocabulary": "esempio-statuaria.lavorazione"
+            },
+            "created_at": "2026-11-19T02:35:21Z",
+            "created_by": "0000-0002-1825-0097",
+            "lang": "und",
+            "property_type": "stat:lavorazione",
+            "value": "gradina"
+          },
+          "description": "gradina",
+          "id": "963934ff-defd-545c-ae3d-3c6d6538d749",
+          "name": "stat:lavorazione",
+          "node_type": "property"
+        }
+      ]
+    }
+  },
+  "header": {
+    "datamodel_versions": {
+      "connections": "1.6.55",
+      "nodes": "1.6.51",
+      "qualia": "1.6.13"
+    },
+    "format": "em.json",
+    "generator": {
+      "tool": "s3dgraphy",
+      "version": "1.6.0.dev123"
+    },
+    "ontology_versions": {
+      "CIDOC-CRM": "7.1.3",
+      "CRMarchaeo": "2.1.1",
+      "CRMdig": "5.0",
+      "CRMem": "1.6.26",
+      "CRMgeo": "1.2",
+      "CRMinf": "1.2.1",
+      "CRMsci": "3.2",
+      "HDT-O": "1.0",
+      "PROV-O": "W3C Recommendation 2013-04-30"
+    },
+    "profiles": [
+      {
+        "iri": "https://w3id.org/extendedmatrix/profile/esempio-statuaria",
+        "version": "0.1.0"
+      }
+    ],
+    "schema_version": 2,
+    "version": "1.1"
+  },
+  "version": {
+    "id": "sha256:28a27906ec00",
+    "modified_at": "2026-11-19T02:35:21Z",
+    "number": 2,
+    "was_revision_of": "sha256:d1ccf0806de6"
+  },
+  "vocabularies": {
+    "used": {
+      "esempio-statuaria.fase-superficie": {
+        "attribution": "Statuaria antica (ESEMPIO) — Curatori di esempio (ESEMPIO)",
+        "concepts_used": 1,
+        "license": "CC-BY-4.0",
+        "scheme": "https://w3id.org/extendedmatrix/profile/esempio-statuaria/vocab/fase-superficie/",
+        "snapshot_date": "2026-11-19",
+        "tier": "A",
+        "title": {
+          "en": "fase-superficie (Statuaria antica (ESEMPIO))"
+        },
+        "version": "0.1.0",
+        "versions_used": [
+          "0.1.0"
+        ]
+      },
+      "esempio-statuaria.lavorazione": {
+        "attribution": "Statuaria antica (ESEMPIO) — Curatori di esempio (ESEMPIO)",
+        "concepts_used": 1,
+        "license": "CC-BY-4.0",
+        "scheme": "https://w3id.org/extendedmatrix/profile/esempio-statuaria/vocab/lavorazione/",
+        "snapshot_date": "2026-11-19",
+        "tier": "A",
+        "title": {
+          "en": "lavorazione (Statuaria antica (ESEMPIO))"
+        },
+        "version": "0.1.0",
+        "versions_used": [
+          "0.1.0"
+        ]
+      }
+    }
+  }
+}

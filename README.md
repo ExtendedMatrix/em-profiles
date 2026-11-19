@@ -27,6 +27,7 @@ SPEC.md          the specification, from 0.2 on (0.1 stays, frozen, in ExtendedM
 schemas/         the JSON schemas of the manifest, byte for byte those s3dgraphy ships
 core-types.json  the node and edge types of the EM core (generated: tools/core_types.py)
 examples/        invented archives that illustrate the specification — not to be cited
+pilots/          the pilots of the packages on synthetic data (statuaria-sintetica: D-5)
 profiles/        the community packages, one folder each, reviewed by their curators
 tools/           validate.py (what the CI runs), core_types.py
 tests/           the checks every pull request must pass

@@ -5,6 +5,8 @@
 | The text of the specification and of the documents | `*.md` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
 | JSON schemas, `core-types.json` | `schemas/`, `core-types.json` | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | Examples | `examples/` | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/), unless an example's own `LICENSE`, envelope or `parts` say otherwise (the synthetic statuary examples: CC BY 4.0 for the data, EUPL-1.2 for the example plugin) |
+| Pilots: the generated heads, their truth and the results | `pilots/*/risultati/`, and what `pilots/*/make_head.py` generates | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) — synthetic, made by a script |
+| Pilots: the scripts | `pilots/*/*.py` | [EUPL-1.2](https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12) |
 | Tools and tests | `tools/`, `tests/`, `.github/` | [EUPL-1.2](https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12) |
 | Community packages | `profiles/<id>/` | what each package declares: its `license`, its `parts`, the licence and tier of every vocabulary it carries |
 

@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><title>ESEMPIO SUP 2026-esempio — US 1</title><style>
+:root { --ink: #111; --rule: #444; --soft: #7a7a7a; --fill: #1a3f7a; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; color: var(--ink); }
+.sheet { background: #fff; }
+.head { display: flex; align-items: baseline; gap: 4mm; border-bottom: 0.6mm solid var(--ink);
+        padding-bottom: 1mm; margin-bottom: 1.5mm; }
+.head .code { font-weight: 700; font-size: 8pt; letter-spacing: .04em; }
+.head .title { font-size: 8pt; flex: 1; }
+.head .side { font-size: 7pt; color: var(--soft); text-transform: uppercase;
+              overflow-wrap: anywhere; }
+.head .demo { background: #b00; color: #fff; padding: 0 1mm; font-size: 6pt; }
+.row { display: flex; width: 100%; min-height: var(--h); align-items: stretch; }
+/* the declared height is a minimum, never a guillotine: a box that would clip what
+   somebody wrote grows instead, and the renderer reports the page it cost. */
+.cell { border: 0.25mm solid var(--rule); padding: 0.6mm 1mm;
+        display: flex; flex-direction: column; min-width: 0; overflow-wrap: anywhere; }
+.cell.spacer { border: none; }
+.lbl { font-size: 5.4pt; letter-spacing: .02em; line-height: 1.05; text-transform: uppercase;
+       color: var(--ink); }
+.req { color: #b00; }
+.prov { font-size: 4.6pt; background: #eee; border: 0.2mm solid var(--soft); padding: 0 0.6mm;
+        margin-left: 0.8mm; vertical-align: super; }
+.v { font-size: 8pt; color: var(--fill); line-height: 1.2; word-wrap: break-word; }
+.v.long { font-size: 7.6pt; }
+.v.refs { font-weight: 700; letter-spacing: .02em; word-break: break-all; }
+.qty .q { display: block; font-size: 7pt; color: var(--fill); }
+.qty .q b { font-weight: 600; color: var(--ink); font-size: 6pt; text-transform: uppercase; }
+.opts { display: flex; gap: 2mm; flex-wrap: wrap; }
+.opt { font-size: 5pt; text-transform: uppercase; display: inline-flex; align-items: center;
+        gap: 0.8mm; white-space: nowrap; }
+.tick { display: inline-block; width: 2.6mm; height: 2.6mm; border: 0.25mm solid var(--rule); }
+.tick.on { background: var(--fill); box-shadow: inset 0 0 0 0.5mm #fff; }
+/* A labelled block reserves the strip with its own PADDING and paints the label
+   in an absolutely positioned box.  The strip used to be a flex sibling, and the
+   nested percentages then resolved against the block instead of the space left
+   over — every inner row came out a strip too wide. */
+.block { display: block; border: none; padding: 0; }
+.block.labelled { position: relative; border: 0.25mm solid var(--rule);
+                  padding: 0 0 0 6.5mm; }
+.block .row { width: 100%; }
+.strip { position: absolute; left: 0; top: 0; height: 100%; width: 6.5mm;
+         border-right: 0.25mm solid var(--rule); background: #f2f2f2; font-size: 5.2pt;
+         text-transform: uppercase; overflow: hidden; }
+.strip .txt { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+         white-space: nowrap; letter-spacing: .04em; }
+.strip.rot .txt { transform: translate(-50%, -50%) rotate(-90deg); }
+
+@page { size: A4; margin: 12mm 12mm 12mm 12mm; }
+html, body { background: #fff; }
+.sheet { padding-right: 1.5mm; page-break-after: always; break-after: page; }
+.sheet:last-of-type { page-break-after: auto; break-after: auto; }
+</style></head><body><section class="sheet" id="side-recto" data-side="recto"><div class="head"><div class="code">ESEMPIO SUP 2026-esempio <span class="demo">FIXTURE</span></div><div class="title">Surface form (EXAMPLE)</div><div class="side">front · US 1</div></div><div class="row" style="--h: 12.0mm"><div class="cell t-identifier" style="flex: 0 0 auto; width: 100.0%; max-width: 100.0%;" data-field="us"><div class="lbl">SU <span class="req">*</span></div><span class="v">1</span></div></div><div class="row" style="--h: 40.0mm"><div class="cell t-longtext" style="flex: 0 0 auto; width: 100.0%; max-width: 100.0%;" data-field="descrizione"><div class="lbl">DESCRIPTION</div><span class="v long">Superficie del volto della testa sintetica (ESEMPIO, D-5)</span></div></div><div class="row" style="--h: 14.0mm"><div class="cell t-term" style="flex: 0 0 auto; width: 40.0%; max-width: 40.0%;" data-field="fase"><div class="lbl">SURFACE PHASE</div><span class="v">integrazione di restauro</span></div><div class="cell t-term" style="flex: 0 0 auto; width: 35.0%; max-width: 35.0%;" data-field="lavorazione"><div class="lbl">WORKING</div><span class="v">gradina</span></div><div class="cell t-decimal" style="flex: 0 0 auto; width: 25.0%; max-width: 25.0%;" data-field="area"><div class="lbl">AREA OF THE INFILL (m²)</div><span class="v">0.0002307</span></div></div><div class="row" style="--h: 14.0mm"><div class="cell t-decimal" style="flex: 0 0 auto; width: 34.0%; max-width: 34.0%;" data-field="larghezza"><div class="lbl">BIORBITAL WIDTH (m)</div><span class="v">0.107315</span></div><div class="cell t-decimal" style="flex: 0 0 auto; width: 33.0%; max-width: 33.0%;" data-field="altezza"><div class="lbl">FACE HEIGHT (m)</div><span class="v">0.116693</span></div><div class="cell t-decimal" style="flex: 0 0 auto; width: 33.0%; max-width: 33.0%;" data-field="indice"><div class="lbl">FACIAL INDEX</div><span class="v">1.087388</span></div></div></section></body></html>

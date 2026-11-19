@@ -800,10 +800,18 @@ All invented, marked as such in their texts, not to be cited:
   sheet with its compiled form, a colour scheme, strings and help in two
   languages, an example document.
 - [`examples/facemesh_fit/`](examples/facemesh_fit/) — a plugin alone that
-  requires the data of `esempio-statuaria` (`part = "data"`); its module does
-  nothing.
+  requires the data of `esempio-statuaria` (`part = "data"`): from 0.3.0 it
+  proposes the six points of `stat:volto` on a model, from its geometry only
+  (pure Python, `.glb`/`.obj`), as a volatile proposal (`ingest-batch`) that
+  the person confirms with the pose tool.
 - [`examples/esempio-statuaria-misto/`](examples/esempio-statuaria-misto/) —
-  the two in **one** archive, `data/` and `code/` (a mixed package).
+  the two in **one** archive, `data/` and `code/` (a mixed package): 0.1.1
+  carries the data 0.1.0 unchanged and the code 0.2.0, the same Python as
+  `facemesh_fit` 0.3.0.
+- [`pilots/statuaria-sintetica/`](pilots/statuaria-sintetica/) — the pilot of
+  the two forms on **generated** heads whose points are known by construction
+  (D-5): installation, the plugin's proposals, the pose, the combiners, the
+  sheet, measured.
 
 The real pilot (statuary, with its curators and data) will be a community
 package in `profiles/`.
