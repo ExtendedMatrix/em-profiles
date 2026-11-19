@@ -96,6 +96,24 @@ def test_a_georeferenced_stack_keeps_its_origin_and_one_stack_is_asked(tmp_path,
     assert gpr["items"][0]["extent"] == [0.0, 0.0, 0.8, 0.6]
     assert _layers(stack=gpr["id"]) == [gpr]
     assert _layers(stack="nowhere") == []
+    # MICRO-GEO15: two products at the same (no) depth lie on one plane: one at a time
+    assert gpr["display"]["mode"] == "one"
+    (ert,) = [x for x in layers if x["id"] != gpr["id"]]
+    assert ert["display"]["mode"] == "all"
+
+
+def test_a_band_thinner_than_a_centimetre_is_said_in_millimetres(tmp_path, session):
+    """MICRO-GEO15: Alcudia's 5 mm slices were all «0.60–0.60 m» on the layer and in the Inspector."""
+    folder = tmp_path / "thin"
+    folder.mkdir()
+    for a in (600, 605):
+        (folder / f"{a}-{a + 5}mm.ASC").write_text("1 2 3\n4 5 6\n")
+    (folder / "1000-1500mm.ASC").write_text("1 2 3\n4 5 6\n")
+    _value(session(folder=str(folder), method="ert", declared={"extent": [3.0, 2.0]}))
+    (layer,) = _layers("it")
+    bands = [i["label"].split(" · ")[1] for i in layer["items"]]
+    assert bands == ["0.600–0.605 m dal piano di campagna", "0.605–0.610 m dal piano di campagna",
+                     "1.00–1.50 m dal piano di campagna"]
 
 
 def test_a_cache_not_on_this_machine_leaves_the_plane_without_a_picture(tmp_path, session):

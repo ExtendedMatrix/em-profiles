@@ -81,7 +81,10 @@ def _band(geo: Dict[str, Any]) -> Optional[Dict[str, str]]:
                       f"0–{_m(bottom)} m dal piano di campagna, lungo {geo.get('line')}")
         return None
     if top is not None and bottom is not None:
-        return _w(f"{_m(top)}–{_m(bottom)} m below ground", f"{_m(top)}–{_m(bottom)} m dal piano di campagna")
+        a, b = _m(top), _m(bottom)
+        if 0 < abs(float(bottom) - float(top)) < 0.01:  # a band thinner than a centimetre (Alcudia: 5 mm)
+            a, b = f"{float(top):.3f}", f"{float(bottom):.3f}"
+        return _w(f"{a}–{b} m below ground", f"{a}–{b} m dal piano di campagna")
     if top is not None:
         return _w(f"{_m(top)} m below ground", f"{_m(top)} m dal piano di campagna")
     prod = geo.get("product") or "—"
@@ -255,7 +258,9 @@ def usd_rows(graph: Any, node: Any) -> List[Dict[str, Any]]:
         rows.append(_row(_w("Slice", "Fetta"), _w(f"and {more} more", f"e altre {more}")))
     kind = (node.data or {}).get("anomaly_type")
     if kind:
-        rows.insert(0, _row(_w("Anomaly", "Anomalia"), _tail(kind)))
+        from .trace import TYPES        # trace imports this module: asked here
+        en_it = TYPES.get(_tail(kind))
+        rows.insert(0, _row(_w("Anomaly", "Anomalia"), _w(*en_it) if en_it else _tail(kind)))
     return rows
 
 

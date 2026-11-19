@@ -131,6 +131,10 @@ def layers(slots: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
         g = d.get("georef") or {}
         e, n = g.get("origin_e"), g.get("origin_n")
         flat = sum(1 for i in items if i["orientation"] == "horizontal")
+        # products of one place and no depth (UA Ilici's mean_v2 and sqmean_v2) lie on ONE plane:
+        # drawn together they fight, so such a stack starts one at a time
+        depths = [(i["depth_top"], i["depth_bottom"]) for i in items if i["orientation"] == "horizontal"]
+        coplanar = len(set(depths)) < len(depths)
         out.append({
             "kind": "raster_stack", "id": acq.node_id, "name": acq.name or d.get("geo_stack_id") or acq.node_id,
             "frame": {"epsg": d.get("epsg") or g.get("epsg"),
@@ -139,7 +143,7 @@ def layers(slots: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
                       "rotation": float(g.get("rotation") or 0.0)},
             "ground": {"mode": "surface", "surface": surface} if surface else {"mode": "flat", "z": 0.0},
             "items": items,
-            "display": {"mode": "one" if flat > ALL_MAX else "all", "index": 0},
+            "display": {"mode": "one" if flat > ALL_MAX or coplanar else "all", "index": 0},
             "opacity": 1.0})
     return out
 

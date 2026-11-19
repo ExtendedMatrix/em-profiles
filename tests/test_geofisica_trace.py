@@ -145,7 +145,10 @@ def test_an_area_on_three_slices_is_a_combiner(tmp_path, session):
                         "slot": "inspector.section@1", "slots": {"id": usd.node_id}}], lang="it")
     rows = {x["label"]: x["value"] for x in v["value"]}
     assert rows["Letta su"] == "3 fette geofisiche" and rows["Attraverso"] == "1 combinatore"
-    assert rows["Anomalia"] == "alta_resistivita" and rows["Bande"].startswith("1.00–3.50 m")
+    assert rows["Anomalia"] == "zona ad alta resistività" and rows["Bande"].startswith("1.00–3.50 m")
+    (v,) = PL.compute([{"key": "k", "plugin": "geofisica", "command": "geofisica.section",
+                        "slot": "inspector.section@1", "slots": {"id": usd.node_id}}], lang="en")
+    assert {x["label"]: x["value"] for x in v["value"]}["Anomaly"] == "high-resistivity zone"   # G15: not the slug
 
 
 def test_a_point_on_a_section_and_the_refusals(tmp_path, session):
