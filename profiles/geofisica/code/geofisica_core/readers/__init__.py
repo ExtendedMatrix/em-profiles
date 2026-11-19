@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """The readers, one module per form of file — ``csv_grid``, ``image_stack``
-(row G2), ``geotiff`` and ``ascii_matrix`` (row G3); XYZV and screenshot stacks
-arrive in G4 — the scan of a stack folder, and :func:`read_slice`, which reads
+(row G2), ``geotiff`` and ``ascii_matrix`` (row G3), ``xyzv``, ``xyz_lines``
+and ``screenshot`` (row G4) — the scan of a stack folder, and :func:`read_slice`, which reads
 any of them into a :class:`~geofisica_core.grid.SliceData`."""
 
 from __future__ import annotations
@@ -17,11 +17,16 @@ from .csv_grid import CSV_EXT, NODATA, RepairedReader, read_csv_slice, repair_ch
 from .geotiff import (GEOTIFF_EXT, SATURATION, geotiff_info, is_value_raster,
                       read_geotiff_slice)
 from .image_stack import IMG_EXT, image_size
+from .points import (XYZ_EXT, XYZV_COLUMNS, axis_of, grid_points, is_points_file,
+                     plane_product, read_xyz_lines, read_xyzv, xyzv_planes)
+from .screenshot import (compare_extent, crop_rgba, declare_frame, frame_extent, frame_grid,
+                         measure_frame, read_screenshot_slice, same_frame)
 
 #: the kinds a folder can be read as; ``scan_stack(kind="auto")`` still only
 #: chooses between the first two (as 3DSC's import_gpr.py expects until G6):
 #: :func:`guess_kind` knows them all
-KINDS = ("csv_grid", "image_stack", "geotiff", "ascii_matrix")
+KINDS = ("csv_grid", "image_stack", "geotiff", "ascii_matrix", "xyzv", "xyz_lines",
+         "screenshot")
 
 #: a vertical section named by its line: ``VERT-1-OK``, ``VERT3``, ``sez_2``,
 #: ``profile 4`` → ``VERT1``, ``VERT3``, ``SEZ2``, ``PROFILE4``
@@ -37,15 +42,22 @@ def line_from_name(name):
 
 def guess_kind(folder):
     """The reader a folder asks for: ``csv_grid`` if it has CSVs, ``ascii_matrix``
-    for ``.asc`` matrices, ``geotiff`` when its TIFFs are rasters of values
+    for ``.asc`` matrices, ``xyzv`` for ``.asc`` tables of points (a volume),
+    ``xyz_lines`` for ``.xyz``, ``geotiff`` when its TIFFs are rasters of values
     (one band, float or 16 bits: UA Ilici), ``image_stack`` for pictures;
-    ``None`` when nothing in it is read."""
+    ``None`` when nothing in it is read. A stack of screen captures
+    (``screenshot``) looks like pictures: it is asked for by name."""
     names = sorted(os.listdir(folder))
     low = [n.lower() for n in names]
     if any(n.endswith(CSV_EXT) for n in low):
         return "csv_grid"
-    if any(n.endswith(ASCII_EXT) for n in low):
+    ascs = [n for n, lo in zip(names, low) if lo.endswith(ASCII_EXT)]
+    if ascs:
+        if all(is_points_file(os.path.join(folder, n)) for n in ascs):
+            return "xyzv"
         return "ascii_matrix"
+    if any(n.endswith(XYZ_EXT) for n in low):
+        return "xyz_lines"
     tifs = [n for n, lo in zip(names, low) if lo.endswith(GEOTIFF_EXT)]
     if tifs and all(is_value_raster(os.path.join(folder, n)) for n in tifs):
         return "geotiff"
@@ -80,6 +92,29 @@ def _scan_named(folder, kind):
     return kind, specs
 
 
+def _scan_points(folder, kind, plane="y", columns=XYZV_COLUMNS):
+    """A folder of volumes (one spec per plane of each file: the planes are
+    read from the file, the rest is not) or of ``line N`` files (one section
+    each, its line from the name)."""
+    ext = ASCII_EXT if kind == "xyzv" else XYZ_EXT
+    specs = []
+    for n in sorted(os.listdir(folder)):
+        if not n.lower().endswith(ext):
+            continue
+        p = os.path.join(folder, n)
+        if kind == "xyzv":
+            if not is_points_file(p):
+                continue
+            for v in xyzv_planes(p, plane, columns):
+                specs.append(SliceSpec(path=p, depth_top=None, depth_bottom=None, kind=kind,
+                                       product=plane_product(p, plane, v), plane=v))
+        else:
+            specs.append(SliceSpec(path=p, depth_top=None, depth_bottom=None, kind=kind,
+                                   orientation="vertical",
+                                   line=line_from_name(n) or os.path.splitext(n)[0]))
+    return kind, specs
+
+
 def scan_stack(folder, kind="auto"):
     """Return ``(kind, [SliceSpec, ...])`` sorted by depth.
 
@@ -89,6 +124,8 @@ def scan_stack(folder, kind="auto"):
     """
     if kind in ("geotiff", "ascii_matrix"):
         return _scan_named(folder, kind)
+    if kind in ("xyzv", "xyz_lines"):
+        return _scan_points(folder, kind)
     names = sorted(os.listdir(folder))
     csvs = [n for n in names if n.lower().endswith(CSV_EXT)]
     imgs = [n for n in names if n.lower().endswith(IMG_EXT)]
@@ -125,6 +162,8 @@ def scan_stack(folder, kind="auto"):
 
 _HORIZONTAL = ("extent", "step", "nodata", "row0", "transpose")
 _VERTICAL = ("length", "depth", "nodata", "along", "reverse", "surface")
+_XYZV = ("plane", "x", "y", "columns", "nodata", "row0")
+_SCREENSHOT = ("frame", "rgb", "black", "axes")
 
 
 def read_slice(spec, grid=None, **declared):
@@ -133,7 +172,9 @@ def read_slice(spec, grid=None, **declared):
     ``declared`` — what the file does not say and the person declares at
     import: for a matrix ``extent``/``step``, ``nodata``, ``row0``,
     ``transpose``; for a section ``length``, ``depth``, ``along``,
-    ``reverse``, ``surface``. ``grid`` — a CSV stack's grid (the fast path).
+    ``reverse``, ``surface``; for a plane of a volume ``plane``, ``x``,
+    ``y``, ``columns``, ``row0``; for a capture ``frame`` (required),
+    ``rgb``, ``black``, ``axes``. ``grid`` — a CSV stack's grid (the fast path).
     """
     if spec.kind == "csv_grid":
         g, amp, mask, dt = read_csv_slice(spec.path, grid)
@@ -146,6 +187,21 @@ def read_slice(spec, grid=None, **declared):
                                       **{k: v for k, v in declared.items() if k in _VERTICAL})
         return read_ascii_matrix(spec.path, spec,
                                  **{k: v for k, v in declared.items() if k in _HORIZONTAL})
+    if spec.kind == "xyzv":
+        opts = {k: v for k, v in declared.items() if k in _XYZV}
+        data = read_xyzv(spec.path, only=spec.plane, **opts) if spec.plane is not None else \
+            read_xyzv(spec.path, **opts)
+        data[0].spec = spec
+        return data[0]
+    if spec.kind == "xyz_lines":
+        return read_xyz_lines(spec.path, spec, nodata=declared.get("nodata", 0.0),
+                              orientation=spec.orientation)
+    if spec.kind == "screenshot":
+        if "frame" not in declared:
+            raise ValueError("%s: a capture is read through its declared frame"
+                             % os.path.basename(spec.path))
+        opts = {k: v for k, v in declared.items() if k in _SCREENSHOT}
+        return read_screenshot_slice(spec, **opts)
     raise ValueError("no reader for slices of kind %r (%s)" % (spec.kind, spec.path))
 
 
@@ -188,7 +244,10 @@ def same_values(slices):
     return out
 
 
-__all__ = ["ASCII_EXT", "CSV_EXT", "GEOTIFF_EXT", "IMG_EXT", "KINDS", "NODATA", "RepairedReader",
+__all__ = ["XYZ_EXT", "XYZV_COLUMNS", "axis_of", "compare_extent", "crop_rgba", "declare_frame",
+           "frame_extent", "frame_grid", "grid_points", "is_points_file", "measure_frame",
+           "plane_product", "read_screenshot_slice", "read_xyz_lines", "read_xyzv", "same_frame",
+           "xyzv_planes", "ASCII_EXT", "CSV_EXT", "GEOTIFF_EXT", "IMG_EXT", "KINDS", "NODATA", "RepairedReader",
            "SATURATION", "geotiff_info", "guess_kind", "image_size", "is_value_raster",
            "line_from_name", "read_ascii_matrix", "read_ascii_section", "read_csv_slice",
            "read_geotiff_slice", "read_slice", "repair_chunk", "same_values", "scan_stack",

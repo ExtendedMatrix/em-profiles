@@ -34,13 +34,16 @@ from .georef import detect_georeference, extent_from_world_file, prj_file_for, e
 from .grid import DEFAULT_QUANTITY, GridSpec, Stack
 from .identity import document_id, stack_name
 from .png import write_png
-from .readers import image_size, read_csv_slice, scan_stack
+from .readers import (compare_extent, frame_grid, image_size, read_csv_slice, same_frame,
+                      scan_stack)
+from .readers.screenshot import BLACK
 
 MANIFEST_NAME = "gpr_stack.json"
 MANIFEST_VERSION = 2
 
 #: the keys a v2 manifest adds to v1, at the top and per slice
-V2_KEYS = ("stack", "stamped", "upgraded_from")
+V2_KEYS = ("stack", "stamped", "upgraded_from", "frame", "nodata", "checks",
+           "warnings")
 V2_SLICE_KEYS = ("geo_id", "orientation", "stamp")
 
 
@@ -316,6 +319,136 @@ def build_image_manifest(folder, out_dir=None, x_min=0.0, y_min=0.0,
             parameters={"kind": "image_stack", "x_step": x_step, "y_step": y_step,
                         "georef_source": georef["source"], "epsg": georef["epsg"],
                         "method": stack.method, "quantity": stack.quantity, "slices": len(entries)})
+    return manifest
+
+
+def _inside(path, folder):
+    real_f = os.path.realpath(folder)
+    real_p = os.path.realpath(path)
+    return os.path.commonpath([real_f, real_p]) == real_f
+
+
+def build_screenshot_manifest(folder, out_dir, frame, origin=None, epsg=None, rotation=0.0,
+                              black=BLACK, limit=0, method="gpr", quantity=None, unit=None,
+                              value_scale=None, geotiff=None, measured=None, stamp=True,
+                              software=()):
+    """Describe a stack of screen captures (``screenshot``) without rewriting one.
+
+    ``frame`` — the plot box, declared once for the stack
+    (:func:`~geofisica_core.readers.screenshot.declare_frame` or
+    :func:`~geofisica_core.readers.screenshot.measure_frame` with its
+    ranges); ``origin`` — ``(E, N)`` of the program's local (0, 0), doubles,
+    with its ``epsg`` and ``rotation`` (degrees, counter-clockwise): the
+    person reads them in the overlay. ``geotiff`` — a GeoTIFF of the same
+    sector: its extent is held against the frame (``checks.geotiff``).
+    ``measured`` — frames measured on captures of the stack (by the host,
+    which decodes): they must all be the frame (``checks.frames``).
+
+    The manifest has the shape of the others: ``grid`` = the frame in the
+    local frame, ``georef`` absolute; v2 adds ``frame`` (the crop in pixels
+    the consumer textures with) and ``nodata`` (black ≤ ``black`` and the
+    axis lines). Each slice's ``raster`` is the capture itself. ``out_dir``
+    is required and must not lie under ``folder`` (the captures' folder is
+    read only: OneDrive). The manifest is stamped: its inputs the captures
+    by digest, its parameters the frame and the origin.
+    """
+    if not out_dir:
+        raise ValueError("a screenshot stack needs a cache folder of its own")
+    if _inside(out_dir, folder):
+        raise ValueError("the cache folder %s lies under the captures' folder %s: refused "
+                         "(nothing is written beside the source)" % (out_dir, folder))
+    stack = open_stack(folder, kind="screenshot", method=method, quantity=quantity, unit=unit,
+                       value_scale=value_scale)
+    specs = stack.slices
+    if not specs:
+        raise ValueError("no captures found in %s" % folder)
+    if limit:
+        specs = specs[:limit]
+    if not frame.get("x_range") or not frame.get("y_range"):
+        raise ValueError("a frame needs the values at its ticks (x_range, y_range)")
+    os.makedirs(out_dir, exist_ok=True)
+    t0 = time.time()
+    w, h = image_size(specs[0].path)
+    if frame.get("image_size") and list(frame["image_size"]) != [w, h]:
+        raise ValueError("the frame was measured on a %d × %d capture, %s is %d × %d"
+                         % (frame["image_size"][0], frame["image_size"][1],
+                            os.path.basename(specs[0].path), w, h))
+    grid = frame_grid(frame)
+    checks = {}
+    warnings = []
+    if measured:
+        off = [i for i, m in enumerate(measured) if not same_frame(m, frame)]
+        checks["frames"] = {"measured": len(measured), "same": len(measured) - len(off),
+                            "off": off[:20]}
+        if off:
+            warnings.append({
+                "code": "frame_differs",
+                "en": "%d of %d captures do not have the declared plot box." % (len(off),
+                                                                             len(measured)),
+                "it": "%d schermate su %d non hanno il riquadro dichiarato." % (len(off),
+                                                                             len(measured))})
+    if geotiff:
+        cmp = compare_extent(frame, origin or (0.0, 0.0), geotiff)
+        if cmp.get("warning"):
+            warnings.append(cmp.pop("warning"))
+        checks["geotiff"] = cmp
+
+    def _ref(path):
+        return os.path.realpath(path)
+
+    entries = []
+    for i, s in enumerate(specs):
+        gid = document_id(folder, s, method)
+        entries.append({
+            "index": i,
+            "document_id": gid,
+            "source": _ref(s.path),
+            "raster": _ref(s.path),
+            "depth_top": s.depth_top,
+            "depth_bottom": s.depth_bottom,
+            "vmin": 0.0, "vmax": 1.0,
+            "valid_cells": None,                  # unknown until a capture is decoded
+            "png_bytes": os.path.getsize(s.path),
+            "geo_id": gid,
+            "orientation": s.orientation,
+            "stamp": None,
+        })
+    e, n = (None, None) if origin is None else (float(origin[0]), float(origin[1]))
+    georef = {"origin_e": e, "origin_n": n, "x_step": grid.x_step, "y_step": grid.y_step,
+              "epsg": epsg, "rotation": float(rotation),
+              "source": "declared" if origin is not None else "none"}
+    manifest = {
+        "manifest_version": MANIFEST_VERSION,
+        "generator": _generator(),
+        "kind": "screenshot",
+        "source_folder": folder,
+        "colormap": "AS_IS",
+        "normalize": "AS_IS",
+        "world_file": "",
+        "georef": georef,
+        "grid": asdict(grid),
+        "slices": entries,
+        "stack": stack.describe(),
+        "stamped": bool(stamp),
+        "frame": {"px": list(frame["px"]), "x_range": list(frame["x_range"]),
+                  "y_range": list(frame["y_range"]), "image_size": [w, h]},
+        "nodata": {"black_at_most": black, "axes": True},
+        "checks": checks,
+        "warnings": warnings,
+        "build_seconds": round(time.time() - t0, 2),
+    }
+    path = _write_manifest(out_dir, manifest)
+    if stamp:
+        t2 = time.time()
+        _stamp.stamp_artifact(
+            path, inputs=[s.path for s in specs], dtc_kind="transformation",
+            technique="screenshot stack manifest", software=software, label=stack.name,
+            parameters={"kind": "screenshot", "frame_px": list(frame["px"]),
+                        "x_range": list(frame["x_range"]), "y_range": list(frame["y_range"]),
+                        "origin": [e, n], "epsg": epsg, "rotation": float(rotation),
+                        "black_at_most": black, "method": stack.method,
+                        "quantity": stack.quantity, "slices": len(entries)})
+        manifest["stamp_seconds"] = round(time.time() - t2, 2)
     return manifest
 
 

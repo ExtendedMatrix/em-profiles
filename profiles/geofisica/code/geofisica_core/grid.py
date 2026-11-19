@@ -73,6 +73,8 @@ class SliceSpec:
     orientation: str = "horizontal"
     line: Optional[str] = None
     product: Optional[str] = None
+    #: the value of the plane a slice of a volume lies on (``xyzv``, row G4)
+    plane: Optional[float] = None
 
     @property
     def depth_known(self):

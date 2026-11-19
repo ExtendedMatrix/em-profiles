@@ -17,7 +17,8 @@ here in row G2 of the geophysics plan, MICRO-GEO03) divided into modules:
 * :mod:`.identity` — ``gpr:<stack>#d<top>-<bottom>m`` unchanged, ``ert:``,
   ``mag:``, ``#s<line>``, ``#<product>``;
 * :mod:`.readers` — ``csv_grid``, ``image_stack``, ``geotiff``, ``ascii_matrix``
-  (row G3), ``scan_stack``, ``guess_kind``, ``read_slice``, ``same_values``;
+  (row G3), ``xyzv``, ``xyz_lines``, ``screenshot`` (row G4), ``scan_stack``,
+  ``guess_kind``, ``read_slice``, ``same_values``;
 * :mod:`.georef` — world files, ``.prj``, shift;
 * :mod:`.color`, :mod:`.png` — colour maps and the zlib PNG writer;
 * :mod:`.manifest` — the cache and ``gpr_stack.json`` v2 (reads v1);
@@ -42,16 +43,23 @@ from .grid import (DEFAULT_QUANTITY, METHODS, ORIENTATIONS, GridSpec, Slice, Sli
                    SliceSpec, Stack)
 from .identity import document_id, geo_id, stack_name
 from .manifest import (MANIFEST_NAME, MANIFEST_VERSION, as_v1, build_cache, build_cache_steps,
-                       build_image_manifest, load_manifest, open_stack, upgrade_manifest)
+                       build_image_manifest, build_screenshot_manifest, load_manifest, open_stack,
+                       upgrade_manifest)
 from .png import write_png
 from .readers import (ASCII_EXT, CSV_EXT, GEOTIFF_EXT, IMG_EXT, KINDS, NODATA, SATURATION,
                       RepairedReader, geotiff_info, guess_kind, image_size, is_value_raster,
                       line_from_name, read_ascii_matrix, read_ascii_section, read_csv_slice,
                       read_geotiff_slice, read_slice, repair_chunk, same_values, scan_stack,
                       values_digest)
+from .readers import (XYZ_EXT, XYZV_COLUMNS, compare_extent, crop_rgba, declare_frame,
+                      frame_extent, frame_grid, is_points_file, measure_frame,
+                      read_screenshot_slice, read_xyz_lines, read_xyzv, same_frame, xyzv_planes)
 from .stamp import STAMP_SUFFIX, file_digest, resource_id_for, stamp_artifact, stamp_path
 
 __all__ = [
+    "XYZ_EXT", "XYZV_COLUMNS", "build_screenshot_manifest", "compare_extent", "crop_rgba",
+    "declare_frame", "frame_extent", "frame_grid", "is_points_file", "measure_frame",
+    "read_screenshot_slice", "read_xyz_lines", "read_xyzv", "same_frame", "xyzv_planes",
     "ASCII_EXT", "GEOTIFF_EXT", "KINDS", "SATURATION", "geotiff_info", "guess_kind",
     "is_value_raster", "line_from_name", "read_ascii_matrix", "read_ascii_section",
     "read_geotiff_slice", "read_slice", "same_values", "values_digest",
