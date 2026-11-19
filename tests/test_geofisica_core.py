@@ -144,12 +144,25 @@ def test_pngs_are_the_old_cores(work, config):
         assert _pixels(out / e["raster"]) == g["pixels"], e["raster"]
         if zlib.ZLIB_RUNTIME_VERSION == GOLDEN["zlib"]:                # bytes: the same zlib
             assert hashlib.sha256((out / e["raster"]).read_bytes()).hexdigest() == g["bytes"]
-    assert _neutral(m, work) == GOLDEN["manifest_csv"][config]
+    _same_manifest(_neutral(m, work), GOLDEN["manifest_csv"][config])
+
+
+def _same_manifest(got, want):
+    """Equal, except a slice's ``vmin``/``vmax``: the 2nd/98th percentile of a
+    float32 slice, whose last bit depends on numpy's interpolation (numpy
+    2.5.5 gives 52.95256042 where the golden's numpy gave 52.95256424, one
+    float32 ulp apart; the pixels above are the same either way)."""
+    got, want = json.loads(json.dumps(got)), json.loads(json.dumps(want))
+    for g, w in zip(got.get("slices", []), want.get("slices", [])):
+        for k in ("vmin", "vmax"):
+            if k in g and k in w and g[k] == pytest.approx(w[k], rel=1e-6):
+                g[k] = w[k]
+    assert got == want
 
 
 def test_image_manifest_is_the_old_cores(work):
     m = core.build_image_manifest(str(work / "ilici"), str(work / "cache_img"))
-    assert _neutral(m, work) == GOLDEN["manifest_image"]
+    _same_manifest(_neutral(m, work), GOLDEN["manifest_image"])
     assert m["georef"]["epsg"] == 25830 and m["georef"]["origin_e"] == GOLDEN["georef_image"]["origin_e"]
 
 
