@@ -48,5 +48,25 @@ hosts = ["emstudio", "blender"]
   [code.descriptor]
   host = "emstudio-side"
   transport = ["direct"]
-  capabilities = ["read-graph"]
+  capabilities = ["read-graph", "write-graph"]
   provenance = "derivation"
+  [[code.commands]]
+  id = "geofisica.ingest"
+  label = { en = "Import a geophysical stack", it = "Importa una pila geofisica" }
+  writes = true
+  slots = [
+    { name = "folder", kind = "path" },
+    { name = "kind", kind = "string", required = false },
+    { name = "method", kind = "string", required = false },
+    { name = "quantity", kind = "string", required = false },
+    { name = "unit", kind = "string", required = false },
+    { name = "name", kind = "string", required = false },
+    { name = "declared", kind = "string", required = false },
+    { name = "georef", kind = "string", required = false },
+    { name = "value_scale", kind = "string", required = false },
+    { name = "colormap", kind = "string", required = false },
+    { name = "normalize", kind = "string", required = false },
+    { name = "value_range", kind = "string", required = false },
+    { name = "geometry", kind = "string", required = false },
+  ]
+  in = []
