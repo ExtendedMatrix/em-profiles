@@ -103,12 +103,28 @@ Slice = SliceSpec
 
 @dataclass
 class SliceData:
-    """A slice with its raster loaded."""
+    """A slice with its raster loaded.
+
+    The grid is in the slice's **local** frame: for a raster read from a
+    GeoTIFF or a matrix of declared extent, the origin is the raster's
+    lower-left corner (so the first cell centre is half a step in), row 0 =
+    ``y_min``. For a vertical section ``x`` runs along the line and ``y`` is
+    the height above ground (``-depth``): row 0 is the deepest.
+
+    ``georef`` — where the local frame sits, as the file says it (``None``
+    when it says nothing): ``{origin_e, origin_n`` (the lower-left corner,
+    doubles), ``rotation`` (degrees, counter-clockwise), ``epsg``,
+    ``source``, ``checks}``. ``warnings`` — what the reader noticed, each
+    ``{code, en, it, …}`` (both languages: they reach the interface).
+    """
     spec: SliceSpec
     grid: GridSpec
     amp: "np.ndarray"       # (ny, nx) float32, NODATA where unsurveyed  # noqa: F821
     mask: "np.ndarray"      # (ny, nx) bool, True = valid  # noqa: F821
     read_seconds: float = 0.0
+    georef: Optional[dict] = None
+    warnings: List[dict] = field(default_factory=list)
+    info: dict = field(default_factory=dict)
 
 
 @dataclass

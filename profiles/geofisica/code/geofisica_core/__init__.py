@@ -16,7 +16,8 @@ here in row G2 of the geophysics plan, MICRO-GEO03) divided into modules:
 * :mod:`.depth` — depth from a name, the CSV header;
 * :mod:`.identity` — ``gpr:<stack>#d<top>-<bottom>m`` unchanged, ``ert:``,
   ``mag:``, ``#s<line>``, ``#<product>``;
-* :mod:`.readers` — ``csv_grid``, ``image_stack``, ``scan_stack``;
+* :mod:`.readers` — ``csv_grid``, ``image_stack``, ``geotiff``, ``ascii_matrix``
+  (row G3), ``scan_stack``, ``guess_kind``, ``read_slice``, ``same_values``;
 * :mod:`.georef` — world files, ``.prj``, shift;
 * :mod:`.color`, :mod:`.png` — colour maps and the zlib PNG writer;
 * :mod:`.manifest` — the cache and ``gpr_stack.json`` v2 (reads v1);
@@ -43,11 +44,17 @@ from .identity import document_id, geo_id, stack_name
 from .manifest import (MANIFEST_NAME, MANIFEST_VERSION, as_v1, build_cache, build_cache_steps,
                        build_image_manifest, load_manifest, open_stack, upgrade_manifest)
 from .png import write_png
-from .readers import (CSV_EXT, IMG_EXT, NODATA, RepairedReader, image_size, read_csv_slice,
-                      repair_chunk, scan_stack)
+from .readers import (ASCII_EXT, CSV_EXT, GEOTIFF_EXT, IMG_EXT, KINDS, NODATA, SATURATION,
+                      RepairedReader, geotiff_info, guess_kind, image_size, is_value_raster,
+                      line_from_name, read_ascii_matrix, read_ascii_section, read_csv_slice,
+                      read_geotiff_slice, read_slice, repair_chunk, same_values, scan_stack,
+                      values_digest)
 from .stamp import STAMP_SUFFIX, file_digest, resource_id_for, stamp_artifact, stamp_path
 
 __all__ = [
+    "ASCII_EXT", "GEOTIFF_EXT", "KINDS", "SATURATION", "geotiff_info", "guess_kind",
+    "is_value_raster", "line_from_name", "read_ascii_matrix", "read_ascii_section",
+    "read_geotiff_slice", "read_slice", "same_values", "values_digest",
     "ABSOLUTE_COORD_THRESHOLD", "COLORMAPS", "CSV_EXT", "DEFAULT_QUANTITY", "GridSpec", "IMG_EXT",
     "MANIFEST_NAME", "MANIFEST_VERSION", "METHODS", "NODATA", "ORIENTATIONS", "RepairedReader",
     "STAMP_SUFFIX", "Slice", "SliceData", "SliceSpec", "Stack", "as_v1", "build_cache",

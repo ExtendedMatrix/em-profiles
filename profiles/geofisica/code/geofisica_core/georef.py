@@ -110,14 +110,28 @@ def detect_georeference(folder, kind="auto"):
         return out
     first = specs[0].path
 
-    if kind == "image_stack":
+    if kind == "geotiff":
+        from .readers.geotiff import _gt, geotiff_info
+        info = geotiff_info(first)
+        aff = info.get("affine")
+        if aff:
+            # the old convention: the CENTRE of the lower-left pixel
+            e, n = _gt.pixel_to_crs(aff, 0.5, info["height"] - 0.5)
+            out.update(origin_e=float(e), origin_n=float(n), x_step=math.hypot(aff[1], aff[4]),
+                       y_step=math.hypot(aff[2], aff[5]),
+                       source=os.path.basename(first) + " (" + str(info["georef_source"]) + ")")
+        crs = info.get("crs")
+        if crs and crs.startswith("EPSG:"):
+            out["epsg"] = int(crs.split(":")[1])
+            return out
+    elif kind == "image_stack":
         wf = world_file_for(first)
         if wf:
             nx, ny = image_size(first)
             x_min, y_min, px, py = extent_from_world_file(wf, nx, ny)
             out.update(origin_e=x_min, origin_n=y_min, x_step=px, y_step=py,
                        source=os.path.basename(wf))
-    else:
+    elif kind == "csv_grid":
         hdr = read_csv_header(first)
         out["x_step"] = hdr.get("x_step")
         out["y_step"] = hdr.get("y_step")
