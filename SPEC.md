@@ -637,6 +637,75 @@ bare 0.1 profile its envelope, and validates the result in memory before
 writing. `[build]` (`paths`, `paths_exclude_pattern`) chooses the files, as
 in Blender. The folder is never written.
 
+### 6.7 Good practice — the stamp on derived artifacts
+
+*Encouraged, not required.* A package whose code writes no stamp installs
+and works exactly as one that does; the validator says it at most as a piece
+of advice (a warning, `code_stamp_advice`), never as an error.
+
+**When.** Every time the code of a package — in EMStudio, in EM Tools, on the
+command line — **makes a file from other files**: a texture or a PNG cut from
+a slice, a cache, a drape baked on a surface, a resampled raster, a glb or a
+3tz, an export. Not for what it only reads, and not for the em.json (the
+graph keeps its own history).
+
+**What.** A **stamp** is the immutable record of one step in the format of
+[dtcstamp](https://github.com/zalmoxes-laran/dtcstamp) (`stamp-format.md`):
+an agent, a process with its parameters, the inputs it consumed **named by
+identity** (a digest, the `resource_id` of a resource of the graph — never a
+path), and **one** artifact, identified by the digest of its bytes.
+
+**How, from the `em` API** (1.2 and later: declare `em_api_min = "1.2"`):
+
+```python
+def bake(slots):
+    png = cache / "d0.10-0.20m.png"
+    write_png(png, slice_)
+    ctx.stamp(png,
+              inputs=[source_file,                                # a path: hashed, never written
+                      {"resource_id": acq_id, "kind": "acquisition"}],  # an input with no bytes
+              parameters={"colormap": "viridis", "clip": [2, 98]},
+              dtc_kind="format_conversion", technique="slice rasterization",
+              label="Ilici S1 · 0.10–0.20 m")
+```
+
+`ctx.stamp(file, …)` names the plugin as the agent — its id and version as
+the first line of `how.software`, s3dgraphy's after it — and, by the format's
+own rule, writes no `by.operator`: the agent is the software. `em.stamp(file,
+…)` does the same from a script, and inside a plugin's command it finds the
+calling plugin by itself. `dtc_kind` comes from the vocabulary of DTC kinds
+(`format_conversion`, `transformation`, `georeferencing`, `export`,
+`lod_generation`…); `technique` is the plugin's own words. The output's
+`resource_id` is derived from its digest when none is given, so the same
+bytes baked twice are the same artifact; two stamps of them differ only in
+the instant, which the format reads as one fact recorded twice.
+
+**Where.** Beside the artifact, `<artifact>.stamp.json` (the name the format
+fixes: not `em.json`, not `dtc.json`). An artifact the plugin keeps for itself
+lives in its own folder, `~/.s3dgraphy/plugins-data/<id>/` (`ctx.data_dir`),
+never beside the source data, which may be read-only.
+
+**How it joins the graph's DTC.** The stamp does not touch the graph; it
+cites it. When an input is the file of a resource of the graph — the
+`ResourceNode` an acquisition produced (`DTCAcquisitionNode`
+—`dtc_had_output`→ `ResourceNode`) — the stamp names that resource's
+`resource_id` and digest, so the chain reads backwards **acquisition →
+resource → derived artifact**: `s3dgraphy.stamp.absorb_stamp` merges a stamp
+into a graph by UUID (the derived artifact as a resource, its process, the
+inputs as its parents), and `dtcstamp.walk_chain` follows the digests from the
+artifact to whatever the reader can reach. A stamp that contradicts another
+for the same bytes is kept beside it: a contradiction is a discovery.
+
+**An example.** A geophysics package bakes the PNG of a GPR slice from a
+GeoTIFF the person brought in. The GeoTIFF is the `ResourceNode` the import
+wrote under the stack's acquisition; the PNG goes to
+`plugins-data/geofisica/cache/<stack digest>/d0.10-0.20m.png` with
+`d0.10-0.20m.png.stamp.json` beside it, whose `from` cites the GeoTIFF's
+`resource_id` and digest and the acquisition (`kind = "acquisition"`), and
+whose `how` says `format_conversion`, the colour scheme and the clipping
+percentiles, `geofisica 0.1.0` and `s3dgraphy`. Whoever finds the PNG alone,
+years later, can tell what it was made from and check it.
+
 ## 7. Versions
 
 Three axes, independent, never mixed:
@@ -891,7 +960,11 @@ package in `profiles/`.
   (19 November 2026). The tools read a repository: added by URL, `file://` or
   a folder, the archive checked against `archive_hash`, the `blocklist`
   respected, `[requires]` installed first (19 November 2026, row X2). A
-  repository may be signed with minisign (19 November 2026, row X8, §9 point 7).
+  repository may be signed with minisign (19 November 2026, row X8, §9 point 7). A
+  good practice, encouraged and never required: the code of a package stamps
+  the artifacts it derives (`ctx.stamp`, `em` API 1.2; §6.7), and the
+  validator advises the code that writes files and stamps none (19 November
+  2026, G-5).
 - **0.1 — 25 October 2026 (Editor's Draft).** First draft: the manifest, the
   PROF correspondence, the five kinds of content, the fallback, the three axes
   of version, the declaration in the em.json header.
