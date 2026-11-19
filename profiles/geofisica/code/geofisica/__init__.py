@@ -9,8 +9,9 @@ process as one act. Row G8 (:mod:`.door`) brings it in through «Porta
 dentro…»: the reader ``geofisica.read`` (``door.reader@2``: a folder, the
 claimed rasters and pictures) opens the panel ``import`` with the folder,
 whose value ``geofisica.describe`` says what the folder is and whose button
-runs ``geofisica.ingest``. The Inspector (G9), the Space layer (G10–G11) and
-the tracing tool (G12) arrive row by row.
+runs ``geofisica.ingest``. Row G9 (:mod:`.inspector`): ``geofisica.section``,
+the Inspector's section of a slice and of a USD read on slices. The Space
+layer (G10–G11) and the tracing tool (G12) arrive row by row.
 """
 
 __version__ = "0.1.0"
@@ -40,6 +41,11 @@ def _describe(slots):
     return door.describe(slots)
 
 
+def _section(slots):
+    from . import inspector
+    return inspector.section(slots)
+
+
 def _stacks():
     from . import ingest
     return ingest.stacks()
@@ -51,6 +57,7 @@ def setup(ctx):
     ctx.command("geofisica.ingest", _ingest)
     ctx.command("geofisica.read", _read)
     ctx.command("geofisica.describe", _describe)
+    ctx.command("geofisica.section", _section)
     ctx.expose("stacks", _stacks)
 
 

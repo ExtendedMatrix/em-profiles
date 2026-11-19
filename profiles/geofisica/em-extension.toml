@@ -107,6 +107,13 @@ hosts = ["emstudio", "blender"]
     { name = "declared", kind = "string", required = false },
   ]
   in = []
+  [[code.commands]]
+  id = "geofisica.section"
+  label = { en = "Geophysical reading", it = "Lettura geofisica" }
+  in = ["inspector.section@1"]
+  when = "selection:document|USD"
+  writes = false
+  slots = [{ name = "id", kind = "id" }]
   [[code.panels]]
   id = "import"
   label = { en = "Geophysical stack", it = "Pila geofisica" }

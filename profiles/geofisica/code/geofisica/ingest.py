@@ -296,6 +296,13 @@ def ingest(folder: str, *, kind: Optional[str] = None, method: str = "gpr",
             acquisition={"resource_id": acq, "kind": "acquisition"}, software=software, at=at)
     except (core.CacheError, core.ColorError) as exc:
         raise Said(getattr(exc, "en", str(exc)), getattr(exc, "it", str(exc)))
+    except EmError:
+        raise
+    except Exception as exc:                         # noqa: BLE001 — a file that cannot be read (row G9)
+        # the readers of the core say what broke in English (no bpy, no em there);
+        # the sentence that reaches the person is said in both languages
+        raise Said(f"the stack {stack} cannot be read: {exc}",
+                   f"la pila {stack} non si legge: {exc}")
     geom, georef_source = placement(kind, manifest, georef, decl)
     if geometry:
         geom = geometry
