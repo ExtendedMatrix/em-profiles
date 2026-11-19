@@ -114,6 +114,13 @@ hosts = ["emstudio", "blender"]
   when = "selection:document|USD"
   writes = false
   slots = [{ name = "id", kind = "id" }]
+  [[code.commands]]
+  id = "geofisica.layer"
+  label = { en = "Geophysical slices", it = "Fette geofisiche" }
+  in = ["space.layer@1"]
+  layer = "raster_stack"
+  writes = false
+  slots = [{ name = "stack", kind = "string", required = false }]
   [[code.panels]]
   id = "import"
   label = { en = "Geophysical stack", it = "Pila geofisica" }

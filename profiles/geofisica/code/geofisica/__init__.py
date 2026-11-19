@@ -10,8 +10,10 @@ dentro…»: the reader ``geofisica.read`` (``door.reader@2``: a folder, the
 claimed rasters and pictures) opens the panel ``import`` with the folder,
 whose value ``geofisica.describe`` says what the folder is and whose button
 runs ``geofisica.ingest``. Row G9 (:mod:`.inspector`): ``geofisica.section``,
-the Inspector's section of a slice and of a USD read on slices. The Space
-layer (G10–G11) and the tracing tool (G12) arrive row by row.
+the Inspector's section of a slice and of a USD read on slices. Row G10
+(:mod:`.layer`): ``geofisica.layer``, the stacks described as layers of the
+Space (``space.layer@1``) — the host draws them (G11). The tracing tool (G12)
+arrives next.
 """
 
 __version__ = "0.1.0"
@@ -46,6 +48,11 @@ def _section(slots):
     return inspector.section(slots)
 
 
+def _layer(slots):
+    from . import layer
+    return layer.layers(slots)
+
+
 def _stacks():
     from . import ingest
     return ingest.stacks()
@@ -58,6 +65,7 @@ def setup(ctx):
     ctx.command("geofisica.read", _read)
     ctx.command("geofisica.describe", _describe)
     ctx.command("geofisica.section", _section)
+    ctx.command("geofisica.layer", _layer)
     ctx.expose("stacks", _stacks)
 
 
