@@ -103,9 +103,34 @@ def input_entry(item, digests=None):
             "size_bytes": os.path.getsize(path), "label": os.path.basename(path)}
 
 
+#: written beside the core by a host that embeds a copy of it (3DSC's
+#: ``scripts/vendor_geofisica_core.py``, row G6): where the copy came from
+SOURCE_NAME = "SOURCE.json"
+
+
+def vendored_source():
+    """``SOURCE.json`` beside the core when it is an embedded copy (3DSC:
+    ``repo``, ``path``, ``commit``, ``tree_digest``), else ``{}`` (the
+    package installed by the extension system, a checkout of em-profiles)."""
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), SOURCE_NAME)
+    try:
+        with open(path, "r", encoding="utf-8") as fh:
+            data = json.load(fh)
+    except (OSError, ValueError):
+        return {}
+    return data if isinstance(data, dict) else {}
+
+
 def core_line():
+    """The core's software line: name and version, and the em-profiles
+    commit an embedded copy was taken from (the agent of a stamp names the
+    exact code)."""
     from . import __version__
-    return {"name": "geofisica_core", "version": __version__}
+    line = {"name": "geofisica_core", "version": __version__}
+    commit = str(vendored_source().get("commit") or "")[:7]
+    if commit:
+        line["commit"] = commit
+    return line
 
 
 def make_stamp(artifact, inputs=(), parameters=None, dtc_kind="format_conversion",
@@ -160,5 +185,5 @@ def stamp_artifact(artifact, write=True, **fields):
     return stamp
 
 
-__all__ = ["STAMP_SUFFIX", "StampError", "file_digest", "input_entry", "make_stamp",
-           "resource_id_for", "stamp_artifact", "stamp_path"]
+__all__ = ["SOURCE_NAME", "STAMP_SUFFIX", "StampError", "core_line", "file_digest", "input_entry",
+           "make_stamp", "resource_id_for", "stamp_artifact", "stamp_path", "vendored_source"]

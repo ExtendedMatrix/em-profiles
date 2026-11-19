@@ -275,3 +275,29 @@ def test_without_dtcstamp_the_same_record(work, monkeypatch):
     except Exception:                                                     # noqa: BLE001
         return
     assert rec["self"]["resource_id"] == resource_id_for(rec["self"]["digest"])   # one identity
+
+
+def test_an_embedded_copy_names_its_commit(tmp_path, monkeypatch):
+    """Row G6: 3DSC embeds the core with ``SOURCE.json`` beside it; the core's
+    software line then carries the em-profiles commit (the stamp names the
+    exact code). Without the file (the installed package) no commit."""
+    assert core.stamp.core_line() == {"name": "geofisica_core", "version": core.__version__}
+    import shutil
+    copy = tmp_path / "geofisica_core"
+    shutil.copytree(CODE / "geofisica_core", copy,
+                    ignore=shutil.ignore_patterns("__pycache__", SOURCE_FILE))
+    (copy / SOURCE_FILE).write_text(json.dumps({"repo": "em-profiles", "commit": "0123456789abcdef"}),
+                                    encoding="utf-8")
+    spec = importlib.util.spec_from_file_location(
+        "geofisica_core_embedded", copy / "__init__.py", submodule_search_locations=[str(copy)])
+    mod = importlib.util.module_from_spec(spec)
+    monkeypatch.setitem(sys.modules, spec.name, mod)
+    spec.loader.exec_module(mod)
+    assert mod.stamp.vendored_source()["repo"] == "em-profiles"
+    assert mod.stamp.core_line() == {"name": "geofisica_core", "version": mod.__version__,
+                                     "commit": "0123456"}
+    (copy / SOURCE_FILE).write_text("not json", encoding="utf-8")
+    assert mod.stamp.vendored_source() == {} and "commit" not in mod.stamp.core_line()
+
+
+SOURCE_FILE = "SOURCE.json"
