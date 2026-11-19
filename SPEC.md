@@ -723,6 +723,14 @@ esempio-statuaria-0.1.0.zip
    when its permissions, capabilities or source change. In the 1.6 beta,
    trust is a list of plugins reviewed by the editor and by the curators of
    the package that requires them; signatures come later (decision D-6).
+   The list (`reviewed.json` of ExtendedMatrix/em-extensions, copied into the
+   index's `reviewed`) names the digest of the **code section**, who read it
+   (`by`, a GitHub handle), in which role (`as`: `editor` or
+   `curator:<package>`) and when (`on`). A code with a reviewed digest
+   installs without the question and is marked verified, with its reviewer;
+   a data-only update keeps the review; a changed code does not. A tool
+   counts the reviews of the official index by default, those of another
+   repository only when the person turns them on for it.
 5. **The same vocabulary from two packages**: same digest — one copy, one
    more carrier; another version — side by side; same version, another
    digest — **the owner of the IRI's namespace wins** (a `…/profile/<name>/vocab/`
@@ -842,7 +850,9 @@ package in `profiles/`.
   the data), clean removal (one version, the old code versions, what nothing
   owns) and wheels per platform (only the machine's are installed;
   `build --split-platforms` writes `<id>-<version>-<platform>.zip`, one per
-  platform, and a repository may list them side by side).
+  platform, and a repository may list them side by side). Row X4 too: the
+  list of the reviewed (§9, point 4) — `python -m s3dgraphy.extensions
+  review add`, checked by the CI of em-extensions against decision D-6.
 
 ## 15. Changes
 
