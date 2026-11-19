@@ -130,7 +130,7 @@ def test_a_geotiff_folder(tmp_path):
     _tif(f / "mean_v2.tif", _field(5, 6))
     _tif(f / "sqmean_v2.tif", _field(5, 6, 1))
     assert core.guess_kind(str(f)) == "geotiff"
-    assert core.scan_stack(str(f))[0] == "image_stack"                  # auto unchanged (3DSC until G6)
+    assert core.scan_stack(str(f))[0] == "geotiff"                      # auto asks guess_kind (row G16 h)
     kind, specs = core.scan_stack(str(f), "geotiff")
     assert kind == "geotiff" and [s.product for s in specs] == ["mean_v2", "sqmean_v2"]
     assert all(not s.depth_known for s in specs)                        # never an invented depth

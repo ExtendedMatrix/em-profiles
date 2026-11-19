@@ -86,14 +86,69 @@ def _number(value: Any, name: str) -> Optional[float]:
         raise Said(f"{name}: a number ({value!r})", f"{name}: un numero ({value!r})")
 
 
+#: the panel's «according to» of a typed origin → the ``source`` of the
+#: placement, which says the document's geometry axis (row G16 i)
+ORIGIN_FROM = {"instrument": "instrument (its own coordinates, transcribed)",
+               "documentation": "documentation (figure, plan, report)",
+               "eye": "by eye"}
+
+
+def _frame(px: Any, fx: Any, fy: Any) -> Optional[Dict[str, Any]]:
+    """The plot box of a stack of screen captures (row G16 a): ``px`` the
+    pixels ``left, top, right, bottom`` of the first and last ticks (empty:
+    measured on the first capture at import), ``fx``/``fy`` the metres those
+    ticks stand for (``-50 25``, ``-22 37``)."""
+    x, y = _pair(fx, "frame_x"), _pair(fy, "frame_y")
+    box = None
+    if px not in (None, ""):
+        if isinstance(px, (list, tuple)):
+            nums = [str(v) for v in px]
+        else:
+            nums = re.findall(r"\d+", str(px))
+        if len(nums) != 4:
+            raise Said(f"frame: four pixels, left, top, right, bottom, as 610, 170, 1303, 715 ({px!r})",
+                       f"riquadro: quattro pixel, sinistra, alto, destra, basso, come 610, 170, 1303, 715 ({px!r})")
+        box = [int(float(v)) for v in nums]
+        if box[2] <= box[0] or box[3] <= box[1]:
+            raise Said(f"frame: right after left and bottom below top ({px!r})",
+                       f"riquadro: la destra dopo la sinistra e il basso sotto l'alto ({px!r})")
+    if x is None and y is None and box is None:
+        return None
+    if x is None or y is None:
+        raise Said("the frame of the captures wants what the ticks stand for on x and on y (as -50 25 and -22 37)",
+                   "il riquadro delle schermate vuole quanto valgono le tacche in x e in y (come -50 25 e -22 37)")
+    return {"px": box, "x_range": x, "y_range": y}
+
+
+def _placement_fields(origin: Any, epsg: Any, origin_from: Any) -> Dict[str, Any]:
+    """The panel's origin (``E, N`` in doubles), EPSG and «according to» →
+    the keys of a declared placement."""
+    out: Dict[str, Any] = {}
+    o = _pair(origin, "origin")
+    if o is not None:
+        out["origin_e"], out["origin_n"] = o
+    e = _number(epsg, "epsg")
+    if e is not None:
+        if e != int(e) or e <= 0:
+            raise Said(f"epsg: a code, as 25830 ({epsg!r})", f"epsg: un codice, come 25830 ({epsg!r})")
+        out["epsg"] = int(e)
+    if origin_from not in (None, ""):
+        if str(origin_from) not in ORIGIN_FROM:
+            raise Said(f"origin_from: one of {', '.join(ORIGIN_FROM)} ({origin_from!r})",
+                       f"origin_from: uno tra {', '.join(ORIGIN_FROM)} ({origin_from!r})")
+        out["source"] = ORIGIN_FROM[str(origin_from)]
+    return out
+
+
 def panel_slots(slots: Dict[str, Any]) -> Dict[str, Any]:
     """The panel's plain fields folded into the declarations of
     ``geofisica.ingest``: ``extent_x``/``extent_y`` (m), ``sections``
     (``VERT1=92x8, …``), ``section_length``/``section_depth`` (every section)
     → ``declared``; ``scale_from``/``scale_to`` (``1-255``, ``0-3500``),
     ``scale_unit``, ``scale_source`` → ``value_scale`` (confidence low: a
-    declaration, never a measure). A field written wins over the same key of
-    the JSON slot."""
+    declaration, never a measure); ``frame``/``frame_x``/``frame_y`` → the
+    captures' ``frame`` (row G16 a); ``origin``/``epsg``/``origin_from`` →
+    ``georef``. A field written wins over the same key of the JSON slot."""
     out = dict(slots)
     declared = _json_slot(out.get("declared"), "declared") or {}
     if not isinstance(declared, dict):
@@ -114,8 +169,22 @@ def panel_slots(slots: Dict[str, Any]) -> Dict[str, Any]:
         if sd is not None:
             common["depth"] = sd
         declared["section"] = common
+    frame = _frame(out.pop("frame", None), out.pop("frame_x", None), out.pop("frame_y", None))
+    if frame:
+        declared["frame"] = dict(declared.get("frame") or {}, **frame)
     if declared:
         out["declared"] = declared
+    place = _placement_fields(out.pop("origin", None), out.pop("epsg", None), out.pop("origin_from", None))
+    if place:
+        georef = _json_slot(out.get("georef"), "georef") or {}
+        if not isinstance(georef, dict):
+            raise Said("georef: a JSON object", "georef: un oggetto JSON")
+        georef.update(place)
+        if georef.get("origin_e") is None or georef.get("origin_n") is None:
+            raise Said("a placement wants its origin (E, N): the EPSG or the source alone place nothing",
+                       "una collocazione vuole la sua origine (E, N): l'EPSG o la fonte da soli non collocano niente")
+        georef.setdefault("source", "declared")
+        out["georef"] = georef
     scale = _json_slot(out.get("value_scale"), "value_scale") or {}
     sf, st = _pair(out.pop("scale_from", None), "scale_from"), _pair(out.pop("scale_to", None), "scale_to")
     unit, source = out.pop("scale_unit", None), out.pop("scale_source", None)
@@ -208,7 +277,8 @@ def describe(slots: Dict[str, Any]) -> List[Dict[str, Any]]:
         return [{"label": W("Folder", "Cartella"), "value": W(f"{path}: not found", f"{path}: non trovata")}]
     folder = stack_folder(path)
     core = _core()
-    kind = slots.get("kind") or core.guess_kind(folder)
+    kind = slots.get("kind") or ("screenshot" if slots.get("frame_x") or slots.get("frame_y")
+                                 or slots.get("frame") else core.guess_kind(folder))
     rows: List[Dict[str, Any]] = [{"label": W("Stack", "Pila"), "value": slots.get("name") or core.stack_name(folder)}]
     if kind is None:
         rows.append({"label": W("Format", "Formato"),
@@ -239,6 +309,22 @@ def describe(slots: Dict[str, Any]) -> List[Dict[str, Any]]:
             rows.append({"label": W("Products (no depth)", "Prodotti (senza profondità)"), "value": ", ".join(products)})
     method = slots.get("method") or METHOD_OF_KIND.get(kind, "gpr")
     rows.append({"label": W("Method", "Metodo"), "value": str(method).upper()})
+    if kind == "screenshot":
+        fr = None
+        try:
+            fr = _frame(slots.get("frame"), slots.get("frame_x"), slots.get("frame_y"))
+        except Said as exc:
+            rows.append({"label": W("Frame", "Riquadro"), "value": W(exc.messages["en"], exc.messages["it"])})
+        if fr:
+            rows.append({"label": W("Frame", "Riquadro"), "value": W(
+                (f"pixels {', '.join(str(v) for v in fr['px'])}" if fr["px"] else "measured on the first capture")
+                + f": x {fr['x_range'][0]:g}…{fr['x_range'][1]:g} m, y {fr['y_range'][0]:g}…{fr['y_range'][1]:g} m",
+                (f"pixel {', '.join(str(v) for v in fr['px'])}" if fr["px"] else "misurato sulla prima schermata")
+                + f": x {fr['x_range'][0]:g}…{fr['x_range'][1]:g} m, y {fr['y_range'][0]:g}…{fr['y_range'][1]:g} m")})
+        elif fr is None and not slots.get("declared"):
+            rows.append({"label": W("Missing", "Manca"),
+                         "value": W("the frame: what the plot's first and last ticks stand for on x and y, in m",
+                                    "il riquadro: quanto valgono in m la prima e l'ultima tacca del grafico in x e in y")})
     if kind == "ascii_matrix" and not (slots.get("extent_x") or slots.get("declared")):
         rows.append({"label": W("Missing", "Manca"),
                      "value": W("the extent in m (the matrices do not say it: 1 unit per cell until then)",

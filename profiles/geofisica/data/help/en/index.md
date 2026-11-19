@@ -21,6 +21,17 @@ make one extractor per slice and a combiner of them. The kind (point, linear,
 areal, diffraction hyperbola, high or low resistivity) says the shape read,
 not what it is. One undo step takes it all back.
 
+**Screen captures.** A stack of captures (the slices exported as pictures by
+the radar's software) is read through the plot's **frame**: in the panel,
+write what the first and last ticks stand for in metres on x and on y (as
+`-50 25` and `-22 37`); the ticks' pixels are measured on the first capture,
+or you write them. The **origin** (E, N), the **EPSG** and *according to whom*:
+the instrument (its own coordinates, copied: *reality based*), a
+documentation (*observable*) or by eye (*asserted*).
+
+Once traced, the anomaly stays **drawn on its plane**, and while you trace it
+the vertices you place show at once.
+
 Every image the package derives (a slice's PNG, the cache, a drape) is written
 with its **stamp** beside it (`<file>.stamp.json`): what it was made from, how,
 by which version.

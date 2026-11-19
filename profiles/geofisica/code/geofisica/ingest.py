@@ -42,6 +42,11 @@ PLUGIN_ID = "geofisica"
 NS = "https://w3id.org/extendedmatrix/profile/geofisica/vocab/"
 #: the kinds whose grid is the file's own coordinates (the instrument's)
 MEASURED_KINDS = ("csv", "geotiff", "xyzv", "xyz_lines")
+#: a declared georef whose ``source`` names the instrument: its own
+#: coordinates, transcribed (UA Ilici Alcudia: the UTM origin printed by the
+#: radar's software on the captures) → reality_based (row G16 i, a default
+#: written for E.D.: the numbers are the instrument's, a person only copied them)
+INSTRUMENT_SOURCES = ("instrument", "strumento")
 #: a declared georef whose ``source`` names a rigorous documentation
 DOCUMENTED_SOURCES = ("figure", "plan", "report", "documentation", "survey", "pianta", "figura",
                       "relazione")
@@ -130,6 +135,37 @@ def _decoder() -> Optional[Callable[[str], Any]]:
     return decode
 
 
+def _measured_frame(folder: str, declared: Any, decode: Callable[[str], Any]) -> Any:
+    """A stack of captures whose frame says the metres but not the pixels
+    (the panel's ``frame`` left empty, row G16 a): the plot box measured on
+    the first capture by its axes and ticks (the same box on every capture of
+    a stack: Alcudia's 601, MICRO-GEO05)."""
+    if callable(declared):
+        return declared
+    fr = (declared or {}).get("frame") if isinstance(declared, dict) else None
+    if not fr:
+        raise Said("screen captures are read through their frame: say what the plot's first and last "
+                   "ticks stand for on x and y (m)",
+                   "le schermate si leggono attraverso il loro riquadro: di' quanto valgono in m la prima "
+                   "e l'ultima tacca del grafico in x e in y")
+    core = _core()
+    if fr.get("px"):
+        out = dict(declared)
+        out["frame"] = core.declare_frame(fr["px"], fr["x_range"], fr["y_range"], fr.get("image_size"))
+        return out
+    _, specs = core.scan_stack(folder, "screenshot")
+    if not specs:
+        raise Said(f"no capture in {folder}", f"nessuna schermata in {folder}")
+    try:
+        got = core.measure_frame(decode(specs[0].path), fr.get("x_range"), fr.get("y_range"))
+    except ValueError as exc:
+        raise Said(f"the frame of {os.path.basename(specs[0].path)} was not found ({exc}): write its pixels",
+                   f"il riquadro di {os.path.basename(specs[0].path)} non si trova ({exc}): scrivine i pixel")
+    out = dict(declared)
+    out["frame"] = core.declare_frame(got["px"], fr["x_range"], fr["y_range"], got.get("image_size"))
+    return out
+
+
 # ── the placement → the document's geometry axis ────────────────────────────
 
 def placement(kind: str, manifest: Dict[str, Any], georef: Optional[Dict[str, Any]],
@@ -137,12 +173,15 @@ def placement(kind: str, manifest: Dict[str, Any], georef: Optional[Dict[str, An
     """``(geometry, georef_source)``: who says where the slices are (plan §2.6).
 
     * ``reality_based`` — the instrument or its processing (a GeoTIFF's keys,
-      a world file, a grid in survey coordinates);
+      a world file, a grid in survey coordinates; a declared placement whose
+      source is the instrument's own coordinates, transcribed);
     * ``observable`` — another rigorous documentation (a declared placement
       whose source is a figure, a plan, a report; sizes declared from it);
     * ``asserted`` — placed by eye, no source."""
     if georef:
         src = str(georef.get("source") or "declared").lower()
+        if any(w in src for w in INSTRUMENT_SOURCES):
+            return "reality_based", src
         if any(w in src for w in DOCUMENTED_SOURCES):
             return "observable", src
         return "asserted", src
@@ -273,6 +312,8 @@ def ingest(folder: str, *, kind: Optional[str] = None, method: str = "gpr",
     if method not in core.METHODS:
         raise Said(f"method {method!r}: one of {', '.join(core.METHODS)}",
                    f"metodo {method!r}: uno tra {', '.join(core.METHODS)}")
+    if not kind and isinstance(declared, dict) and declared.get("frame"):
+        kind = "screenshot"                          # a frame is said only of captures (row G16 a)
     kind = kind or core.guess_kind(folder)
     if kind is None:
         raise Said(f"nothing in {folder} is a geophysical slice",
@@ -282,6 +323,8 @@ def ingest(folder: str, *, kind: Optional[str] = None, method: str = "gpr",
         if decode is None:
             raise Said("screen captures need an image decoder (Pillow) in this host",
                        "le schermate vogliono un decodificatore d'immagini (Pillow) in questo host")
+    if kind == "screenshot":
+        declared = _measured_frame(folder, declared, decode)
     stack = name or core.stack_name(folder)
     acq = acquisition_id(method, stack)
     quantity = quantity or QUANTITY_OF.get(method)
@@ -317,7 +360,9 @@ def ingest(folder: str, *, kind: Optional[str] = None, method: str = "gpr",
                               "updated": [], "removed": [], "cache_key": manifest["cache_key"],
                               "cache_dir": cache_dir, "reused": bool(manifest.get("reused")),
                               "geometry": geom, "georef_source": georef_source,
-                              "warnings": manifest.get("warnings") or []}
+                              # the manifest keeps every warning; the person reads them
+                              # summed up (row G16 d: Alcudia's 217 repeated captures)
+                              "warnings": core.summarize_warnings(manifest.get("warnings") or [])}
     with em.write(title) as tx:
         graph = tx.graph
         acq_data = {

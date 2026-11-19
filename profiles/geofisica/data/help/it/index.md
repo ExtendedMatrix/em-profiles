@@ -21,6 +21,17 @@ tipo (puntuale, lineare, areale, iperbole di diffrazione, alta o bassa
 resistività) dice la forma letta, non che cosa è. Un solo passo di
 annullamento toglie tutto.
 
+**Schermate.** Una pila di schermate (le fette esportate come immagini dal
+programma del georadar) si legge attraverso il **riquadro** del grafico: nel
+pannello scrivi quanto valgono in metri la prima e l'ultima tacca in x e in y
+(come `-50 25` e `-22 37`); i pixel delle tacche si misurano sulla prima
+schermata, o li scrivi tu. L'**origine** (E, N), l'**EPSG** e *secondo chi*:
+lo strumento (le sue coordinate, ricopiate: *reality based*), una
+documentazione (*observable*) o a occhio (*asserted*).
+
+Dopo il tracciamento l'anomalia resta **disegnata sul suo piano**, e mentre
+la tracci i vertici che metti si vedono subito.
+
 Ogni immagine che il pacchetto deriva (il PNG di una fetta, la cache, un
 drappeggio) esce con il suo **timbro** accanto (`<file>.stamp.json`): da cosa
 è fatta, come, con quale versione.

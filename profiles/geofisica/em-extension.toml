@@ -77,6 +77,12 @@ hosts = ["emstudio", "blender"]
     { name = "scale_to", kind = "string", required = false },
     { name = "scale_unit", kind = "string", required = false },
     { name = "scale_source", kind = "string", required = false },
+    { name = "frame", kind = "string", required = false },
+    { name = "frame_x", kind = "string", required = false },
+    { name = "frame_y", kind = "string", required = false },
+    { name = "origin", kind = "string", required = false },
+    { name = "epsg", kind = "number", required = false },
+    { name = "origin_from", kind = "string", required = false },
   ]
   in = []
   [[code.commands]]
@@ -105,6 +111,9 @@ hosts = ["emstudio", "blender"]
     { name = "name", kind = "string", required = false },
     { name = "extent_x", kind = "number", required = false },
     { name = "declared", kind = "string", required = false },
+    { name = "frame", kind = "string", required = false },
+    { name = "frame_x", kind = "string", required = false },
+    { name = "frame_y", kind = "string", required = false },
   ]
   in = []
   [[code.commands]]
@@ -240,6 +249,41 @@ hosts = ["emstudio", "blender"]
     label = { en = "Every section: depth", it = "Ogni sezione: profondità" }
     unit = "m"
     min = 0
+    [[code.panels.fields]]
+    kind = "text"
+    name = "frame_x"
+    label = { en = "Captures: x ticks", it = "Schermate: tacche in x" }
+    help = { en = "What the plot's first and last ticks on x stand for, in m, as -50 25", it = "Quanto valgono in m la prima e l'ultima tacca del grafico in x, come -50 25" }
+    [[code.panels.fields]]
+    kind = "text"
+    name = "frame_y"
+    label = { en = "Captures: y ticks", it = "Schermate: tacche in y" }
+    help = { en = "The same on y, as -22 37", it = "Lo stesso in y, come -22 37" }
+    [[code.panels.fields]]
+    kind = "text"
+    name = "frame"
+    label = { en = "Captures: frame in pixels", it = "Schermate: riquadro in pixel" }
+    help = { en = "Left, top, right, bottom of those ticks, as 610, 170, 1303, 715. Empty: measured on the first capture", it = "Sinistra, alto, destra, basso di quelle tacche, come 610, 170, 1303, 715. Vuoto: misurato sulla prima schermata" }
+    [[code.panels.fields]]
+    kind = "text"
+    name = "origin"
+    label = { en = "Origin (E, N)", it = "Origine (E, N)" }
+    help = { en = "Where x = 0, y = 0 lies, as 701806.741, 4234824.081", it = "Dove sta x = 0, y = 0, come 701806.741, 4234824.081" }
+    [[code.panels.fields]]
+    kind = "number"
+    name = "epsg"
+    label = { en = "EPSG", it = "EPSG" }
+    min = 1
+    [[code.panels.fields]]
+    kind = "choice"
+    name = "origin_from"
+    label = { en = "The origin, according to", it = "L'origine, secondo" }
+    options = [
+      { value = "", label = { en = "not said", it = "non detto" } },
+      { value = "instrument", label = { en = "the instrument (its own coordinates)", it = "lo strumento (le sue coordinate)" } },
+      { value = "documentation", label = { en = "a documentation (figure, plan, report)", it = "una documentazione (figura, pianta, relazione)" } },
+      { value = "eye", label = { en = "by eye", it = "a occhio" } },
+    ]
     [[code.panels.fields]]
     kind = "text"
     name = "scale_from"

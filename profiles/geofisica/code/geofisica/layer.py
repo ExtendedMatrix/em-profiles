@@ -14,7 +14,9 @@ nothing: one layer per stack (the acquisition ``geof:pila`` of
               plugin's data folder, the only place the host serves from —
               null when the cache is not on this machine, stamp, extent (local
               metres; a section runs along its line and down, y = −depth),
-              orientation, depth_top, depth_bottom, line}],
+              orientation, depth_top, depth_bottom, line,
+              marks: [{id: <extractor>, label: «USDn · kind», primitive,
+                       points: the trace in the plane's coordinates}]}],
      display: all, or one at a time over 60 slices}
 
 The slices go from the shallowest down (the products without a depth last,
@@ -22,6 +24,11 @@ by name), then the sections. A section's ``line`` — where it lies on the
 ground — is the document's ``geo.trace`` when someone said it; the reports
 give the Basilica's sections as length × depth only, so it is null there and
 the host decides how to show a section it cannot place.
+
+The ``marks`` of a plane (row G16 b, MICRO-GEO16) are the anomalies traced
+on that slice (:mod:`.trace`): one per extractor, its points the trace's
+place in the stack's metres (a section: along, −depth), which are the
+plane's own coordinates; the label names the USD the extractor reads for.
 
 ``em.plugins.shape`` gives the host the one normalised description; the
 slot ``stack`` asks for one stack (its acquisition id or its name).
@@ -90,7 +97,48 @@ def _order(node: Any):
     return (vertical, top is None, top if top is not None else 0.0, node.name or "")
 
 
-def _item(node: Any, root: Optional[str]) -> Optional[Dict[str, Any]]:
+#: the extractors of an anomaly (trace.EXTRACTOR_TYPE) → the primitive drawn
+MARK_PRIMITIVE = {"geof:anomalia_punto": "point", "geof:anomalia_linea": "polyline",
+                  "geof:anomalia_area": "surface"}
+
+
+def _usd_of(graph: Any, xid: str) -> Optional[Any]:
+    """The USD an extractor reads for: its properties' provenance is the
+    extractor, or the combiner that combines it."""
+    provs = {xid} | set(_incoming(graph, xid, "combines"))
+    for p in provs:
+        for prop in _incoming(graph, p, "has_data_provenance"):
+            for u in _incoming(graph, prop, "has_property"):
+                node = graph.find_node_by_id(u)
+                if node is not None and getattr(node, "node_type", "") == "USD":
+                    return node
+    return None
+
+
+def _marks(graph: Any) -> Dict[str, List[Dict[str, Any]]]:
+    """The anomalies traced on each slice: ``{document id: [mark, …]}``."""
+    from .trace import TYPES
+    out: Dict[str, List[Dict[str, Any]]] = {}
+    for x in graph.nodes:
+        d = x.data or {}
+        prim = MARK_PRIMITIVE.get(d.get("em_kind"))
+        geo = d.get("geo") or {}
+        pts = geo.get("local")
+        if getattr(x, "node_type", "") != "extractor" or not prim or not geo.get("slice") \
+                or not isinstance(pts, list) or not pts:
+            continue
+        kind = str(d.get("anomaly_type") or "").rsplit("/", 1)[-1]
+        words = TYPES.get(kind, (kind, kind))
+        usd = _usd_of(graph, x.node_id)
+        who = (usd.name if usd is not None else None) or x.name or x.node_id
+        out.setdefault(str(geo["slice"]), []).append({
+            "id": x.node_id, "label": {"en": f"{who} · {words[0]}", "it": f"{who} · {words[1]}"},
+            "primitive": prim, "points": [[float(p[0]), float(p[1])] for p in pts]})
+    return out
+
+
+def _item(node: Any, root: Optional[str], marks: Optional[Dict[str, List[Dict[str, Any]]]] = None
+          ) -> Optional[Dict[str, Any]]:
     geo = (node.data or {}).get("geo") or {}
     ext = geo.get("extent")
     if not (isinstance(ext, (list, tuple)) and len(ext) == 4):
@@ -107,7 +155,8 @@ def _item(node: Any, root: Optional[str]) -> Optional[Dict[str, Any]]:
             "image": image, "stamp": _inner(root, geo.get("cache_key"), geo.get("stamp")) if image else None,
             "extent": [float(x) for x in ext], "orientation": geo.get("orientation") or "horizontal",
             "depth_top": geo.get("depth_top"), "depth_bottom": geo.get("depth_bottom"),
-            "line": line if line and None not in line else None}
+            "line": line if line and None not in line else None,
+            "marks": (marks or {}).get(node.node_id, [])}
 
 
 def layers(slots: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
@@ -118,6 +167,7 @@ def layers(slots: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
     want = str((slots or {}).get("stack") or "").strip()
     root = _cache_root()
     surface = _surface(graph)
+    marks = _marks(graph)
     out: List[Dict[str, Any]] = []
     for acq in graph.nodes:
         d = acq.data or {}
@@ -125,7 +175,7 @@ def layers(slots: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
             continue
         if want and want not in (acq.node_id, d.get("geo_stack_id")):
             continue
-        items = [i for i in (_item(n, root) for n in sorted(_documents(graph, acq.node_id), key=_order)) if i]
+        items = [i for i in (_item(n, root, marks) for n in sorted(_documents(graph, acq.node_id), key=_order)) if i]
         if not items:
             continue
         g = d.get("georef") or {}
