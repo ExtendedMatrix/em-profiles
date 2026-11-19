@@ -171,12 +171,21 @@ def _label_of(entry: Dict[str, Any], method: str, lang: str) -> str:
 
 
 def _extent(entry: Dict[str, Any]) -> Optional[List[float]]:
-    g = entry.get("grid") or {}
+    """The slice's rectangle in the stack's local frame, from the CENTRES of
+    its first and last cells (half a step out). A grid that says only
+    ``nx``/``ny`` and the steps (the cache's per-slice grid) has its last
+    centre computed (MICRO-GEO09: the documents of G7 had no extent)."""
+    g = dict(entry.get("grid") or {})
+    for ax in ("x", "y"):
+        n, lo, step = g.get(f"n{ax}"), g.get(f"{ax}_min"), g.get(f"{ax}_step")
+        if g.get(f"{ax}_max") is None and None not in (n, lo, step):
+            g[f"{ax}_max"] = float(lo) + (int(n) - 1) * float(step)
     keys = ("x_min", "y_min", "x_max", "y_max")
     if all(g.get(k) is not None for k in keys):
         hx, hy = float(g.get("x_step") or 0) / 2.0, float(g.get("y_step") or 0) / 2.0
-        return [float(g["x_min"]) - hx, float(g["y_min"]) - hy, float(g["x_max"]) + hx,
-                float(g["y_max"]) + hy]
+        # to the micrometre: 92.00000000000001 is the sum of 343 steps, not a size
+        return [round(float(g["x_min"]) - hx, 6) + 0.0, round(float(g["y_min"]) - hy, 6) + 0.0,
+                round(float(g["x_max"]) + hx, 6) + 0.0, round(float(g["y_max"]) + hy, 6) + 0.0]
     return None
 
 
@@ -387,9 +396,13 @@ def command(slots: Dict[str, Any], *, agent: Optional[Dict[str, str]] = None) ->
     """The command ``geofisica.ingest``: the slots as the host fills them
     (strings and numbers; the dicts as JSON text or as dicts)."""
     from s3dgraphy import em
+    from .door import panel_slots, stack_folder
+    slots = panel_slots(slots)          # the panel's plain fields (row G8): sizes, sections, scale
     folder = slots.get("folder") or slots.get("path")
     if not folder:
         raise Said("which folder? (the slot folder)", "quale cartella? (lo slot folder)")
+    if os.path.isfile(str(folder)):     # a slice «read as» a stack (row G8): its folder
+        folder = stack_folder(str(folder))
     lang = (em.host.current().language() or "en")[:2]
     vr = _json_slot(slots.get("value_range"), "value_range")
     return ingest(

@@ -68,5 +68,181 @@ hosts = ["emstudio", "blender"]
     { name = "normalize", kind = "string", required = false },
     { name = "value_range", kind = "string", required = false },
     { name = "geometry", kind = "string", required = false },
+    { name = "extent_x", kind = "number", required = false },
+    { name = "extent_y", kind = "number", required = false },
+    { name = "sections", kind = "string", required = false },
+    { name = "section_length", kind = "number", required = false },
+    { name = "section_depth", kind = "number", required = false },
+    { name = "scale_from", kind = "string", required = false },
+    { name = "scale_to", kind = "string", required = false },
+    { name = "scale_unit", kind = "string", required = false },
+    { name = "scale_source", kind = "string", required = false },
   ]
   in = []
+  [[code.commands]]
+  id = "geofisica.read"
+  label = { en = "Geophysical stack", it = "Pila geofisica" }
+  in = ["door.reader@2"]
+  folders = true
+  accept = [".asc", ".xyz"]
+  claims = [".csv", ".tif", ".tiff", ".jpg", ".jpeg", ".png"]
+  panel = "import"
+  writes = true
+  slots = [
+    { name = "folder", kind = "path" },
+    { name = "kind", kind = "string", required = false },
+    { name = "method", kind = "string", required = false },
+    { name = "name", kind = "string", required = false },
+  ]
+  [[code.commands]]
+  id = "geofisica.describe"
+  label = { en = "What the folder is", it = "Che cos'è la cartella" }
+  writes = false
+  slots = [
+    { name = "folder", kind = "path", required = false },
+    { name = "kind", kind = "string", required = false },
+    { name = "method", kind = "string", required = false },
+    { name = "name", kind = "string", required = false },
+    { name = "extent_x", kind = "number", required = false },
+    { name = "declared", kind = "string", required = false },
+  ]
+  in = []
+  [[code.panels]]
+  id = "import"
+  label = { en = "Geophysical stack", it = "Pila geofisica" }
+  place = "right"
+  when = "document"
+    [[code.panels.fields]]
+    kind = "text"
+    name = "folder"
+    label = { en = "Folder", it = "Cartella" }
+    help = { en = "The stack's folder: «File ▸ Porta dentro una cartella…» writes it here", it = "La cartella della pila: «File ▸ Porta dentro una cartella…» la scrive qui" }
+    [[code.panels.fields]]
+    kind = "value"
+    command = "geofisica.describe"
+    label = { en = "What it is", it = "Che cos'è" }
+    [[code.panels.fields]]
+    kind = "choice"
+    name = "method"
+    label = { en = "Method", it = "Metodo" }
+    options = [
+      { value = "", label = { en = "as the format suggests", it = "come suggerisce il formato" } },
+      { value = "gpr", label = { en = "GPR (ground-penetrating radar)", it = "GPR (georadar)" } },
+      { value = "ert", label = { en = "ERT (electrical resistivity)", it = "ERT (resistività elettrica)" } },
+      { value = "mag", label = { en = "Magnetometry", it = "Magnetometria" } },
+    ]
+    [[code.panels.fields]]
+    kind = "choice"
+    name = "kind"
+    label = { en = "Format", it = "Formato" }
+    options = [
+      { value = "", label = { en = "read from the files", it = "letto dai file" } },
+      { value = "csv_grid", label = { en = "CSV grids", it = "griglie CSV" } },
+      { value = "ascii_matrix", label = { en = "ASCII matrices", it = "matrici ASCII" } },
+      { value = "xyzv", label = { en = "XYZV volumes", it = "volumi XYZV" } },
+      { value = "xyz_lines", label = { en = "XYZ lines", it = "linee XYZ" } },
+      { value = "geotiff", label = { en = "GeoTIFF rasters", it = "raster GeoTIFF" } },
+      { value = "image_stack", label = { en = "Pictures", it = "Immagini" } },
+      { value = "screenshot", label = { en = "Screen captures", it = "Schermate" } },
+    ]
+    [[code.panels.fields]]
+    kind = "text"
+    name = "name"
+    label = { en = "Stack name", it = "Nome della pila" }
+    help = { en = "Empty: the folder's name. It is the stack's identity: keep it the same to import again", it = "Vuoto: il nome della cartella. È l'identità della pila: tienilo uguale per importare di nuovo" }
+    [[code.panels.fields]]
+    kind = "text"
+    name = "quantity"
+    label = { en = "Quantity", it = "Grandezza" }
+    [[code.panels.fields]]
+    kind = "text"
+    name = "unit"
+    label = { en = "Unit", it = "Unità" }
+    [[code.panels.fields]]
+    kind = "number"
+    name = "extent_x"
+    label = { en = "Width (x)", it = "Larghezza (x)" }
+    unit = "m"
+    min = 0
+    [[code.panels.fields]]
+    kind = "number"
+    name = "extent_y"
+    label = { en = "Height (y)", it = "Altezza (y)" }
+    unit = "m"
+    min = 0
+    [[code.panels.fields]]
+    kind = "text"
+    name = "sections"
+    label = { en = "Sections", it = "Sezioni" }
+    help = { en = "Length × depth of each line, as VERT1=92x8, VERT4=50x8", it = "Lunghezza × profondità di ogni linea, come VERT1=92x8, VERT4=50x8" }
+    [[code.panels.fields]]
+    kind = "number"
+    name = "section_length"
+    label = { en = "Every section: length", it = "Ogni sezione: lunghezza" }
+    unit = "m"
+    min = 0
+    [[code.panels.fields]]
+    kind = "number"
+    name = "section_depth"
+    label = { en = "Every section: depth", it = "Ogni sezione: profondità" }
+    unit = "m"
+    min = 0
+    [[code.panels.fields]]
+    kind = "text"
+    name = "scale_from"
+    label = { en = "Values in the file", it = "Valori nel file" }
+    help = { en = "The file's range, as 1-255 (the scale is declared, never measured)", it = "L'intervallo del file, come 1-255 (la scala si dichiara, non si misura)" }
+    [[code.panels.fields]]
+    kind = "text"
+    name = "scale_to"
+    label = { en = "…stand for", it = "…valgono" }
+    help = { en = "As 0-3500", it = "Come 0-3500" }
+    [[code.panels.fields]]
+    kind = "text"
+    name = "scale_unit"
+    label = { en = "…in", it = "…in" }
+    help = { en = "As ohm.m", it = "Come ohm.m" }
+    [[code.panels.fields]]
+    kind = "text"
+    name = "scale_source"
+    label = { en = "…according to", it = "…secondo" }
+    help = { en = "Where the scale comes from, as «colour bar, report p. 5»", it = "Da dove viene la scala, come «barra dei colori, relazione p. 5»" }
+    [[code.panels.fields]]
+    kind = "choice"
+    name = "colormap"
+    label = { en = "Colours", it = "Colori" }
+    options = [
+      { value = "", label = { en = "the method's", it = "quelli del metodo" } },
+      { value = "grigio", label = { en = "grey", it = "grigio" } },
+      { value = "viridis", label = { en = "viridis", it = "viridis" } },
+      { value = "hot", label = { en = "hot", it = "hot" } },
+      { value = "jet", label = { en = "jet", it = "jet" } },
+    ]
+    [[code.panels.fields]]
+    kind = "choice"
+    name = "normalize"
+    label = { en = "Colour range", it = "Intervallo dei colori" }
+    options = [
+      { value = "", label = { en = "as the format suggests", it = "come suggerisce il formato" } },
+      { value = "STACK", label = { en = "one for the whole stack", it = "uno per tutta la pila" } },
+      { value = "SLICE", label = { en = "one per slice", it = "uno per fetta" } },
+    ]
+    [[code.panels.fields]]
+    kind = "choice"
+    name = "geometry"
+    label = { en = "Where the slices are, according to", it = "Dove stanno le fette, secondo" }
+    options = [
+      { value = "", label = { en = "the source of the position", it = "la fonte della posizione" } },
+      { value = "reality_based", label = { en = "the instrument (reality based)", it = "lo strumento (reality based)" } },
+      { value = "observable", label = { en = "a documentation (observable)", it = "una documentazione (observable)" } },
+      { value = "asserted", label = { en = "by eye (asserted)", it = "a occhio (asserted)" } },
+    ]
+    [[code.panels.fields]]
+    kind = "text"
+    name = "georef"
+    label = { en = "Placement (JSON)", it = "Collocazione (JSON)" }
+    help = { en = "Advanced: {\"origin\": [E, N], \"rotation\": 0, \"epsg\": 32633, \"source\": \"figure\"}", it = "Avanzato: {\"origin\": [E, N], \"rotation\": 0, \"epsg\": 32633, \"source\": \"figure\"}" }
+    [[code.panels.fields]]
+    kind = "button"
+    command = "geofisica.ingest"
+    label = { en = "Import", it = "Importa" }
