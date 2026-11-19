@@ -17,7 +17,13 @@ What this repository adds, because only a repository can see it:
   for its folder (its curators review it), and data — a pure plugin is not a
   community package and is listed elsewhere (``em-extensions``, phase 2);
 * the schemas in ``schemas/`` are the library's own, byte for byte;
-* ``core-types.json`` names no type the core no longer has.
+* ``core-types.json`` names no type the core no longer has;
+* the packages of ``profiles/`` together, as the index of em-extensions will
+  list them (``s3dgraphy.extensions.server_generate`` on their archives,
+  built here and written nowhere): a version of a section never reused, a
+  vocabulary version with one content, a vocabulary carried by a package
+  that does not own it (an error when its owner is here), ``[requires]``
+  without cycles, an entry with every field of the index.
 
 Exit 1 when anything is an error. Warnings never fail.
 """
@@ -117,6 +123,35 @@ def repo_checks(packages: Dict[Path, object]) -> List[Dict]:
         out.append({"level": "error", "code": "repo_core_gone", "params": {"types": ", ".join(gone)}})
     if new:
         out.append({"level": "warning", "code": "repo_core_new", "params": {"types": ", ".join(new)}})
+    out += as_index([p for p, pkg in packages.items() if p.parent.name == "profiles" and pkg is not None])
+    return out
+
+
+def as_index(folders: List[Path]) -> List[Dict]:
+    """The packages as the index would list them (X1): built in a temporary
+    folder, then ``server_generate`` without writing. Its problems come with
+    their own words (EN, IT) from the library, the file named by folder."""
+    import tempfile
+    from s3dgraphy.extensions import build, server_generate
+
+    if not folders:
+        return []
+    out: List[Dict] = []
+    with tempfile.TemporaryDirectory() as tmp:
+        names: Dict[str, str] = {}
+        for f in sorted(folders):
+            res = build(f, output_dir=tmp)
+            if res["ok"]:
+                names[res["file"]] = f"profiles/{f.name}"
+        res = server_generate(tmp, dry_run=True)
+    def where(p: Dict) -> Dict:
+        name = names.get(p.get("where", ""), "")
+        return {"level": p["level"], "code": p["code"], "params": {},
+                "en": f"{name}: {p['en']}" if name else p["en"], "it": f"{name}: {p['it']}" if name else p["it"]}
+    said = {(p["code"], p["en"]) for p in res["problems"]}
+    out += [where(p) for p in res["problems"]]
+    out += [where(dict(p, where=x["file"])) for x in res["refused"] for p in x["errors"]
+            if (p["code"], p["en"]) not in said]       # a cross-check is in both lists
     return out
 
 
@@ -137,8 +172,9 @@ def run(paths: List[Path], lang: str = "en") -> Dict:
         result["archives"].append({"path": rel, **r.as_dict()})
     if not paths:
         for pr in repo_checks(opened):
-            result["repository"].append({**pr, "en": say(pr["code"], "en", **pr["params"]),
-                                         "it": say(pr["code"], "it", **pr["params"])})
+            if "en" not in pr:
+                pr = {**pr, "en": say(pr["code"], "en", **pr["params"]), "it": say(pr["code"], "it", **pr["params"])}
+            result["repository"].append(pr)
     result["ok"] = all(a["ok"] for a in result["archives"]) and not any(
         x["level"] == "error" for x in result["repository"])
     return result

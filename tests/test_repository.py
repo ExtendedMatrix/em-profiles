@@ -115,6 +115,27 @@ def test_two_packages_never_share_a_prefix_and_a_plugin_is_not_a_package(fake_re
     assert _codes(res) == ["repo_plugin_only", "repo_prefix_twice"], res["repository"]
 
 
+def test_the_packages_are_checked_as_the_index_will_list_them(fake_repo):
+    """X1: the packages of profiles/ built and given to server_generate,
+    without writing: what the index of em-extensions would refuse fails here."""
+    shutil.copytree(REPO / "examples/esempio-statuaria", fake_repo / "profiles/esempio-statuaria")
+    shutil.copytree(REPO / "examples/example-toolmarks", fake_repo / "profiles/example-toolmarks")
+    (fake_repo / ".github/CODEOWNERS").write_text(
+        "".join(f"/profiles/{n}/ @zalmoxes-laran\n" for n in ("esempio-statuaria", "example-toolmarks")), encoding="utf-8")
+    res = validate.run([])
+    assert all(a["ok"] for a in res["archives"])          # each archive is valid …
+    assert _codes(res) == ["index_entry_fields"]          # … but a bare 0.1 profile has no tagline for the index
+    bad = next(x for x in res["repository"] if x["code"] == "index_entry_fields")
+    assert bad["en"].startswith("profiles/example-toolmarks: ") and "tagline" in bad["it"]
+    assert not res["ok"]
+    (fake_repo / "profiles/example-toolmarks/em-extension.toml").write_text(
+        'schema_version = "1.0.0"\nid = "example-toolmarks"\nversion = "0.1.0"\nname = "Toolmarks (EXAMPLE)"\n'
+        'tagline = "Tool marks on stone surfaces"\nmaintainer = "Example curators"\n'
+        'license = ["SPDX:CC-BY-4.0"]\n\n[data]\nprofile = "profile.json"\n', encoding="utf-8")
+    res = validate.run([])
+    assert "index_entry_fields" not in _codes(res)
+
+
 def test_a_schema_edited_by_hand_is_caught(fake_repo):
     s = fake_repo / "schemas/profile.v0.2.schema.json"
     s.write_text(s.read_text(encoding="utf-8").replace("additive", "ADDITIVE"), encoding="utf-8")
