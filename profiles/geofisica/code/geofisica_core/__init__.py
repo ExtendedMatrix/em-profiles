@@ -20,8 +20,11 @@ here in row G2 of the geophysics plan, MICRO-GEO03) divided into modules:
   (row G3), ``xyzv``, ``xyz_lines``, ``screenshot`` (row G4), ``scan_stack``,
   ``guess_kind``, ``read_slice``, ``same_values``;
 * :mod:`.georef` — world files, ``.prj``, shift;
-* :mod:`.color`, :mod:`.png` — colour maps and the zlib PNG writer;
-* :mod:`.manifest` — the cache and ``gpr_stack.json`` v2 (reads v1);
+* :mod:`.color`, :mod:`.png` — colour maps (the old ones and the package's
+  ``.emc`` ramps), the declared ``value_scale``, the zlib PNG writer;
+* :mod:`.manifest` — 3DSC's CSV cache and ``gpr_stack.json`` v2 (reads v1);
+* :mod:`.cache` — the cache of ANY stack in ``plugins-data/geofisica/cache/``
+  (row G5): PNGs + manifest, deterministic, every file stamped;
 * :mod:`.stamp` — ``<file>.stamp.json`` on everything written (G-5).
 
 The names below are a STABLE API: they are what 3DSC's ``import_gpr.py``
@@ -34,7 +37,11 @@ from __future__ import annotations
 
 __version__ = "0.1.0"
 
-from .color import COLORMAPS, _viridis_lut, percentile_range, to_rgba8
+from .cache import (CacheError, build_stack_cache, cache_key, cache_root, check_cache_dir,
+                    plugins_data_dir)
+from .color import (COLORMAPS, DEFAULT_RAMP, RAMPS, ColorError, _viridis_lut, apply_value_scale,
+                    check_value_scale, load_emc, percentile_range, ramp_lut, ramp_mapping,
+                    robust_range, to_rgba8)
 from .depth import depth_from_name, parse_csv_header, read_csv_header
 from .georef import (ABSOLUTE_COORD_THRESHOLD, detect_georeference, epsg_from_prj,
                      extent_from_world_file, is_absolute, prj_file_for, propose_shift,
@@ -57,6 +64,9 @@ from .readers import (XYZ_EXT, XYZV_COLUMNS, compare_extent, crop_rgba, declare_
 from .stamp import STAMP_SUFFIX, file_digest, resource_id_for, stamp_artifact, stamp_path
 
 __all__ = [
+    "CacheError", "ColorError", "DEFAULT_RAMP", "RAMPS", "apply_value_scale", "build_stack_cache",
+    "cache_key", "cache_root", "check_cache_dir", "check_value_scale", "load_emc",
+    "plugins_data_dir", "ramp_lut", "ramp_mapping", "robust_range",
     "XYZ_EXT", "XYZV_COLUMNS", "build_screenshot_manifest", "compare_extent", "crop_rgba",
     "declare_frame", "frame_extent", "frame_grid", "is_points_file", "measure_frame",
     "read_screenshot_slice", "read_xyz_lines", "read_xyzv", "same_frame", "xyzv_planes",

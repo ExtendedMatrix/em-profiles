@@ -230,18 +230,21 @@ def same_values(slices):
     for d in slices:
         k = values_digest(d)
         if k in seen:
-            first = seen[k]
-            a = os.path.join(os.path.basename(os.path.dirname(first)), os.path.basename(first))
-            b = os.path.join(os.path.basename(os.path.dirname(d.spec.path)),
-                             os.path.basename(d.spec.path))
-            out.append({"code": "same_values", "path": d.spec.path, "same_as": first,
-                        "en": "%s holds the same values as %s: one of the two is probably the "
-                              "wrong file." % (b, a),
-                        "it": "%s contiene gli stessi valori di %s: probabilmente uno dei due è "
-                              "il file sbagliato." % (b, a)})
+            out.append(same_values_warning(d.spec.path, seen[k]))
         else:
             seen[k] = d.spec.path
     return out
+
+
+def same_values_warning(path, first):
+    """The ``same_values`` warning for ``path`` holding ``first``'s values (EN + IT)."""
+    a = os.path.join(os.path.basename(os.path.dirname(first)), os.path.basename(first))
+    b = os.path.join(os.path.basename(os.path.dirname(path)), os.path.basename(path))
+    return {"code": "same_values", "path": path, "same_as": first,
+            "en": "%s holds the same values as %s: one of the two is probably the "
+                  "wrong file." % (b, a),
+            "it": "%s contiene gli stessi valori di %s: probabilmente uno dei due è "
+                  "il file sbagliato." % (b, a)}
 
 
 __all__ = ["XYZ_EXT", "XYZV_COLUMNS", "axis_of", "compare_extent", "crop_rgba", "declare_frame",
@@ -250,5 +253,5 @@ __all__ = ["XYZ_EXT", "XYZV_COLUMNS", "axis_of", "compare_extent", "crop_rgba", 
            "xyzv_planes", "ASCII_EXT", "CSV_EXT", "GEOTIFF_EXT", "IMG_EXT", "KINDS", "NODATA", "RepairedReader",
            "SATURATION", "geotiff_info", "guess_kind", "image_size", "is_value_raster",
            "line_from_name", "read_ascii_matrix", "read_ascii_section", "read_csv_slice",
-           "read_geotiff_slice", "read_slice", "repair_chunk", "same_values", "scan_stack",
-           "values_digest"]
+           "read_geotiff_slice", "read_slice", "repair_chunk", "same_values", "same_values_warning",
+           "scan_stack", "values_digest"]
