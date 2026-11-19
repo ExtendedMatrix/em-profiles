@@ -163,11 +163,12 @@ def frame_extent(frame, origin=(0.0, 0.0)):
 def compare_extent(frame, origin, geotiff, tol=0.5):
     """Hold a screenshot stack against a GeoTIFF of the same sector.
 
-    The plot box is the program's choice of axes, a little larger than the
-    survey; the GeoTIFF's raster is the survey's own box: each of its edges
-    must lie INSIDE the frame by no more than ``tol`` metres (Alcudia against
-    ``Sector 1/mean_v2.tif``: 0.03–0.35 m). Returns ``{agrees, edges: [left,
-    bottom, right, top] (metres inside), tol, geotiff, warning?}``."""
+    The plot box is the program's choice of round axes around the survey;
+    the GeoTIFF's raster is the survey's own box: each of its edges must lie
+    within ``tol`` metres of the frame's (Alcudia against ``Sector
+    1/mean_v2.tif``: 0.28, 0.46, 0.13 m inside on the west, south and east,
+    0.15 m outside on the north). Returns ``{agrees, edges: [left, bottom,
+    right, top] (metres inside; negative = outside), tol, geotiff, warning?}``."""
     from .geotiff import read_geotiff_slice
     d = read_geotiff_slice(geotiff)
     gr = d.georef or {}
