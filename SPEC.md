@@ -833,8 +833,16 @@ package in `profiles/`.
   em-extensions —; EMStudio and the library read it (row X2: a repository
   added by URL, `file://` or a folder, an optional token, the archive checked
   against `archive_hash` before it is opened, the `blocklist`, `[requires]`
-  installed first, tier C fetched with «Allow online access»); side-by-side
-  versions and «Update all» (row X3) do not yet.
+  installed first, tier C fetched with «Allow online access»). Row X3 too:
+  the versions side by side (every data version kept, each file bound to the
+  one it declares; the code versions on disk, an older one made active again
+  without a download), «Update all» (an update that would ask the trust
+  question again waits for the person's yes), the question «this file uses
+  1.0.0, 1.1.0 is here» (a major shows the archive's `CHANGELOG.md`, kept beside
+  the data), clean removal (one version, the old code versions, what nothing
+  owns) and wheels per platform (only the machine's are installed;
+  `build --split-platforms` writes `<id>-<version>-<platform>.zip`, one per
+  platform, and a repository may list them side by side).
 
 ## 15. Changes
 
