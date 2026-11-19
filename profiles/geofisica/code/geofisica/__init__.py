@@ -1,7 +1,8 @@
 """geofisica — the plugin of the geophysics package (GPL-3.0-or-later).
 
 0.1.0, row G1 of the geophysics plan: the skeleton. ``setup`` wires nothing
-yet; the reading core (``geofisica_core``, row G2), the import into the graph
+yet. The reading core sits beside it, ``geofisica_core`` (row G2: the old 3DSC
+``gpr_core`` moved here, the one source); the import into the graph
 (G7), «Bring in…» (G8), the Inspector (G9), the Space layer (G10–G11) and the
 tracing tool (G12) arrive row by row. Every derived artifact it will write is
 stamped (``ctx.stamp``, decision G-5).

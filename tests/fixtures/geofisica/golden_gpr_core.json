@@ -1,0 +1,379 @@
+{
+ "depth_from_name": {
+  "Slice_-2889mm.jpg": [
+   2.889,
+   2.889
+  ],
+  "Slice_00000mm.jpg": [
+   0.0,
+   0.0
+  ],
+  "depth 0.75m.png": [
+   0.75,
+   0.75
+  ],
+  "no depth here.csv": null,
+  "slice_0.000 - 0.100m.CSV": [
+   0.0,
+   0.1
+  ],
+  "slice_1,25-1,50m.csv": [
+   1.25,
+   1.5
+  ]
+ },
+ "georef_csv": {
+  "epsg": null,
+  "origin_e": null,
+  "origin_n": null,
+  "source": "none",
+  "x_step": 0.05,
+  "y_step": 0.05
+ },
+ "georef_image": {
+  "epsg": 25830,
+  "origin_e": 701806.791,
+  "origin_n": 4234824.131,
+  "source": "Slice_00000mm.pgw + Slice_00000mm.prj",
+  "x_step": 0.1,
+  "y_step": 0.1
+ },
+ "manifest_csv": {
+  "GRAY/STACK": {
+   "clip_percentiles": [
+    2.0,
+    98.0
+   ],
+   "colormap": "GRAY",
+   "generator": "3DSC gpr_core",
+   "georef": {
+    "epsg": null,
+    "origin_e": null,
+    "origin_n": null,
+    "source": "none",
+    "x_step": 0.05,
+    "y_step": 0.05
+   },
+   "grid": {
+    "nx": 37,
+    "ny": 23,
+    "x_min": 0.0,
+    "x_step": 0.05,
+    "y_min": 0.0,
+    "y_step": 0.05
+   },
+   "kind": "csv_grid",
+   "manifest_version": 1,
+   "normalize": "STACK",
+   "slices": [
+    {
+     "depth_bottom": 0.1,
+     "depth_top": 0.0,
+     "document_id": "gpr:stack#d0.000-0.100m",
+     "index": 0,
+     "png_bytes": 1198,
+     "raster": "slice_000_0.000-0.100m.png",
+     "source": "../stack/slice_0.000 - 0.100m.CSV",
+     "valid_cells": 656,
+     "vmax": 52.95256423950195,
+     "vmin": 8.842740058898926
+    },
+    {
+     "depth_bottom": 0.2,
+     "depth_top": 0.1,
+     "document_id": "gpr:stack#d0.100-0.200m",
+     "index": 1,
+     "png_bytes": 1288,
+     "raster": "slice_001_0.100-0.200m.png",
+     "source": "../stack/slice_0.100 - 0.200m.CSV",
+     "valid_cells": 656,
+     "vmax": 52.95256423950195,
+     "vmin": 8.842740058898926
+    },
+    {
+     "depth_bottom": 0.3,
+     "depth_top": 0.2,
+     "document_id": "gpr:stack#d0.200-0.300m",
+     "index": 2,
+     "png_bytes": 1329,
+     "raster": "slice_002_0.200-0.300m.png",
+     "source": "../stack/slice_0.200 - 0.300m.CSV",
+     "valid_cells": 656,
+     "vmax": 52.95256423950195,
+     "vmin": 8.842740058898926
+    }
+   ],
+   "source_folder": "<stack>"
+  },
+  "GRAY_INV/SLICE": {
+   "clip_percentiles": [
+    2.0,
+    98.0
+   ],
+   "colormap": "GRAY_INV",
+   "generator": "3DSC gpr_core",
+   "georef": {
+    "epsg": null,
+    "origin_e": null,
+    "origin_n": null,
+    "source": "none",
+    "x_step": 0.05,
+    "y_step": 0.05
+   },
+   "grid": {
+    "nx": 37,
+    "ny": 23,
+    "x_min": 0.0,
+    "x_step": 0.05,
+    "y_min": 0.0,
+    "y_step": 0.05
+   },
+   "kind": "csv_grid",
+   "manifest_version": 1,
+   "normalize": "SLICE",
+   "slices": [
+    {
+     "depth_bottom": 0.1,
+     "depth_top": 0.0,
+     "document_id": "gpr:stack#d0.000-0.100m",
+     "index": 0,
+     "png_bytes": 1254,
+     "raster": "slice_000_0.000-0.100m.png",
+     "source": "../stack/slice_0.000 - 0.100m.CSV",
+     "valid_cells": 656,
+     "vmax": 49.1654052734375,
+     "vmin": 8.341099739074707
+    },
+    {
+     "depth_bottom": 0.2,
+     "depth_top": 0.1,
+     "document_id": "gpr:stack#d0.100-0.200m",
+     "index": 1,
+     "png_bytes": 1308,
+     "raster": "slice_001_0.100-0.200m.png",
+     "source": "../stack/slice_0.100 - 0.200m.CSV",
+     "valid_cells": 656,
+     "vmax": 52.83890914916992,
+     "vmin": 11.466300010681152
+    },
+    {
+     "depth_bottom": 0.3,
+     "depth_top": 0.2,
+     "document_id": "gpr:stack#d0.200-0.300m",
+     "index": 2,
+     "png_bytes": 1371,
+     "raster": "slice_002_0.200-0.300m.png",
+     "source": "../stack/slice_0.200 - 0.300m.CSV",
+     "valid_cells": 656,
+     "vmax": 56.04389953613281,
+     "vmin": 14.470499992370605
+    }
+   ],
+   "source_folder": "<stack>"
+  },
+  "VIRIDIS/STACK": {
+   "clip_percentiles": [
+    2.0,
+    98.0
+   ],
+   "colormap": "VIRIDIS",
+   "generator": "3DSC gpr_core",
+   "georef": {
+    "epsg": null,
+    "origin_e": null,
+    "origin_n": null,
+    "source": "none",
+    "x_step": 0.05,
+    "y_step": 0.05
+   },
+   "grid": {
+    "nx": 37,
+    "ny": 23,
+    "x_min": 0.0,
+    "x_step": 0.05,
+    "y_min": 0.0,
+    "y_step": 0.05
+   },
+   "kind": "csv_grid",
+   "manifest_version": 1,
+   "normalize": "STACK",
+   "slices": [
+    {
+     "depth_bottom": 0.1,
+     "depth_top": 0.0,
+     "document_id": "gpr:stack#d0.000-0.100m",
+     "index": 0,
+     "png_bytes": 1255,
+     "raster": "slice_000_0.000-0.100m.png",
+     "source": "../stack/slice_0.000 - 0.100m.CSV",
+     "valid_cells": 656,
+     "vmax": 52.95256423950195,
+     "vmin": 8.842740058898926
+    },
+    {
+     "depth_bottom": 0.2,
+     "depth_top": 0.1,
+     "document_id": "gpr:stack#d0.100-0.200m",
+     "index": 1,
+     "png_bytes": 1342,
+     "raster": "slice_001_0.100-0.200m.png",
+     "source": "../stack/slice_0.100 - 0.200m.CSV",
+     "valid_cells": 656,
+     "vmax": 52.95256423950195,
+     "vmin": 8.842740058898926
+    },
+    {
+     "depth_bottom": 0.3,
+     "depth_top": 0.2,
+     "document_id": "gpr:stack#d0.200-0.300m",
+     "index": 2,
+     "png_bytes": 1374,
+     "raster": "slice_002_0.200-0.300m.png",
+     "source": "../stack/slice_0.200 - 0.300m.CSV",
+     "valid_cells": 656,
+     "vmax": 52.95256423950195,
+     "vmin": 8.842740058898926
+    }
+   ],
+   "source_folder": "<stack>"
+  }
+ },
+ "manifest_image": {
+  "colormap": "AS_IS",
+  "generator": "3DSC gpr_core",
+  "georef": {
+   "epsg": 25830,
+   "origin_e": 701806.791,
+   "origin_n": 4234824.131,
+   "source": "Slice_00000mm.pgw + Slice_00000mm.prj",
+   "x_step": 0.1,
+   "y_step": 0.1
+  },
+  "grid": {
+   "nx": 20,
+   "ny": 12,
+   "x_min": 0.0,
+   "x_step": 0.1,
+   "y_min": 0.0,
+   "y_step": 0.1
+  },
+  "kind": "image_stack",
+  "manifest_version": 1,
+  "normalize": "AS_IS",
+  "slices": [
+   {
+    "depth_bottom": 0.0025,
+    "depth_top": 0.0,
+    "document_id": "gpr:ilici#d0.000-0.003m",
+    "index": 0,
+    "png_bytes": 89,
+    "raster": "<work>/ilici/Slice_00000mm.png",
+    "source": "<work>/ilici/Slice_00000mm.png",
+    "valid_cells": 240,
+    "vmax": 1.0,
+    "vmin": 0.0
+   },
+   {
+    "depth_bottom": 0.0075,
+    "depth_top": 0.0025,
+    "document_id": "gpr:ilici#d0.003-0.007m",
+    "index": 1,
+    "png_bytes": 89,
+    "raster": "<work>/ilici/Slice_-0005mm.png",
+    "source": "<work>/ilici/Slice_-0005mm.png",
+    "valid_cells": 240,
+    "vmax": 1.0,
+    "vmin": 0.0
+   },
+   {
+    "depth_bottom": 0.0125,
+    "depth_top": 0.0075,
+    "document_id": "gpr:ilici#d0.007-0.013m",
+    "index": 2,
+    "png_bytes": 89,
+    "raster": "<work>/ilici/Slice_-0010mm.png",
+    "source": "<work>/ilici/Slice_-0010mm.png",
+    "valid_cells": 240,
+    "vmax": 1.0,
+    "vmin": 0.0
+   },
+   {
+    "depth_bottom": 0.017499999999999998,
+    "depth_top": 0.012499999999999999,
+    "document_id": "gpr:ilici#d0.012-0.017m",
+    "index": 3,
+    "png_bytes": 89,
+    "raster": "<work>/ilici/Slice_-0015mm.png",
+    "source": "<work>/ilici/Slice_-0015mm.png",
+    "valid_cells": 240,
+    "vmax": 1.0,
+    "vmin": 0.0
+   }
+  ],
+  "source_folder": "<stack>",
+  "world_file": "Slice_00000mm.pgw"
+ },
+ "png": {
+  "GRAY/STACK": [
+   {
+    "bytes": "06383521d5fb3859d4cef167e39bcb29dd2562c86f867d84041a8484514bdb9f",
+    "pixels": "308327239a87bc34663c922ae6f249cc0d6efcc5ea7153c48f4ac4b676de2d56",
+    "raster": "slice_000_0.000-0.100m.png"
+   },
+   {
+    "bytes": "bb6b0166675fcbc490ef36a29d4cd76bfbfc736fbf59e8b30283267e0ddf69a1",
+    "pixels": "770617fc880a631973006129580a936c50ba33013a5160e8f75502000e3db883",
+    "raster": "slice_001_0.100-0.200m.png"
+   },
+   {
+    "bytes": "f7fa1a796205d77a3913d153a0445712a1552c879dfe07f2f909b6a14aeaca23",
+    "pixels": "2b29c24966335963d2a1b62eeb715c8c21a075cd173b3bf1e89c2fe2a610f407",
+    "raster": "slice_002_0.200-0.300m.png"
+   }
+  ],
+  "GRAY_INV/SLICE": [
+   {
+    "bytes": "de0cb5677fa12ae0440dff9e012273f81c0c4c94243d886d7ccbaacfe967a46b",
+    "pixels": "8814a3af07bde6de887da3b05bc2c903f15a9daff083277ca968918d87ea7d50",
+    "raster": "slice_000_0.000-0.100m.png"
+   },
+   {
+    "bytes": "a16020b5a10df64755ac4d8c03e182bd53abccd128ca5a815bc310220df78a6b",
+    "pixels": "b30d21b6df641679afb10f53d56de51a28204698f990cc2e9a37f32838ae6154",
+    "raster": "slice_001_0.100-0.200m.png"
+   },
+   {
+    "bytes": "a3fdfba19346c4751748ce8e0caad6675b512887efa9e5b3620d80579fe9d832",
+    "pixels": "6f91d1166983d4e6a18d71870c9b2fbc700032f49de1cfbb7d478566061a93b6",
+    "raster": "slice_002_0.200-0.300m.png"
+   }
+  ],
+  "VIRIDIS/STACK": [
+   {
+    "bytes": "31530a91c36d7df79477d055eeac5d1e3fa8cfc59851fb8765cb4d0c2f0eea24",
+    "pixels": "da8d2fd5de582629166e75c6c3e5f265c5f3290f79a11bbaec33f24195d68010",
+    "raster": "slice_000_0.000-0.100m.png"
+   },
+   {
+    "bytes": "4d92cbe41f6e692946e33870e05003133c340163fd8d51140e90bcc2dc2f3117",
+    "pixels": "6974b18e76fcacea0b671667f63347734a9348e000ec095935480f565461451b",
+    "raster": "slice_001_0.100-0.200m.png"
+   },
+   {
+    "bytes": "ef5b6e42fe4a25f981755e6a6e82a8cec9545a9361a5f47f96e551a41fed2e0a",
+    "pixels": "536ea3a9d090396fa734e53c5b057405b77f8c02f7370ca98626970d9cba8d8c",
+    "raster": "slice_002_0.200-0.300m.png"
+   }
+  ]
+ },
+ "shift": {
+  "absolute": true,
+  "local": false,
+  "proposed": [
+   701800.0,
+   4234820.0
+  ]
+ },
+ "source": "3D-survey-collection importer/gpr_core.py @ 506e768",
+ "zlib": "1.2.12"
+}

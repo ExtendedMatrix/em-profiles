@@ -74,6 +74,9 @@ def test_the_archive_installs_from_disk_and_loads(machine):
     assert pre["id"] == "geofisica"
     res = X.install(zip_path, trust=True)
     assert res["data"]["status"] == "installed" and res["code"]["status"] == "installed", res
+    # the reading core travels in the code (row G2): beside the plugin, on the same sys.path
+    cores = list((machine / "machine" / "plugins").rglob("geofisica_core/manifest.py"))
+    assert len(cores) == 1 and (cores[0].parent.parent / "geofisica" / "__init__.py").is_file()
     from s3dgraphy import profiles as P
     prof = P.find("geofisica", "0.1.0")
     assert prof is not None and prof.version == "0.1.0"
