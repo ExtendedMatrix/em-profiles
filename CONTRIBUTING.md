@@ -4,6 +4,11 @@ Thank you for wanting to bring your community's way of recording to Extended
 Matrix. This page says what a community package must carry and how it is
 reviewed. When something is not covered, open an issue and ask.
 
+**New to packages?** The EMStudio manual has a step-by-step guide, from an
+empty folder to a published package, with data only or with Python:
+[Extending EMStudio](https://docs.extendedmatrix.org/projects/emstudio-doc/en/1.6/extending/index.html)
+(in Italian: [Estendere EMStudio](https://docs.extendedmatrix.org/projects/emstudio-doc/it/1.6/extending/index.html)).
+
 ## How a package arrives
 
 1. **Open an issue.** Say who the community is, what it records, and why the
