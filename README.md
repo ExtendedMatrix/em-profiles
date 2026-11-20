@@ -61,6 +61,9 @@ command line and in this repository's CI, in English and Italian
   [ExtendedMatrix/em-extensions](https://github.com/ExtendedMatrix/em-extensions).
   Until the tools read repositories (phase 2), packages are installed from
   disk (a folder or a zip).
+- **The Python of a package** (the commands, readers and checks of a mixed
+  package) goes through `import em`; its full reference is the
+  [EMStudio Python API](https://docs.extendedmatrix.org/projects/emstudio-python-api/en/latest/).
 
 ## Contributing
 
